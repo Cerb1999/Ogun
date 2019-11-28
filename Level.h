@@ -1,7 +1,13 @@
-#include "room.h"
+#include "Room.h"
 
-typedef struct level {
+class Level {
+public:
+  Level(int rooms, int d);
+  int getNbRooms();
+  int getDepth();
+
+private:
   int nb_rooms;
   int depth;
-  room rooms[];
+  Room rooms[];
 };
