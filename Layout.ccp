@@ -1,34 +1,12 @@
+#include "Layout.h";
+
 class Layout {
 public:
     Layout();
     Layout(int depth, int type);
 
 private:
-    int level1_room1[50][25] = { 
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {} };
+    int level1_room1;
 
     int level1_room2[50][25] = { 
         {},

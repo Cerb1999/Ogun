@@ -1,19 +1,18 @@
 #include "Coordinates.h";
 #include "Projectile.h";
 
-class Monster {
+class Hero {
 public:
-    Monster(int l);
+    Hero();
     int hpLeft();
-    bool isRanged();
     bool hit(Projectile p); // contact avec p, renvoie le bool correspondant et effectue les actions nescessaires
+    bool hit(Monster m);
     void move();
 
 
 private:
     int hp;
-    int level;
     int speed;
-    bool ranged;
+    int damages;
     Coordinates position;
 };

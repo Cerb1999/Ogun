@@ -3,7 +3,7 @@
 
 class Projectile {
 public:
-    //Projectile(Hero h, int d);
+    Projectile(Hero h, int d);
     Projectile(Monster h);
 
 private:

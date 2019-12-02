@@ -1,54 +1,51 @@
-#include "Layout.h";
+#include "Room.h";
+#include <cstdlib>;
 
-class Room {
-public:
-    Room(int t, int index, int depth) {
-        r_layout = Layout(depth, index);
+Room::Room(int t, int index, int depth) {
+        r_layout = Layout(depth, t);
+        r_id = index;
         r_cleared = false;
         r_occupied = false;
         r_type = t;
-    }
-    int layout() {
-        switch (r_type) {
-            case 0: // standart room
-            //spawn des mobs et du terrain en fonction du layout
-            break;
-            case 1: // item room
-            //piedestal avec objet au centre de la piece, possibilité de faire spawn des mobs
-            break;
-            case 2: // shop
-            //piedestaux avec hp, key et un objet ainsi que le prix de chacun, possibilité de faire spawn des mobs
-            break;
-            case 3: // boss room
-            //mob avec un indice particulier, les mobs spawn durant le combat
-            break;
+}
+
+Room* Room::rooms(int nbRooms, int depth) {
+    Room* prev; Room* actual; int type; bool rewarded = false; Room* first;
+    for (int i = 0; i < nbRooms; i++ ) {
+        if (i == nbRooms-1) {
+            type = 2;
+        } else if ( !rewarded ) {
+            type = rand()%2;
+            rewarded = (type == 1); 
+        } else {
+            type = 0;
+        }
+        if ( i > 0) {
+            prev = actual;
+        } 
+        actual = &Room(type, i, depth);
+        if (i > 0) {
+            prev->setNext(actual);
+            actual->setPrevious(prev);
+        } else {
+            first = actual;
         }
     }
+    return first;
+}
 
-    void clear() {
-        r_cleared = true;
-    }
+void Room::clear() {
+    r_cleared = true;
+}
 
-    void enter() {
-        r_occupied = true;
-    }
+void Room::enter() {
+    r_occupied = true;
+}
 
-    bool isClear() {
-        return r_cleared;
-    }
+void Room::setNext(Room* r) {
+    r_next = r;
+}
 
-    bool isOccupied() {
-        return r_occupied;
-    }
-
-    int index() {
-        return r_index;
-    }
-
-private:
-    Layout r_layout; //tableau 2D
-    bool r_cleared;
-    bool r_occupied;
-    int r_type;
-    int r_index;
-};
+void Room::setPrevious(Room* r) {
+    r_previous = r;
+}
