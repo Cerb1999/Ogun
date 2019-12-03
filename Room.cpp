@@ -1,5 +1,5 @@
-#include "Room.h";
-#include <cstdlib>;
+#include "Room.h"
+#include <cstdlib>
 
 Room::Room(int t, int index, int depth) {
         r_layout = Layout(depth, t);

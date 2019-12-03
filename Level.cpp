@@ -1,5 +1,5 @@
-#include "Level.h";
-#include "Room.h";
+#include "Level.h"
+#include "Room.h"
 
 Level::Level(int nbRooms, int d) {
     l_nbRooms = nbRooms;

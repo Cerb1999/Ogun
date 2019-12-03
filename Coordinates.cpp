@@ -1,4 +1,4 @@
-#include "Coordinates.h";
+#include "Coordinates.h"
 
 Coordinates::Coordinates(double x, double y) {
     setX(x);
