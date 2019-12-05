@@ -27,8 +27,7 @@ int main(int argc, char *argv[])
     }
 
     ecran = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
-
-    SDL_Texture* fond = charger_image("textures/ogun-background-menu", ecran);
+    SDL_Texture* fond = charger_image("textures/ogun-background-menu.bmp", ecran);
 
     Uint8 r = 255;
     Uint8 g = 255;

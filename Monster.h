@@ -3,17 +3,17 @@
 
 class Monster {
 public:
-    Monster(int l);
-    int hpLeft();
-    bool isRanged();
+    Monster(int l, Coordinates c);
+    int hpLeft() { return m_hp; }
+    bool isRanged() { return m_ranged; }
     bool hit(Projectile p); // contact avec p, renvoie le bool correspondant et effectue les actions nescessaires
-    void move();
+    void attaquer(Hero h);
 
 
 private:
-    int hp;
-    int level;
-    int speed;
-    bool ranged;
-    Coordinates position;
+    int m_hp;
+    int m_level;
+    int m_speed;
+    bool m_ranged;
+    Coordinates m_position;
 };
