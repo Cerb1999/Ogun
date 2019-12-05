@@ -5,10 +5,11 @@ class Projectile {
 public:
     Projectile(Hero h, int d);
     Projectile(Monster h);
+    Coordinates getCoordinates() { return p_position; }
 
 private:
-    Coordinates position;
-    int damages;
-    bool players; //evitons le suicide et de pouvoir nous faire mal avec nos propres projectiles
-    int direction; //le tir se déplace vers un point cardinal
+    Coordinates p_position;
+    int p_damages;
+    bool p_players; //evitons le suicide et de pouvoir nous faire mal avec nos propres projectiles
+    int p_direction; //le tir se déplace vers un point cardinal
 };
