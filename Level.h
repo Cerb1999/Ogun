@@ -1,23 +1,24 @@
 #ifndef Level_H
 #define Level_H
 
-//#include "Room.h";
 #include "Monster.h";
 #include "Destructible.h";
 
 class Level {
 private:
-  //int l_nbRooms;
   int l_depth;
   Monster l_monsters[];
   Destructibles l_crates[];
-  //Room* l_rooms;
+  bool l_cleared;
+  int l_map[][];
 
 public:
-  Level(/*int rooms*/, int d);
-  void loadLayout();
-  //int getNbRooms() { return l_nbRooms; }
-  int getDepth() { return l_depth; }
+  Level(int d);
+  bool isCleared();
+  int getDepth() { return l_depth; };
+  Monster* getMonsters(){ return l_monsters; };
+  Destructible* getDestructibles(){ return Destructible; };
+  void loadStage();
 };
 
 #endif

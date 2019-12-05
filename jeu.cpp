@@ -27,7 +27,8 @@ int main(int argc, char *argv[])
     }
 
     ecran = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
-    SDL_Texture* fond = charger_image("textures/ogun-background-menu.bmp", ecran);
+
+    SDL_Texture* fond = charger_image("textures/ogun-background-menu", ecran);
 
     Uint8 r = 255;
     Uint8 g = 255;
@@ -64,7 +65,12 @@ int main(int argc, char *argv[])
                     switch(evenements.key.keysym.sym)
                     {
                         case SDLK_ESCAPE:
+
                         case SDLK_q:
+                            SDL_DestroyRenderer(ecran);
+                            SDL_DestroyWindow(fenetre);
+                            SDL_Quit();
+                            //free ?
                             terminer = true; break;
                     }
             }
