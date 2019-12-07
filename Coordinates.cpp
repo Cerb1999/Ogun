@@ -31,10 +31,10 @@ void Coordinates::move(double x, double y) {
     setY(nextY);
 }
 
-bool Coordinates::contact(Coordinates c) {
-    return (c_x == c.getX() && c_y == c.getY());
+bool Coordinates::contact(Coordinates* c) {
+    return (c_x == c->getX() && c_y == c->getY());
 }
 
-bool Coordinates::contact(Coordinates c, double hitBox) {
-    return (c_x >= c.getX()-hitBox && c_x <= c.getX()+hitBox && c_y >= c.getY()-hitBox && c_y <= c.getY()+hitBox);
+bool Coordinates::contact(Coordinates* c, double hitBox) {
+    return (c_x >= c->getX()-hitBox && c_x <= c->getX()+hitBox && c_y >= c->getY()-hitBox && c_y <= c->getY()+hitBox);
 }

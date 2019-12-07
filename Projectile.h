@@ -11,7 +11,7 @@ private:
     Coordinates* p_position;
     int p_damages;
     bool p_players; //evitons le suicide et de pouvoir nous faire mal avec nos propres projectiles
-    int p_direction; //le tir se déplace vers un point cardinal
+    int p_direction; //le tir se déplace vers un point cardinal {N, NE, E, SE, S, SW, W, NW}
 
 public:
     Projectile(Hero h, int d);
