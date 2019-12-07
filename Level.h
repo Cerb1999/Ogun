@@ -17,7 +17,7 @@ public:
   bool isCleared();
   int getDepth() { return l_depth; };
   Monster* getMonsters(){ return l_monsters; };
-  Destructible* getDestructibles(){ return &l_crates; };
+  Destructible* getDestructibles(){ return l_crates; };
   void loadStage();
 };
 

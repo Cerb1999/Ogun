@@ -15,18 +15,7 @@ void Coordinates::setY(double y) {
 
 void Coordinates::move(double x, double y) {
     double nextX = c_x + x; double nextY = c_y + y;
-    if ( nextX > g_dim[0] && nextX > g_dim[1] ) {
-        nextX = g_dim[1];
-    }
-    if ( nextX < g_dim[0] && nextX < g_dim[1] ) {
-        nextX = g_dim[0];
-    }
-    if ( nextY > g_dim[2] && nextY > g_dim[3] ) {
-        nextY = g_dim[3];
-    }
-    if ( nextY < g_dim[2] && nextY < g_dim[3] ) {
-        nextY = g_dim[2];    
-    }
+    if ( g_level[int(nextX)][int(nextY)] )
     setX(nextX);
     setY(nextY);
 }

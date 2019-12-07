@@ -5,11 +5,11 @@ class Coordinates {
 private:
     double c_x;
     double c_y;
-    static double* g_dim;
+    static int** g_level;
 
 public:
     Coordinates(double x, double y);
-    static void setDimmension(double* dim) { g_dim = dim; }
+    static void setMap(int** env) { g_level = env; }
     double getX() { return c_x; }
     double getY() { return c_y; }
     void setX(double x);
