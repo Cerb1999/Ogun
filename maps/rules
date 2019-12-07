@@ -1,10 +1,14 @@
-0 - vide
-1 - sol
-2 - mur
-3 - mobs
-4 - boss
-5 - caisse
-6 - porte
-7 - perso
-8 - piece
-9 - cle
+infranchissable : i
+franchissable : f
+peut-être détruit/tué : m
+
+0 - vide //i
+1 - sol //f
+2 - mur  //i
+3 - mobs  //i m
+4 - boss  //i m
+5 - caisse  // i m
+6 - porte  // f (définir règle)
+7 - piege  // f
+8 - piece  // f
+9 - cle  // f
