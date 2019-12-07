@@ -1,10 +1,7 @@
-#ifndef Monster_H
-#define Monster_H
+#ifndef Boss_H
+#define Boss_H
 
-#include "Coordinates.h";
-#include "Projectile.h";
-
-class Monster {
+class Boss {
 private:
     int m_hp;
     int m_level;
@@ -13,7 +10,7 @@ private:
     Coordinates m_position;
 
 public:
-    Monster(int l, Coordinates c);
+    Boss(int l, Coordinates c);
     int hpLeft() { return m_hp; }
     bool isRanged() { return m_ranged; }
     bool hit(Projectile p); // contact avec p, renvoie le bool correspondant et effectue les actions nescessaires
