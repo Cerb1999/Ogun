@@ -8,7 +8,7 @@ class Level {
 private:
   int l_depth;
   Monster l_monsters[];
-  Destructibles l_crates[];
+  Destructible l_crates[];
   bool l_cleared;
   int l_map[][];
 
@@ -17,7 +17,7 @@ public:
   bool isCleared();
   int getDepth() { return l_depth; };
   Monster* getMonsters(){ return l_monsters; };
-  Destructible* getDestructibles(){ return Destructible; };
+  Destructible* getDestructibles(){ return &l_crates; };
   void loadStage();
 };
 

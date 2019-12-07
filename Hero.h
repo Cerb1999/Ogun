@@ -9,11 +9,11 @@ public:
     bool hit(Projectile p); // contact avec p, renvoie le bool correspondant et effectue les actions nescessaires
     bool hit(Monster m);
     void move();
-    Coordinates position();
+    Coordinates* position() { return &h_position; }
 
 private:
-    int hp;
-    int speed;
-    int damages;
-    Coordinates position;
+    int h_hp;
+    int h_speed;
+    int h_damages;
+    Coordinates h_position;
 };
