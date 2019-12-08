@@ -5,10 +5,12 @@
 #include "Projectile.h";
 
 class Monster {
-private:
+protected:
     int m_hp;
     int m_level;
+    int m_damages;
     int m_speed;
+    double m_size;
     bool m_ranged;
     int m_focus;
     Coordinates* m_position;

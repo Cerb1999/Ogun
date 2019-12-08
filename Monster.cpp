@@ -2,6 +2,8 @@
 
 Monster::Monster(int l, Coordinates* c) {
 	m_level = l;
+	m_damages = 1;
+	m_size = 1.;
 	m_ranged = l == 3 || l == 4;
 	m_speed = 1 + (l != 1 || l != 4)*0.25;
 	m_position = c;
@@ -17,8 +19,8 @@ bool Monster::attaquer(Hero h) {
 		refreshFocus(h);
 		res = true;
 	} else {
-		if (m_position->contact(h.position, 1.)) {
-			h.die(1);
+		if (m_position->contact(h.position, m_size)) {
+			h.die(m_damages);
 		} else {
 			refreshFocus(h);
 			move(h);
