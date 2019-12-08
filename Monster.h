@@ -10,15 +10,19 @@ private:
     int m_level;
     int m_speed;
     bool m_ranged;
-    Coordinates m_position;
+    int m_focus;
+    Coordinates* m_position;
 
 public:
-    Monster(int l, Coordinates c);
+    Monster(int l, Coordinates* c);
     int hpLeft() { return m_hp; }
     bool isRanged() { return m_ranged; }
     bool hit(Projectile p); // contact avec p, renvoie le bool correspondant et effectue les actions nescessaires
-    void attaquer(Hero h);
-    Coordinates* position() { return &m_position; }
+    bool attaquer(Hero h);
+    void move(Hero h);
+    int focus() { return m_focus; }
+    void refreshFocus(Hero h);
+    Coordinates* position() { return m_position; }
 };
 
 #endif

@@ -26,3 +26,7 @@ bool Hero::hit(Monster m) {
 void Hero::move() {
     //h_position->move(); //move based on keyboard input
 }
+
+void Hero::die(int damages) {
+    h_hp -= damages;
+}

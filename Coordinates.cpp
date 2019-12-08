@@ -15,9 +15,12 @@ void Coordinates::setY(double y) {
 
 void Coordinates::move(double x, double y) {
     double nextX = c_x + x; double nextY = c_y + y;
-    if ( g_level[int(nextX)][int(nextY)] )
-    setX(nextX);
-    setY(nextY);
+    double destTile = g_level[int(nextX)][int(nextY)];
+    if ( destTile == 1 || (destTile > 6 && destTile <= 10) ) {
+        g_level[int(c_x)][int(c_y)] = 1;
+        setX(nextX);
+        setY(nextY);
+    }
 }
 
 bool Coordinates::contact(Coordinates* c) {
