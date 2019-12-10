@@ -1,0 +1,43 @@
+dimensions :
+
+backgrounds :
+
+    - ogun background menu : 1920 * 1080
+    - ogun background menu : 1920 * 1080
+    - maximo graveyard : 512 * 288
+
+2d heart :
+    - broken : 223 * 162
+    - cracked : 200 * 167
+    - heart : 200 * 167
+    - pre1 : 700 * 511
+    - half : 110 * 167
+
+2d coin :
+    - coin : 192 * 32
+    - key : 19 * 10
+
+dungeon tileset :
+    - dungeon tileset V1 : 256 * 160
+    - dungeon tileset v2 : 256 * 256
+    - dungeon tileset v4 : 256 * 256
+    - dungeon tileset walls v1 : 256 * 256
+    - dungeon tileset walls v2 : 256 * 256
+
+    SrcR2.x = 0;
+    SrcR2.y = 0;
+    SrcR2.w = 72; // largeur en pixel
+    SrcR2.h = 50; // hauteur en pixel du bmp
+
+    SDL_Rect DestR2;
+
+    DestR2.x = 300; // placement sur l'écran
+    DestR2.y = 300;
+    DestR2.w = 400; // proportion (ex 2* + grosse largeur si 2 * srcr2.w)
+    DestR2.h = 50;
+
+
+et dans boucle
+
+
+          SDL_RenderCopy(ecran, objet_transp2, &SrcR2, &DestR2);
