@@ -4,7 +4,7 @@
 Level::Level(int d) {
     l_cleared = false;
     l_depth = d;
-    l_map = new int[25][52];
+    int **l_map = new int[25][52];
 }
 
 void loadStage(){
@@ -21,7 +21,7 @@ void loadStage(){
     }
 }
 
-Coordinates* heroPosition() {
+Coordinates* Level::heroPosition() {
 	Coordinates c;
 	switch (l_depth) {
 		case 1:
@@ -43,7 +43,7 @@ Coordinates* heroPosition() {
 	return &c;
 }
 
-Coordinates* bossPosition() {
+Coordinates* Level::bossPosition() {
 	int i = 0; int j = 0;
 	while ( l_map[i][j] != 6 || i < 25 ) {
 		j++;

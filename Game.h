@@ -3,7 +3,6 @@
 
 #include "Hero.h";
 #include "Monster.h";
-#include "Boss.h";
 #include "Destructible.h";
 #include "Projectile.h"
 #include "Level.h";
