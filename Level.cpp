@@ -4,7 +4,7 @@
 Level::Level(int d) {
     l_cleared = false;
     l_depth = d;
-    int **l_map = new int[25][52];
+    int l_map[25][52];
 }
 
 void loadStage(){

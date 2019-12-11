@@ -10,7 +10,7 @@ private:
   Monster* l_monsters;
   Destructible* l_crates;
   bool l_cleared;
-  int **l_map;
+  int l_map;
 
 public:
   Level(int d);
