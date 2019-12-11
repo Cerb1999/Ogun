@@ -3,6 +3,7 @@
 
 #include "Monster.h";
 #include "Destructible.h";
+#include "Coordinates.h";
 
 class Level {
 private:
@@ -16,9 +17,12 @@ public:
   Level(int d);
   bool isCleared();
   int getDepth() { return l_depth; };
-  Monster* getMonsters(){ return l_monsters; };
-  Destructible* getDestructibles(){ return l_crates; };
+  Monster* getMonsters(){ return &l_monsters; };
+  Destructible* getDestructibles(){ return &l_crates; };
   void loadStage();
+  Coordinates* heroPosition();
+  Coordinates* bossPosition();
+  int** getMap() { return &l_map; }
 };
 
 #endif
