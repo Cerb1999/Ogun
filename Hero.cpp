@@ -1,10 +1,10 @@
 #include "Hero.h"
 
-Hero::Hero(double x, double y) {
+Hero::Hero(Coordinates* c) {
     h_hp = 6;
     h_speed = 1;
     h_damages = 1;
-    h_position = &Coordinates(x,y);
+    h_position = c;
 }
 
 int Hero::hpLeft() {
@@ -19,7 +19,7 @@ bool Hero::hit(Projectile p) {
     return h_position->contact(p.getCoordinates());
 }
 
-bool Hero::hit(Monster m) {
+bool Hero::contact(Monster m) {
     return h_position->contact(m.position());
 }
 

@@ -1,5 +1,5 @@
-#ifndef Projectile_H
-#define Projectile_H
+#ifndef PROJECTILE_H_
+#define PROJECTILE_H_
 
 #include "Coordinates.h";
 #include "Monster.h";

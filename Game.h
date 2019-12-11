@@ -1,5 +1,11 @@
+#ifndef Game_H
+#define Game_H
+
 #include "Hero.h";
 #include "Monster.h";
+#include "Boss.h";
+#include "Destructible.h";
+#include "Projectile.h"
 #include "Level.h";
 
 class Game{
@@ -10,6 +16,10 @@ public:
 private:
     Hero player;
     Level floor;
-    Room activeRoom;
-    Monster monsters[];
+    Monster* monsters;
+    Boss boss;
+    Projectile projectiles[];
+    Destructible destructibles[];
 };
+
+#endif
