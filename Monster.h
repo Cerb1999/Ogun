@@ -4,6 +4,8 @@
 #include "Coordinates.h";
 #include "Projectile.h";
 
+class Projectile; class Hero; class Game;
+
 class Monster {
 protected:
     int m_hp;
@@ -25,6 +27,13 @@ public:
     int focus() { return m_focus; }
     void refreshFocus(Hero h);
     Coordinates* position() { return m_position; }
+};
+
+class Boss: public Monster {
+private:
+
+public:
+    Boss(int l, Coordinates* c);
 };
 
 #endif

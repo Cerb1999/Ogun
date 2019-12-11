@@ -4,6 +4,8 @@
 #include "Coordinates.h";
 #include "Projectile.h";
 
+class Game; class Level; class Boss; class Monster;
+
 class Hero {
 private:
     int h_hp;

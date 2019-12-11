@@ -1,6 +1,8 @@
 #ifndef Coordinates_H
 #define Coordinates_H
 
+class Boss; class Hero; class Destructible; class Projectile; class Game;
+
 class Coordinates {
 private:
     double c_x;

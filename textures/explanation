@@ -41,3 +41,8 @@ et dans boucle
 
 
           SDL_RenderCopy(ecran, objet_transp2, &SrcR2, &DestR2);
+
+
+
+mur : 0, 16, 25, 16 // 25, 25
+knight (you) : 241, 236, 15, 15 // 20, 25

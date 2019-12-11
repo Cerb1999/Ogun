@@ -4,6 +4,8 @@
 #include "Coordinates.h";
 #include "Projectile.h";
 
+class Level; class Game;
+
 class Destructible {
 private: 
   Coordinates* d_coord;

@@ -4,7 +4,6 @@
 #include "Coordinates.h";
 #include "Monster.h";
 #include "Hero.h";
-#include "Boss.h";
 
 class Projectile {
 private:
