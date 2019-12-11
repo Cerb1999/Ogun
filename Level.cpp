@@ -1,5 +1,5 @@
-#include "Level.h"
 #include <stdio.h>
+#include "Level.h"
 
 Level::Level(int d) {
     l_cleared = false;
@@ -25,19 +25,19 @@ Coordinates* heroPosition() {
 	Coordinates c;
 	switch (l_depth) {
 		case 1:
-		c = Coordinates::Coordinates(7.,7.);
+		c = Coordinates(7.,7.);
 		break;
 		case 2:
-		c = Coordinates::Coordinates(5.,8.);
+		c = Coordinates(5.,8.);
 		break;
 		case 3:
-		c = Coordinates::Coordinates(21.,10.);
+		c = Coordinates(21.,10.);
 		break;
 		case 4:
-		c = Coordinates::Coordinates(20.,19.);
+		c = Coordinates(20.,19.);
 		break;
 		case 5:
-		c = Coordinates::Coordinates(20.,7.);
+		c = Coordinates(20.,7.);
 		break;
 	}
 	return &c;
@@ -54,6 +54,6 @@ Coordinates* bossPosition() {
 			}
 		}
 	}
-	Coordinates c = Coordinates::Coordinates(double(i), double(j));
+	Coordinates c = Coordinates(double(i), double(j));
 	return &c;
 }

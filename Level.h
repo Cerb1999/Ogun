@@ -18,6 +18,8 @@ public:
   int getDepth() { return l_depth; };
   Monster* getMonsters(){ return l_monsters; };
   Destructible* getDestructibles(){ return l_crates; };
+  Coordinates* heroPosition();
+  Coordinates* bossPosition();
   void loadStage();
 };
 
