@@ -9,8 +9,8 @@ Level::Level(int d) {
 
 void Level::loadStage() {
     int c;
-    int l = 0;
-    int col = 0;
+    int l = -1;
+    int col = -1;
     while ((c = getchar()) != EOF) {
         col++;
         if(col == 25){
