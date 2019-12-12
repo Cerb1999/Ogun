@@ -14,14 +14,11 @@ private:
     double p_hitBox;
 
 public:
-    Projectile(Hero h, int d);
-    Projectile(Monster m, int d);
-    Projectile(Boss b, int d);
-    Projectile(Monster m, int d, double size);
-    Projectile(Boss b, int d, double size);
+    Projectile(bool players, int direction, double size, int damages, Coordinates* position);
     Coordinates* getCoordinates() { return p_position; }
     int damages() { return p_damages; }
     bool playerProjectile() { return p_players; }
+    double hitBox() { return p_hitbox; }
     void move();
 };
 

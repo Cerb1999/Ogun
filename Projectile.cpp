@@ -1,43 +1,12 @@
 #include "Projectile.h";
 
-Projectile::Projectile(Hero h, int d) {
-	p_position = h.position();
-	p_damages = h.damages();
-	p_players = true;
-	p_direction = d;
-	p_hitBox = 1;
-}
-
-Projectile::Projectile(Monster m, int d) {
-	p_position = m.position();
-	p_damages = 1;
-	p_players = false;
-	p_direction = d;
-	p_hitBox = 1;
-}
-
-Projectile::Projectile(Boss b, int d) {
-	p_position = b.position();
-	p_damages = 2;
-	p_players = false;
-	p_direction = d;
-	p_hitBox = 1;
-}
-
-Projectile::Projectile(Monster m, int d, double size) {
-	p_position = m.position();
-	p_damages = 1;
-	p_players = false;
-	p_direction = d;
+Projectile::Projectile(bool players, int direction, double size, int damages, Coordinates* position) {
+	p_position = position;
+	p_damages = damages;
+	p_players = players;
+	p_direction = direction;
 	p_hitBox = size;
-}
-
-Projectile::Projectile(Boss b, int d, double size) {
-	p_position = b.position();
-	p_damages = 2;
-	p_players = false;
-	p_direction = d;
-	p_hitBox = size;
+	move();
 }
 
 void Projectile::move() {

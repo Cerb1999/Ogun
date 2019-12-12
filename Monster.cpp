@@ -6,11 +6,22 @@ Monster::Monster(int l, Coordinates* c) {
 	m_size = 1.;
 	m_ranged = l == 3 || l == 4;
 	m_speed = 1 + (l != 1 || l != 4)*0.25;
+	m_actions = m_speed;
 	m_position = c;
 }
 
 bool Monster::hit(Projectile p) {
 	return m_position->contact(p.getCoordinates());
+}
+
+bool Monster::act() {
+	bool res = false;
+	m_actions += m_speed;
+	if (m_actions >= 1) { 
+		m_actions -= 1;
+		res = true;
+	}
+	return res;
 }
 
 bool Monster::attaquer(Hero h) {
@@ -94,6 +105,6 @@ Boss::Boss(int l, Coordinates* c) : Monster(l,c) {
 	m_level = l;
 	m_damages = 2.;
 	m_ranged = l == 3 || l == 4;
-	m_speed = 1 + (l != 1 || l != 4)*0.25;
+	m_speed = 1 + (l != 1 || l != 4)*0.5;
 	m_position = c;
 }

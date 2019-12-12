@@ -17,7 +17,6 @@ public:
     void setX(double x);
     void setY(double y);
     void move(double x, double y);
-    bool contact(Coordinates* c);
     bool contact(Coordinates* c, double hitBox);
 };
 

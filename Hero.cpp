@@ -30,3 +30,8 @@ void Hero::move() {
 void Hero::die(int damages) {
     h_hp -= damages;
 }
+
+Projectile* Hero::fire(int direction) {
+    Projectile p = Projectile(true, direction, 1, h_damages, h_position);
+    return &p; 
+}

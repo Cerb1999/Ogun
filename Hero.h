@@ -17,6 +17,7 @@ public:
     Hero(Coordinates* c);
     int hpLeft();
     int damages();
+    Projectile* fire(int direction);
     bool hit(Projectile p); // contact avec p, renvoie le bool correspondant et effectue les actions nescessaires
     bool contact(Monster m);
     void move();

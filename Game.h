@@ -1,6 +1,7 @@
 #ifndef Game_H
 #define Game_H
 
+#include <vector>;
 #include "Hero.h";
 #include "Monster.h";
 #include "Destructible.h";
@@ -10,15 +11,15 @@
 class Game{
 public:
     Game();
-    void spawnMonsters(Layout l);
+    void play();
 
 private:
     Hero player;
     Level floor;
-    Monster* monsters;
+    std::vector<Monster> monsters;
     Boss boss;
-    Projectile projectiles[];
-    Destructible destructibles[];
+    std::vector<Projectile> projectiles;
+    std::vector<Destructible> destructibles;
 };
 
 #endif

@@ -11,7 +11,8 @@ protected:
     int m_hp;
     int m_level;
     int m_damages;
-    int m_speed;
+    double m_speed;
+    double m_actions;
     double m_size;
     bool m_ranged;
     int m_focus;
@@ -22,6 +23,7 @@ public:
     int hpLeft() { return m_hp; }
     bool isRanged() { return m_ranged; }
     bool hit(Projectile p); // contact avec p, renvoie le bool correspondant et effectue les actions nescessaires
+    bool act();
     bool attaquer(Hero h);
     void move(Hero h);
     int focus() { return m_focus; }
