@@ -19,8 +19,8 @@ bool Hero::hit(Projectile p) {
     return h_position->contact(p.getCoordinates(), p.hitBox());
 }
 
-void Hero::move() {
-    //h_position->move(); //move based on keyboard input
+void Hero::move(int d) {
+    h_position->move(d); //move based on keyboard input
 }
 
 void Hero::die(int damages) {

@@ -11,7 +11,7 @@
 class Game{
 public:
     Game(int startLevel);
-    void play();
+    void play(int d);
 
 private:
     Hero player;

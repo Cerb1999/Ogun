@@ -20,7 +20,7 @@ public:
     Projectile* fire(int direction);
     bool hit(Projectile p); // contact avec p, renvoie le bool correspondant et effectue les actions nescessaires
     bool contact(Monster m);
-    void move();
+    void move(int d);
     void die(int damages);
     bool alive() { return h_hp > 0; }
     Coordinates* position() { return h_position; }

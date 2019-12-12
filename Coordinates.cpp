@@ -13,17 +13,48 @@ void Coordinates::setY(double y) {
     c_y = y;
 }
 
-void Coordinates::move(double x, double y) {
-    double nextX = c_x + x; double nextY = c_y + y;
-    int** map = Coordinates::getMap();
-    double destTile = map[int(nextX)][int(nextY)];
-    if ( destTile == 1 || (destTile > 6 && destTile <= 10) ) {
-        map[int(c_x)][int(c_y)] = 1;
-        setX(nextX);
-        setY(nextY);
-    }
-}
-
 bool Coordinates::contact(Coordinates* c, double hitBox) {
     return (c_x >= c->getX()-hitBox && c_x <= c->getX()+hitBox && c_y >= c->getY()-hitBox && c_y <= c->getY()+hitBox);
+}
+
+void Coordinates::move(int d) {
+	double x = 0; double y = 0;
+	switch (d) {
+		case 1:
+			y = 1;
+			break;
+		case 2: 
+			x = 1;
+			y = 1;
+			break;
+		case 3:
+			x = 1;
+			break;
+		case 4:
+			x = 1;
+			y = -1;
+			break;
+		case 5: 
+			y = -1;
+			break;
+		case 6:
+			x = -1;
+			y = -1;
+			break;
+		case 7:
+			x = -1;
+			break;
+		case 8:
+			x = -1;
+			y = 1;
+			break;
+	}
+  double nextX = c_x + x; double nextY = c_y + y;
+  int** map = Coordinates::getMap();
+  int destTile = map[int(nextX)][int(nextY)];
+  if ( destTile == 1 || (destTile > 6 && destTile <= 10) ) {
+      map[int(c_x)][int(c_y)] = 1;
+      setX(nextX);
+      setY(nextY);
+  }
 }

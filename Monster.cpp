@@ -35,45 +35,14 @@ bool Monster::attaquer(Hero h) {
 			h.die(m_damages);
 		} else {
 			refreshFocus(h);
-			move(h);
+			move();
 		}
 	}
 	return res;
 }
 
-void Monster::move(Hero h) {
-	double x = 0; double y = 0;
-	switch (m_focus) {
-		case 1:
-			y = 1;
-			break;
-		case 2: 
-			x = 1;
-			y = 1;
-			break;
-		case 3:
-			x = 1;
-			break;
-		case 4:
-			x = 1;
-			y = -1;
-			break;
-		case 5: 
-			y = -1;
-			break;
-		case 6:
-			x = -1;
-			y = -1;
-			break;
-		case 7:
-			x = -1;
-			break;
-		case 8:
-			x = -1;
-			y = 1;
-			break;
-	}
-	m_position->move(x,y);
+void Monster::move() {
+	m_position->move(m_focus);
 }
 
 void Monster::refreshFocus(Hero h) {
