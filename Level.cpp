@@ -1,5 +1,13 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
 #include "Level.h"
+
+using namespace std;
 
 Level::Level(int d) {
     l_cleared = false;
@@ -8,17 +16,23 @@ Level::Level(int d) {
 }
 
 void Level::loadStage() {
-    int c;
-    int l = -1;
-    int col = -1;
-    while ((c = getchar()) != EOF) {
-        col++;
-        if(col == 25){
-            col = 0;
-            l++;
-        }
-        l_map[l][col] = c;
-    }
+    ifstream infile("maps"+to_string(l_depth)+".txt");
+	
+	int i = -1; int j = -1;
+	while(infile){
+		string s;
+		if(!getline(infile, s)) break;
+		i++;
+		istringstream ss(s);
+		 	
+		while(ss){
+			j++;
+			if(i == 25) i = -1;
+			string s;
+			if(!getline(ss,s))break;
+			l_map[i][j] = atoi(s.c_str());
+		}
+	}
 }
 
 Coordinates* Level::heroPosition() {

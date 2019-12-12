@@ -2,11 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "fonctions_SDL.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
+#include "fonctions_SDL.h"
+#include "Game.h"
 
 using namespace std;
 
@@ -75,6 +76,8 @@ int main(int argc, char *argv[])
         SDL_RenderClear(ecran);
         SDL_RenderCopy(ecran, fond, &SrcR, &DestR);
 
+		bool run = false;
+
 		while( SDL_PollEvent( &evenements ) )
 			switch(evenements.type)
 			{
@@ -88,6 +91,8 @@ int main(int argc, char *argv[])
 				            SDL_Quit();
 				            terminer = true; break;
 				        case SDLK_SPACE:
+							if(!run) run=!run;
+							Game jeu = Game(1);
 							SDL_RenderClear(ecran);
 							
 				            break;

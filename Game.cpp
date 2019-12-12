@@ -2,9 +2,11 @@
 
 
 Game::Game(int startLevel): 
-	floor(Level(startLevel)), boss(Boss(startLevel, floor.bossPosition())),  player(Hero(floor.heroPosition()))
+	floor(Level(startLevel)), player(Hero(floor.heroPosition()))
 {
+	floor.loadStage();
 	monsters = floor.getMonsters();
+	monsters.push_back(Boss(startLevel, floor.bossPosition()));
 }
 
 bool Game::play(int direction) {
