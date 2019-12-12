@@ -28,25 +28,25 @@ int main(int argc, char *argv[])
 
     ecran = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
 
-    SDL_Texture* fond = charger_image("textures/ogun-background-menu", ecran);
+    SDL_Texture* fond = charger_image("textures/background/ogun-background-menu", ecran);
 
     Uint8 r = 255;
     Uint8 g = 255;
-    Uint8 b = 255;
+    Uint8 b = 0;
 
     SDL_Rect SrcR;
 
     SrcR.x = 0;
     SrcR.y = 0;
-    SrcR.w = 640; // Largeur de l’objet en pixels (à récupérer)
-    SrcR.h = 192; // Hauteur de l’objet en pixels (à récupérer)
+    SrcR.w = 1920; // Largeur de l’objet en pixels (à récupérer)
+    SrcR.h = 1080; // Hauteur de l’objet en pixels (à récupérer)
 
     SDL_Rect DestR;
 
     DestR.x = 350;
     DestR.y = 350;
-    DestR.w = 640/3;
-    DestR.h = 192/3;
+    DestR.w = 1920/2;
+    DestR.h = 1080/3;
 
 
     // Boucle principale
@@ -59,20 +59,13 @@ int main(int argc, char *argv[])
         while( SDL_PollEvent( &evenements ) )
             switch(evenements.type)
             {
-                case SDL_QUIT:
+                case SDLK_ESCAPE:
+                    SDL_DestroyRenderer(ecran);
+                    SDL_DestroyWindow(fenetre);
+                    SDL_Quit();
                     terminer = true; break;
-                case SDL_KEYDOWN:
-                    switch(evenements.key.keysym.sym)
-                    {
-                        case SDLK_ESCAPE:
-
-                        case SDLK_q:
-                            SDL_DestroyRenderer(ecran);
-                            SDL_DestroyWindow(fenetre);
-                            SDL_Quit();
-                            //free ?
-                            terminer = true; break;
-                    }
+                case SDLK_SPACE:
+                    break;
             }
         SDL_RenderPresent(ecran);
     }
