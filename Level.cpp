@@ -16,27 +16,36 @@ Level::Level(int d) {
 }
 
 void Level::loadStage() {
+	stringstream str;
 	ostringstream oss;
 	oss << "maps/stage" << l_depth << ".txt";
-	cout << oss.str();
-    ifstream infile("maps/stage1.txt");
 
-	int i = -1; int j = -1;
-	while(infile){
-		string s;
-		if(!getline(infile, s)) break;
-		i++;
-		istringstream ss(s);
-		 	
-		while(ss){
-			j++;
-			if(i == 25) i = -1;
-			string s;
-			if(!getline(ss,s, ' '))break;
-			l_map[i][j] = atoi(s.c_str());
-			printf("%d, %d \n", i, j);
+	cout << oss.str();
+
+	ifstream infile(oss.str());
+
+	int i = 0; int j = - 1;
+	char x;
+	ifstream inFile(oss.str());
+	if (!inFile) {
+		cout << "Unable to open file";
+		exit(1);
+	}
+	while (x != '\n') {
+		while (inFile >> x) {
+			if(j == 52){ j = 0; i++; }else{ j++; };
+			// printf("%d\n",i,j);
+			str << x;
+			int b;
+			str >> b;
+
+			l_map[i][j] = x - 0;
+
+			printf("i : %d, j : %d resultat : %d\n", i, j, l_map[i][j]);
+
 		}
 	}
+	inFile.close();
 }
 
 Coordinates* Level::heroPosition() {
