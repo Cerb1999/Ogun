@@ -68,3 +68,23 @@ projectile :
  - allié : 80, 133, 5, 5 // 10, 10 (peut changer)
  - ennemi : 88, 133, 5, 5 // 10, 10
 
+ordre dans fich :
+0 sol
+1 mur
+2 mob1
+3 mob2
+4 mob3
+5 mob4
+6 mob5
+7 caisse
+8 porte fermee
+9 porte ouverte
+10 piege
+11 piece
+12 cle
+13 projectile allie
+14 projectile ennemi
+15 coeur
+16 half coeur
+17 potion
+18 knight
