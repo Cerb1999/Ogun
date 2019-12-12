@@ -22,24 +22,15 @@ void Game::play(int direction) {
 						projectiles.push_back(Projectile(false, boss.focus(), boss.projectileSize(), boss.damages(), boss.position()));				
 				}
 			}
-		vector<Projectile>::iterator it = projectiles.begin();
-		while (it != projectiles.end()) {
-			it.move();
-      if (!it.playerProjectile()) {
-				if (player.hit(it)) {
-					it = projectiles.erase(it);
-				} else {
-					it++;
-				}
+		for (Projectile p : projectiles) {	
+			p.move();
+      if (!p.playerProjectile()) {
+				player.hit(p);
 			}	else {
 				for (Monster m : monsters) {
-					if (m.hit(it)) {
-						it = projectiles.erase(it);
-					} else {
-						it++;
-					}
+					m.hit(p);
 				}
-			}
+			}	
 		}
 	}
 }

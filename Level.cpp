@@ -22,7 +22,7 @@ void Level::loadStage() {
 }
 
 Coordinates* Level::heroPosition() {
-	Coordinates c = Coordinates(0., 0., l_map);
+	Coordinates c = Coordinates(0., 0.);
 	switch (l_depth) {
 		case 1:
 		c.setX(7.);
@@ -59,6 +59,6 @@ Coordinates* Level::bossPosition() {
 			}
 		}
 	}
-	Coordinates c = Coordinates(double(i), double(j), l_map);
+	Coordinates c = Coordinates(double(i), double(j));
 	return &c;
 }
