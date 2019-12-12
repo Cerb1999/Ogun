@@ -16,11 +16,7 @@ int Hero::damages() {
 }
 
 bool Hero::hit(Projectile p) {
-    return h_position->contact(p.getCoordinates());
-}
-
-bool Hero::contact(Monster m) {
-    return h_position->contact(m.position());
+    return h_position->contact(p.getCoordinates(), p.hitBox());
 }
 
 void Hero::move() {
