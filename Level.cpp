@@ -16,8 +16,11 @@ Level::Level(int d) {
 }
 
 void Level::loadStage() {
-    ifstream infile("maps"+to_string(l_depth)+".txt");
-	
+	ostringstream oss;
+	oss << "maps/stage" << l_depth << ".txt";
+	cout << oss.str();
+    ifstream infile("maps/stage1.txt");
+
 	int i = -1; int j = -1;
 	while(infile){
 		string s;
@@ -29,8 +32,9 @@ void Level::loadStage() {
 			j++;
 			if(i == 25) i = -1;
 			string s;
-			if(!getline(ss,s))break;
+			if(!getline(ss,s, ' '))break;
 			l_map[i][j] = atoi(s.c_str());
+			printf("%d, %d \n", i, j);
 		}
 	}
 }
