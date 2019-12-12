@@ -5,24 +5,22 @@ Game::Game(int startLevel):
 	floor(Level(startLevel)), player(Hero(floor.heroPosition()))
 {
 	floor.loadStage();
-	monsters = floor.getMonsters();
 	monsters.push_back(Boss(startLevel, floor.bossPosition()));
+	monsters = floor.getMonsters();
 }
 
-bool Game::play(int direction) {
+bool Game::play(int moveDirection, int fireDirection) {
 	if(player.alive()) {
-		player.move(direction); 
+		player.move(moveDirection);
+		if (fireDirection > 0 && fireDirection < 9) {
+			projectiles.push_back(*player.fire(fireDirection));
+		} 
 		for (Monster m : monsters) {
 			if (m.act()) {
 				if (m.attaquer(player)) {
 					projectiles.push_back(Projectile(false, m.focus(), m.projectileSize(), m.damages(), m.position()));				
 				}
 			}		
-		}
-		if (boss.act()) {
-			if (boss.attaquer(player)) {
-				projectiles.push_back(Projectile(false, boss.focus(), boss.projectileSize(), boss.damages(), boss.position()));				
-			}
 		}
 		std::vector<Projectile>::iterator it = projectiles.begin();
 		while (it != projectiles.end()) {
