@@ -2,6 +2,7 @@
 
 Monster::Monster(int l, Coordinates* c) {
 	m_level = l;
+	m_level = 2 + l;
 	m_damages = 1;
 	m_size = 1.;
 	p_size = 1 + l == 5;
@@ -9,6 +10,7 @@ Monster::Monster(int l, Coordinates* c) {
 	m_speed = 1 + (l != 1 || l != 4)*0.5;
 	m_actions = m_speed;
 	m_position = c;
+	m_id = 3;
 }
 
 bool Monster::hit(Projectile p) {
@@ -35,45 +37,14 @@ bool Monster::attaquer(Hero h) {
 			h.die(m_damages);
 		} else {
 			refreshFocus(h);
-			move(h);
+			move();
 		}
 	}
 	return res;
 }
 
-void Monster::move(Hero h) {
-	double x = 0; double y = 0;
-	switch (m_focus) {
-		case 1:
-			y = 1;
-			break;
-		case 2: 
-			x = 1;
-			y = 1;
-			break;
-		case 3:
-			x = 1;
-			break;
-		case 4:
-			x = 1;
-			y = -1;
-			break;
-		case 5: 
-			y = -1;
-			break;
-		case 6:
-			x = -1;
-			y = -1;
-			break;
-		case 7:
-			x = -1;
-			break;
-		case 8:
-			x = -1;
-			y = 1;
-			break;
-	}
-	m_position->move(x,y);
+void Monster::move() {
+	m_position->move(m_focus, m_id);
 }
 
 void Monster::refreshFocus(Hero h) {
@@ -104,9 +75,11 @@ void Monster::refreshFocus(Hero h) {
 
 Boss::Boss(int l, Coordinates* c) : Monster(l,c) {
 	m_level = l;
+	m_hp = 10 + 2*l;
 	m_damages = 2.;
 	m_ranged = l == 3 || l == 4;
 	p_size = 1 + l == 5;
 	m_speed = 1 + (l != 1 || l != 4)*0.5;
 	m_position = c;
+	m_id = 4;
 }

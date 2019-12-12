@@ -4,12 +4,12 @@
 Game::Game(int startLevel): 
 	floor(Level(startLevel)), boss(Boss(startLevel, floor.bossPosition())),  player(Hero(floor.heroPosition()))
 {
-	Coordinates::setMap(floor.getMap());
 	monsters = floor.getMonsters();
 }
 
-void Game::play() {
-	while(player.alive()) {
+void Game::play(int direction) {
+	if(player.alive()) {
+	player.move(direction); 
 		for (Monster m : monsters) {
 			if (m.act()) {
 				if (m.attaquer(player)) {
@@ -22,5 +22,15 @@ void Game::play() {
 						projectiles.push_back(Projectile(false, boss.focus(), boss.projectileSize(), boss.damages(), boss.position()));				
 				}
 			}
+		for (Projectile p : projectiles) {	
+			p.move();
+      if (!p.playerProjectile()) {
+				player.hit(p);
+			}	else {
+				for (Monster m : monsters) {
+					m.hit(p);
+				}
+			}	
+		}
 	}
 }
