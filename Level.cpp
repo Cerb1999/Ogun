@@ -9,8 +9,8 @@ Level::Level(int d) {
 
 void Level::loadStage() {
     int c;
-    int l = 0;
-    int col = 0;
+    int l = -1;
+    int col = -1;
     while ((c = getchar()) != EOF) {
         col++;
         if(col == 25){
@@ -22,7 +22,7 @@ void Level::loadStage() {
 }
 
 Coordinates* Level::heroPosition() {
-	Coordinates c = Coordinates(0., 0.);
+	Coordinates c = Coordinates(0., 0., l_map);
 	switch (l_depth) {
 		case 1:
 		c.setX(7.);
@@ -59,6 +59,6 @@ Coordinates* Level::bossPosition() {
 			}
 		}
 	}
-	Coordinates c = Coordinates(double(i), double(j));
+	Coordinates c = Coordinates(double(i), double(j), l_map);
 	return &c;
 }
