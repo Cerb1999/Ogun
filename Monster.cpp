@@ -14,7 +14,7 @@ Monster::Monster(int l, Coordinates* c) {
 }
 
 bool Monster::hit(Projectile p) {
-	return m_position->contact(p.getCoordinates(), p.hitBox());
+	return m_position->contact(p.getCoordinates(), p.hitBox()+monsterSize());
 }
 
 bool Monster::act() {
@@ -33,7 +33,7 @@ bool Monster::attaquer(Hero h) {
 		refreshFocus(h);
 		res = true;
 	} else {
-		if (m_position->contact(h.position(), m_size)) {
+		if (m_position->contact(h.position(), monsterSize())) {
 			h.die(m_damages);
 		} else {
 			refreshFocus(h);
@@ -78,6 +78,7 @@ Boss::Boss(int l, Coordinates* c) : Monster(l,c) {
 	m_hp = 10 + 2*l;
 	m_damages = 2.;
 	m_ranged = l == 3 || l == 4;
+	m_size = 2;
 	p_size = 1 + l == 5;
 	m_speed = 1 + (l != 1 || l != 4)*0.5;
 	m_position = c;

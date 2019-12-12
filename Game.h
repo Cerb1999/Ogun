@@ -9,17 +9,19 @@
 #include "Level.h";
 
 class Game{
-public:
-    Game(int startLevel);
-    void play(int d);
-
 private:
-    Hero player;
-    Level floor;
-    std::vector<Monster> monsters;
-    Boss boss;
-    std::vector<Projectile> projectiles;
-    std::vector<Destructible> destructibles;
+	Hero player;
+	Level floor;
+	std::vector<Monster> monsters;
+	std::vector<Projectile> projectiles;
+	//std::vector<Destructible> destructibles;
+
+public:
+	Game(int startLevel);
+	bool play(int movementDirection, int fireDirection);
+	int depth() { return floor.getDepth(); }	
+	std::vector<Monster> getMonsters() { return monsters; }
+	std::vector<Projectile> getProjectiles() { return projectiles; }
 };
 
 #endif

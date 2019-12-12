@@ -30,6 +30,7 @@ public:
     void move();
     int damages() { return m_damages; }
     int focus() { return m_focus; }
+    double monsterSize() { return m_size; }
     double projectileSize() { return p_size; }
     void refreshFocus(Hero h);
     Coordinates* position() { return m_position; }

@@ -20,7 +20,9 @@ bool Hero::hit(Projectile p) {
 }
 
 void Hero::move(int d) {
-    h_position->move(d, 0); //move based on keyboard input
+	if ( d > 0 && d < 9) {
+		h_position->move(d, 0); //move based on keyboard input
+	}
 }
 
 void Hero::die(int damages) {
