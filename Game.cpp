@@ -13,7 +13,9 @@ void Game::play() {
 	while(player.alive()) {
 		for (Monster m : monsters) {
 			if (m.act()) {
-				m.attaquer(
+				if (m.attaquer(player)) {
+						projectiles.push_back(new Projectile(false, m.focus(), m.projectileSize(), m.damages(), m.position()));				
+				}
 			}		
 		}
 	}

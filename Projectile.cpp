@@ -5,7 +5,7 @@ Projectile::Projectile(bool players, int direction, double size, int damages, Co
 	p_damages = damages;
 	p_players = players;
 	p_direction = direction;
-	p_hitBox = size;
+	p_hitbox = size;
 	move();
 }
 

@@ -4,8 +4,9 @@ Monster::Monster(int l, Coordinates* c) {
 	m_level = l;
 	m_damages = 1;
 	m_size = 1.;
-	m_ranged = l == 3 || l == 4;
-	m_speed = 1 + (l != 1 || l != 4)*0.25;
+	p_size = 1 + l == 5;
+	m_ranged = l == 3 || l == 5;
+	m_speed = 1 + (l != 1 || l != 4)*0.5;
 	m_actions = m_speed;
 	m_position = c;
 }
@@ -17,8 +18,8 @@ bool Monster::hit(Projectile p) {
 bool Monster::act() {
 	bool res = false;
 	m_actions += m_speed;
-	if (m_actions >= 1) { 
-		m_actions -= 1;
+	if (m_actions >= 2.5) { 
+		m_actions -= 2.5;
 		res = true;
 	}
 	return res;
@@ -105,6 +106,7 @@ Boss::Boss(int l, Coordinates* c) : Monster(l,c) {
 	m_level = l;
 	m_damages = 2.;
 	m_ranged = l == 3 || l == 4;
+	p_size = 1 + l == 5;
 	m_speed = 1 + (l != 1 || l != 4)*0.5;
 	m_position = c;
 }

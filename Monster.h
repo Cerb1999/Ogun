@@ -14,6 +14,7 @@ protected:
     double m_speed;
     double m_actions;
     double m_size;
+    double p_size;
     bool m_ranged;
     int m_focus;
     Coordinates* m_position;
@@ -27,6 +28,7 @@ public:
     bool attaquer(Hero h);
     void move(Hero h);
     int focus() { return m_focus; }
+    double projectileSize() { return p_size; }
     void refreshFocus(Hero h);
     Coordinates* position() { return m_position; }
 };

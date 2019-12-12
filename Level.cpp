@@ -4,10 +4,10 @@
 Level::Level(int d) {
     l_cleared = false;
     l_depth = d;
-    int l_map[25][52];
+    l_map[25][52];
 }
 
-void loadStage(){
+void Level::loadStage() {
     int c;
     int l = 0;
     int col = 0;
@@ -22,22 +22,22 @@ void loadStage(){
 }
 
 Coordinates* Level::heroPosition() {
-	Coordinates c;
+	Coordinates c = Coordinates(0., 0.);
 	switch (l_depth) {
 		case 1:
-		c = Coordinates(7.,7.);
+		c.set(7.,7.);
 		break;
 		case 2:
-		c = Coordinates(5.,8.);
+		c.set(5.,8.);
 		break;
 		case 3:
-		c = Coordinates(21.,10.);
+		c.set(21.,10.);
 		break;
 		case 4:
-		c = Coordinates(20.,19.);
+		c.set(20.,19.);
 		break;
 		case 5:
-		c = Coordinates(20.,7.);
+		c.set(20.,7.);
 		break;
 	}
 	return &c;
