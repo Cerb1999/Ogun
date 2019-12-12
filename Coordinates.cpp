@@ -18,7 +18,7 @@ void Coordinates::move(double x, double y) {
     int** map = Coordinates::getMap();
     double destTile = map[int(nextX)][int(nextY)];
     if ( destTile == 1 || (destTile > 6 && destTile <= 10) ) {
-        g_level[int(c_x)][int(c_y)] = 1;
+        map[int(c_x)][int(c_y)] = 1;
         setX(nextX);
         setY(nextY);
     }

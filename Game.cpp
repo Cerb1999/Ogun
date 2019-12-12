@@ -17,5 +17,10 @@ void Game::play() {
 				}
 			}		
 		}
+		if (boss.act()) {
+				if (boss.attaquer(player)) {
+						projectiles.push_back(Projectile(false, boss.focus(), boss.projectileSize(), boss.damages(), boss.position()));				
+				}
+			}
 	}
 }
