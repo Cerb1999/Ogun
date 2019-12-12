@@ -4,7 +4,6 @@
 Game::Game(int startLevel): 
 	floor(Level(startLevel)), boss(Boss(startLevel, floor.bossPosition())),  player(Hero(floor.heroPosition()))
 {
-	Coordinates::setMap(floor.getMap());
 	monsters = floor.getMonsters();
 }
 

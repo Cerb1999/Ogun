@@ -1,8 +1,9 @@
 #include "Coordinates.h"
 
-Coordinates::Coordinates(double x, double y) {
+Coordinates::Coordinates(double x, double y, int** map) {
     c_x = x;
     c_y = y;
+		g_map = map;
 }
 
 void Coordinates::setX(double x) {
@@ -17,9 +18,9 @@ bool Coordinates::contact(Coordinates* c, double hitBox) {
     return (c_x >= c->getX()-hitBox && c_x <= c->getX()+hitBox && c_y >= c->getY()-hitBox && c_y <= c->getY()+hitBox);
 }
 
-void Coordinates::move(int d) {
+void Coordinates::move(int direction, int id) {
 	double x = 0; double y = 0;
-	switch (d) {
+	switch (direction) {
 		case 1:
 			y = 1;
 			break;
@@ -50,10 +51,12 @@ void Coordinates::move(int d) {
 			break;
 	}
   double nextX = c_x + x; double nextY = c_y + y;
-  int** map = Coordinates::getMap();
-  int destTile = map[int(nextX)][int(nextY)];
+  int destTile = g_map[int(nextX)][int(nextY)];
   if ( destTile == 1 || (destTile > 6 && destTile <= 10) ) {
-      map[int(c_x)][int(c_y)] = 1;
+			if (id == 3 || id == 4) {
+				g_map[int(nextX)][int(nextY)] = id;      
+				g_map[int(c_x)][int(c_y)] = 1;
+			}
       setX(nextX);
       setY(nextY);
   }

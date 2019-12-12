@@ -10,5 +10,5 @@ Projectile::Projectile(bool players, int direction, double size, int damages, Co
 }
 
 void Projectile::move() {
-	p_position->move(p_direction);
+	p_position->move(p_direction, 0);
 }

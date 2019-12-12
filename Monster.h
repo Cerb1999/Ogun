@@ -17,6 +17,7 @@ protected:
     double p_size;
     bool m_ranged;
     int m_focus;
+    int m_id;
     Coordinates* m_position;
 
 public:
