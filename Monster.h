@@ -27,6 +27,7 @@ public:
     bool act();
     bool attaquer(Hero h);
     void move(Hero h);
+    int damages() { return m_damages; }
     int focus() { return m_focus; }
     double projectileSize() { return p_size; }
     void refreshFocus(Hero h);

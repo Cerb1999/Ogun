@@ -17,8 +17,9 @@ public:
   Level(int d);
   bool isCleared();
   int getDepth() { return l_depth; };
-  std::vector<Monster> getMonsters(){ return l_monsters; };
-  std::vector<Destructible> getDestructibles(){ return l_crates; };
+  int** getMap() { return l_map; };
+  std::vector<Monster> getMonsters() { return l_monsters; };
+  std::vector<Destructible> getDestructibles() { return l_crates; };
   Coordinates* heroPosition();
   Coordinates* bossPosition();
   void loadStage();

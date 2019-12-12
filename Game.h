@@ -10,7 +10,7 @@
 
 class Game{
 public:
-    Game();
+    Game(int startLevel);
     void play();
 
 private:

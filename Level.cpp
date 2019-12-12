@@ -25,19 +25,24 @@ Coordinates* Level::heroPosition() {
 	Coordinates c = Coordinates(0., 0.);
 	switch (l_depth) {
 		case 1:
-		c.set(7.,7.);
+		c.setX(7.);
+		c.setY(7.);
 		break;
 		case 2:
-		c.set(5.,8.);
+		c.setX(5.);
+		c.setY(8.);
 		break;
 		case 3:
-		c.set(21.,10.);
+		c.setX(21.);
+		c.setY(10.);
 		break;
 		case 4:
-		c.set(20.,19.);
+		c.setX(20.);
+		c.setY(19.);
 		break;
 		case 5:
-		c.set(20.,7.);
+		c.setX(20.);
+		c.setY(7.);
 		break;
 	}
 	return &c;

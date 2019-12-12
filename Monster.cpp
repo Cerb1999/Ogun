@@ -12,7 +12,7 @@ Monster::Monster(int l, Coordinates* c) {
 }
 
 bool Monster::hit(Projectile p) {
-	return m_position->contact(p.getCoordinates());
+	return m_position->contact(p.getCoordinates(), p.hitBox());
 }
 
 bool Monster::act() {
@@ -31,7 +31,7 @@ bool Monster::attaquer(Hero h) {
 		refreshFocus(h);
 		res = true;
 	} else {
-		if (m_position->contact(h.position, m_size)) {
+		if (m_position->contact(h.position(), m_size)) {
 			h.die(m_damages);
 		} else {
 			refreshFocus(h);

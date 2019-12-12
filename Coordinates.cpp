@@ -13,14 +13,10 @@ void Coordinates::setY(double y) {
     c_y = y;
 }
 
-void Coordinates::set(double x, double y) {
-    c_x = x;
-    c_y = y;
-}
-
 void Coordinates::move(double x, double y) {
     double nextX = c_x + x; double nextY = c_y + y;
-    double destTile = g_level[int(nextX)][int(nextY)];
+    int** map = Coordinates::getMap();
+    double destTile = map[int(nextX)][int(nextY)];
     if ( destTile == 1 || (destTile > 6 && destTile <= 10) ) {
         g_level[int(c_x)][int(c_y)] = 1;
         setX(nextX);
