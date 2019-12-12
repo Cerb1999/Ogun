@@ -11,7 +11,7 @@ private:
     int p_damages;
     bool p_players; //evitons le suicide et de pouvoir nous faire mal avec nos propres projectiles
     int p_direction; //le tir se déplace vers un point cardinal {N, NE, E, SE, S, SW, W, NW}
-    double p_hitBox;
+    double p_hitbox;
 
 public:
     Projectile(bool players, int direction, double size, int damages, Coordinates* position);

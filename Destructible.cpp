@@ -6,7 +6,7 @@ Destructible::Destructible(Coordinates c) {
 
 bool Destructible::hit(Projectile p) {
 	bool res = false;
-	if ( d_coord->contact(p.getCoordinates()) ) {
+	if ( d_coord->contact(p.getCoordinates(), 1.)) {
 		res = true;
 	}
 }
