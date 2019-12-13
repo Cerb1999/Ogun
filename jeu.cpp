@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
     {
         SDL_RenderClear(ecran);
         SDL_RenderCopy(ecran, fond, &SrcR, &DestR);
-        Game jeu;
+        Game* jeu;
 
 		bool run = false;
 
@@ -96,48 +96,49 @@ int main(int argc, char *argv[])
                             SDL_DestroyRenderer(ecran);
                             SDL_DestroyWindow(fenetre);
                             SDL_Quit();
-                            jeu = Game(1);
-                            loadMap(jeu.depth(), jeu.level().getMap(), textures);
+                            Game g = Game(1);
+                            jeu = &g;
+                            loadMap(jeu->depth(), jeu->level().getMap(), textures);
                             break;
                         }
                         case SDLK_z: {
                             if (!run) break;
-                            jeu.play(1, 0);
+                            jeu->play(1, 0);
                             break;
                         }
                         case SDLK_s: {
                             if (!run) break;
-                            jeu.play(5, 0);
+                            jeu->play(5, 0);
                             break;
                         }
                         case SDLK_q: {
                             if (!run) break;
-                            jeu.play(7, 0);
+                            jeu->play(7, 0);
                             break;
                         }
                         case SDLK_d: {
                             if (!run) break;
-                            jeu.play(3, 0);
+                            jeu->play(3, 0);
                             break;
                         }
                         case SDLK_UP: {
                             if (!run) break;
-                            jeu.play(0, 1);
+                            jeu->play(0, 1);
                             break;
                         }
                         case SDLK_DOWN: {
                             if (!run) break;
-                            jeu.play(0, 5);
+                            jeu->play(0, 5);
                             break;
                         }
                         case SDLK_LEFT: {
                             if (!run) break;
-                            jeu.play(0, 7);
+                            jeu->play(0, 7);
                             break;
                         }
                         case SDLK_RIGHT: {
                             if (!run) break;
-                            jeu.play(0, 3);
+                            jeu->play(0, 3);
                             break;
                         }
 					}
