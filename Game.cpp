@@ -4,12 +4,27 @@
 Game::Game(int startLevel): 
 	floor(Level(startLevel)), player(Hero(floor.heroPosition()))
 {
+	delete(&exit);
+	exit = floor.exitPosition();
 	floor.loadStage();
-	monsters.push_back(Boss(startLevel, floor.bossPosition()));
 	monsters = floor.getMonsters();
+	monsters.push_back(Boss(startLevel, floor.bossPosition()));
 }
 
 bool Game::play(int moveDirection, int fireDirection) {
+	if (floor.isCleared() && player.position()->contact(exit,0.) ) {
+		int tmp = floor.getDepth()+1;
+		delete(&floor);
+		floor = Level(tmp);
+		floor.loadStage();
+		delete(&player);
+		delete(exit);
+		exit = floor.exitPosition();
+		monsters.clear();
+		monsters = floor.getMonsters();
+		monsters.push_back(Boss(tmp, floor.bossPosition()));
+		projectiles.clear();
+	}
 	if(player.alive()) {
 		player.move(moveDirection);
 		if (fireDirection > 0 && fireDirection < 9) {
@@ -17,7 +32,7 @@ bool Game::play(int moveDirection, int fireDirection) {
 		}
 		std::vector<Monster>::iterator ti = monsters.begin();
 		while (ti != monsters.end()) {
-			if (!ti->alive) {
+			if (!ti->alive()) {
 				ti = monsters.erase(ti);
 			}
 			if (ti->act()) {

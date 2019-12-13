@@ -12,6 +12,7 @@ class Game{
 private:
 	Hero player;
 	Level floor;
+	Coordinates* exit;
 	std::vector<Monster> monsters;
 	std::vector<Projectile> projectiles;
 	//std::vector<Destructible> destructibles;
