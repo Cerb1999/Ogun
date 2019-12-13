@@ -12,7 +12,7 @@ using namespace std;
 Level::Level(int d) {
     l_cleared = false;
     l_depth = d;
-    l_map[25][52];
+    l_map = (int *) malloc(25*52*sizeof(int));
 }
 
 void Level::loadStage() {
@@ -36,15 +36,15 @@ void Level::loadStage() {
 			str << x;
 			int b;
 			str >> b;
-			printf("i : %d, j : %d resultat : %d\n", i, j);
-			l_map[i][j] = b;
-			printf("i : %d, j : %d resultat : %d\n", i, j, l_map[i][j]);
+			l_map[i*j] = b;
+			cout << l_map[i*j] << "\n";
+			printf("i : %d, j : %d resultat : %d\n", i, j, l_map[i*j]);
 
 		}
 	}
 	for (int k = 0; k < 25; ++k) {
 		for (int l = 0; l < 52; ++l) {
-			printf("i : %d, j : %d resultat : %d\n", k, l, l_map[k][l]);
+			printf("i : %d, j : %d resultat : %d\n", k, l, l_map[k*l]);
 
 		}
 	}
@@ -80,7 +80,7 @@ Coordinates* Level::heroPosition() {
 
 Coordinates* Level::bossPosition() {
 	int i = 0; int j = 0;
-	while ( l_map[i][j] != 6 || i < 25 ) {
+	while ( l_map[i*j] != 6 || i < 25 ) {
 		j++;
 		if ( i < 25 ) {
 			if ( j == 52 ) {

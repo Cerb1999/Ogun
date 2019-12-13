@@ -7,10 +7,10 @@ class Coordinates {
 private:
     double c_x;
     double c_y;
-    int** g_map;
+    int* g_map;
 
 public:
-    Coordinates(double x, double y, int** map);
+    Coordinates(double x, double y, int* map);
     double getX() { return c_x; };
     double getY() { return c_y; };
     void setX(double x);

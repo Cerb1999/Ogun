@@ -23,6 +23,7 @@ protected:
 public:
     Monster(int l, Coordinates* c);
     int hpLeft() { return m_hp; }
+    bool alive() { return m_hp > 0; }
     bool isRanged() { return m_ranged; }
     bool hit(Projectile p); // contact avec p, renvoie le bool correspondant et effectue les actions nescessaires
     bool act();

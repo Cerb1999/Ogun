@@ -1,6 +1,6 @@
 #include "Coordinates.h"
 
-Coordinates::Coordinates(double x, double y, int** map) {
+Coordinates::Coordinates(double x, double y, int* map) {
     c_x = x;
     c_y = y;
     g_map = map;
@@ -52,11 +52,11 @@ void Coordinates::move(int direction, int id) {
 			break;
 	}
   double nextX = c_x + x; double nextY = c_y + y;
-  int destTile = g_map[int(nextX)][int(nextY)];
+  int destTile = g_map[int(nextX)*int(nextY)];
   if ( destTile == 1 || (destTile > 6 && destTile <= 10) ) {
 			if (id == 3 || id == 4) {
-				g_map[int(nextX)][int(nextY)] = id;      
-				g_map[int(c_x)][int(c_y)] = 1;
+				g_map[int(nextX)*int(nextY)] = id;      
+				g_map[int(c_x)*int(c_y)] = 1;
 			}
       setX(nextX);
       setY(nextY);
