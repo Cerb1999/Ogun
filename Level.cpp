@@ -20,28 +20,31 @@ void Level::loadStage() {
 	ostringstream oss;
 	oss << "maps/stage" << l_depth << ".txt";
 
-	cout << oss.str();
-
-	ifstream infile(oss.str());
-
 	int i = 0; int j = - 1;
 	char x;
 	ifstream inFile(oss.str());
+	printf("test");
 	if (!inFile) {
 		cout << "Unable to open file";
 		exit(1);
 	}
 	while (x != '\n') {
+		printf("passe par la");
 		while (inFile >> x) {
 			if(j == 52){ j = 0; i++; }else{ j++; };
-			// printf("%d\n",i,j);
+
 			str << x;
 			int b;
 			str >> b;
-
-			l_map[i][j] = x - 0;
-
+			printf("i : %d, j : %d resultat : %d\n", i, j);
+			l_map[i][j] = b;
 			printf("i : %d, j : %d resultat : %d\n", i, j, l_map[i][j]);
+
+		}
+	}
+	for (int k = 0; k < 25; ++k) {
+		for (int l = 0; l < 52; ++l) {
+			printf("i : %d, j : %d resultat : %d\n", k, l, l_map[k][l]);
 
 		}
 	}

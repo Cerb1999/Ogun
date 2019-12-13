@@ -6,6 +6,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <cstring>
 #include "fonctions_SDL.h"
 #include "Game.h"
 
@@ -93,8 +94,10 @@ int main(int argc, char *argv[])
 				        case SDLK_SPACE:
 							if(!run) run=!run;
 							Game jeu = Game(1);
+/*
 							SDL_RenderClear(ecran);
-							
+*/
+
 				            break;
 					}
             }
