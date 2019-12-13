@@ -93,12 +93,9 @@ int main(int argc, char *argv[])
 				        case SDLK_SPACE: {
                             if (!run) run = !run;
                             else break;
-                            SDL_DestroyRenderer(ecran);
-                            SDL_DestroyWindow(fenetre);
-                            SDL_Quit();
                             Game g = Game(1);
                             jeu = &g;
-                            loadMap(jeu->depth(), jeu->level().getMap(), textures);
+                            loadMap(jeu->depth(), jeu->level().getMap(), textures, ecran, fenetre);
                             break;
                         }
                         case SDLK_z: {
@@ -152,36 +149,11 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-int loadMap(int depth, int* map, char textures[][8]){
-    SDL_Window* fenetre;
-    SDL_Event evenements;
-    SDL_Renderer* ecran;
-
-    if(SDL_Init(SDL_INIT_VIDEO) < 0)
-    {
-        printf("Erreur d’initialisation de la SDL: %s",SDL_GetError());
-        SDL_Quit();
-        return EXIT_FAILURE;
-    }
-
-    fenetre = SDL_CreateWindow("Ogun", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920/2, 1080/2, SDL_WINDOW_RESIZABLE);
-    if(fenetre == NULL)
-    {
-        printf("Erreur de la creation d’une fenetre: %s",SDL_GetError());
-        SDL_Quit();
-        return EXIT_FAILURE;
-    }
-
-    ecran = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
-
+int loadMap(int depth, int* map, char textures[][8], SDL_Renderer* ecran, SDL_Window* fenetre){
+    printf("dd");
     SDL_Texture* fond = charger_image("textures/background/ogun-background.bmp", ecran);
 
-
-
     Uint8 r = 255; Uint8 g = 255; Uint8 b = 0;
-    SDL_Rect SrcR; SrcR.x = 0; SrcR.y = 0; SrcR.w = 1920; SrcR.h = 1080;
-    SDL_Rect DestR; DestR.x = 0; DestR.y = 0; DestR.w = 1920/2; DestR.h = 1080/1.5;
-
 
     SDL_Texture* textureTileSetV4 = charger_image_transparente("textures/game/0x72_16x16DungeonTileset.v4.bmp", ecran, r, g, b);
     SDL_Texture* textureTileSetWallsV2 = charger_image_transparente("textures/game/0x72_16x16DungeonTileset_walls.v2.bmp", ecran, r, g, b);
@@ -277,4 +249,6 @@ int loadMap(int depth, int* map, char textures[][8]){
             }
         }
     }
+
+    return 0;
 }
