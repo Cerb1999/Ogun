@@ -19,7 +19,8 @@ private:
 public:
 	Game(int startLevel);
 	bool play(int movementDirection, int fireDirection);
-	int depth() { return floor.getDepth(); }	
+	int depth() { return floor.getDepth(); }
+	Level level() { return floor; };
 	std::vector<Monster> getMonsters() { return monsters; }
 	std::vector<Projectile> getProjectiles() { return projectiles; }
 };

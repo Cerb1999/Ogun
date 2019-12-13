@@ -49,6 +49,8 @@ void Level::loadStage() {
 		}
 	}
 	inFile.close();
+
+
 }
 
 Coordinates* Level::heroPosition() {
