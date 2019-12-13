@@ -29,28 +29,21 @@ void Level::loadStage() {
 		exit(1);
 	}
 	while (x != '\n') {
-		printf("passe par la");
 		while (inFile >> x) {
 			if(j == 52){ j = 0; i++; }else{ j++; };
 
 			str << x;
 			int b;
 			str >> b;
-			l_map[i*j] = b;
-			cout << l_map[i*j] << "\n";
-			printf("i : %d, j : %d resultat : %d\n", i, j, l_map[i*j]);
+			l_map[(i*j)+j] = b;
 
 		}
 	}
 	for (int k = 0; k < 25; ++k) {
 		for (int l = 0; l < 52; ++l) {
-			printf("i : %d, j : %d resultat : %d\n", k, l, l_map[k*l]);
-
 		}
 	}
 	inFile.close();
-
-
 }
 
 Coordinates* Level::heroPosition() {
@@ -82,7 +75,22 @@ Coordinates* Level::heroPosition() {
 
 Coordinates* Level::bossPosition() {
 	int i = 0; int j = 0;
-	while ( l_map[i*j] != 6 || i < 25 ) {
+	while ( l_map[(i*j)+j] != 4 || i < 25 ) {
+		j++;
+		if ( i < 25 ) {
+			if ( j == 52 ) {
+				j = 0;
+				i++;
+			}
+		}
+	}
+	Coordinates c = Coordinates(double(i), double(j), l_map);
+	return &c;
+}
+
+Coordinates* Level::exitPosition() {
+	int i = 0; int j = 0;
+	while ( l_map[(i*j)+j] != 6 || i < 25 ) {
 		j++;
 		if ( i < 25 ) {
 			if ( j == 52 ) {
