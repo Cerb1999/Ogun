@@ -72,20 +72,18 @@ int main(int argc, char *argv[])
 
  
 
-    bool menu = true;
+    bool run = false;
     Game* jeu;
 
     while(!terminer)
     {
         SDL_RenderClear(ecran);
-        if (menu) {
+        if (!run) {
             SDL_RenderCopy(ecran, fondMenu, &SrcR, &DestR);
         } else {
             SDL_RenderCopy(ecran, fondJeu, &SrcR, &DestR);
             load(jeu, textures, ecran);
         }
-		bool run = false;
-
 		while( SDL_PollEvent( &evenements ) )
 			switch(evenements.type)
 			{
@@ -94,7 +92,6 @@ int main(int argc, char *argv[])
 				case SDL_KEYDOWN:
 					switch(evenements.key.keysym.sym){
 				        case SDLK_ESCAPE: {
-                            if (!run) break;
                             SDL_DestroyRenderer(ecran);
                             SDL_DestroyWindow(fenetre);
                             SDL_Quit();
@@ -106,8 +103,6 @@ int main(int argc, char *argv[])
                             else break;
                             Game g = Game(1);
                             jeu = &g;
-                            cout << "jeu cree et attribue\n";
-                            menu = false;
                             //loadMap(jeu->depth(), jeu->level().getMap(), textures, ecran, fenetre);
                             break;
                         }

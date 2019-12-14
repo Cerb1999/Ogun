@@ -24,6 +24,7 @@ public:
     void die(int damages);
     bool alive() { return h_hp > 0; }
     Coordinates* position() { return h_position; }
+    char* toString() { return "je suis vivant"; }
 };
 
 #endif

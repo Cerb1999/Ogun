@@ -27,13 +27,13 @@ public:
     bool isRanged() { return m_ranged; }
     bool hit(Projectile p); // contact avec p, renvoie le bool correspondant et effectue les actions nescessaires
     bool act();
-    bool attaquer(Hero h);
+    bool attaquer(Hero* h);
     void move();
     int damages() { return m_damages; }
     int focus() { return m_focus; }
     double monsterSize() { return m_size; }
     double projectileSize() { return p_size; }
-    void refreshFocus(Hero h);
+    void refreshFocus(Hero* h);
     Coordinates* position() { return m_position; }
 };
 

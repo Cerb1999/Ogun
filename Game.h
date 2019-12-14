@@ -10,8 +10,8 @@
 
 class Game{
 private:
-	Hero player;
 	Level floor;
+	Hero* player;
 	Coordinates* exit;
 	std::vector<Monster> monsters;
 	std::vector<Projectile> projectiles;
@@ -24,6 +24,7 @@ public:
 	Level level() { return floor; };
 	std::vector<Monster> getMonsters() { return monsters; }
 	std::vector<Projectile> getProjectiles() { return projectiles; }
+	Hero* getPlayer() { return player; }
 };
 
 #endif

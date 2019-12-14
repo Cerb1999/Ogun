@@ -1,9 +1,11 @@
 #include "Hero.h"
+#include <stdlib.h>
 
 Hero::Hero(Coordinates* c) {
     h_hp = 6;
     h_speed = 1;
     h_damages = 1;
+    h_position = (Coordinates*) malloc (2*sizeof(double)+sizeof(int*));
     h_position = c;
 }
 
