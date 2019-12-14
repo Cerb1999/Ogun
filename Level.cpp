@@ -12,7 +12,7 @@ using namespace std;
 Level::Level(int d) {
     l_cleared = false;
     l_depth = d;
-    l_map = (int *) malloc(25*52*sizeof(int));
+    l_map = new int[25*52];
 }
 
 void Level::loadStage() {
@@ -30,9 +30,14 @@ void Level::loadStage() {
     if(pFile != NULL){
         do{
             c = fgetc(pFile);
+			int val = (c- '0');
 
             if (c != '\n'){
-                l_map[n] = (c - '0') ;
+                l_map[n] = val;
+				if (val == 3) {
+					Coordinates c = Coordinates(n/25,n%25,l_map);
+					l_monsters.push_back(Monster(l_depth, &c));
+				}
                 //cout << c << " " << l_map[n] << "\n";
                 n++;
             }
@@ -71,7 +76,7 @@ Coordinates* Level::heroPosition() {
 
 Coordinates* Level::bossPosition() {
 	int i = 0; int j = 0;
-	while ( l_map[(i*j)+j] != 4 || i < 25 ) {
+	while ( l_map[(i*j)+j] != 4 && i < 25 ) {
 		j++;
 		if ( i < 25 ) {
 			if ( j == 52 ) {
@@ -85,10 +90,9 @@ Coordinates* Level::bossPosition() {
 }
 
 Coordinates* Level::exitPosition() {
-	printf("exit position");
 	int i = 0; int j = 0;
-	while ( l_map[(i*j)+j] != 6 || i < 25 ) {
-		cout << l_map[(i*j)+j] << "\n";
+	while ( l_map[(i*j)+j] != 6 && i < 25 ) {
+		cout << l_map[(i*j)+j] << " " << i << " " << j << "\n";
 		j++;
 		if ( i < 25 ) {
 			if ( j == 52 ) {
@@ -97,8 +101,6 @@ Coordinates* Level::exitPosition() {
 			}
 		}
 	}
-	printf("iteration end");
 	Coordinates c = Coordinates(double(i), double(j), l_map);
-	printf("coordinates created ");
 	return &c;
 }

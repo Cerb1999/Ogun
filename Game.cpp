@@ -6,12 +6,9 @@ Game::Game(int startLevel):
 	floor(Level(startLevel)), player(Hero(floor.heroPosition()))
 {
 	floor.loadStage();
-	printf("loaded ");
 	exit = floor.exitPosition();
-	printf("exit ");
 	monsters = floor.getMonsters();
 	monsters.push_back(Boss(startLevel, floor.bossPosition()));
-	printf("monsters ");
 }
 
 bool Game::play(int moveDirection, int fireDirection) {
