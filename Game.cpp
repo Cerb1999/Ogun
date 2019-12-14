@@ -1,6 +1,7 @@
 #include "Game.h";
 #include <stdio.h>
-#include <windows.h>;
+#include <iostream>
+#include <windows.h>
 
 Game::Game(int startLevel): 
 	floor(Level(startLevel)), player(Hero(floor.heroPosition()))
@@ -12,6 +13,7 @@ Game::Game(int startLevel):
 }
 
 bool Game::play(int moveDirection, int fireDirection) {
+	std::cout << "play";
 	if (floor.isCleared() && player.position()->contact(exit,0.) ) {
 		int tmp = floor.getDepth()+1;
 		delete(&floor);

@@ -38,7 +38,6 @@ void Level::loadStage() {
 					Coordinates c = Coordinates(n/25,n%25,l_map);
 					l_monsters.push_back(Monster(l_depth, &c));
 				}
-                //cout << c << " " << l_map[n] << "\n";
                 n++;
             }
         } while(c != EOF);
@@ -76,7 +75,7 @@ Coordinates* Level::heroPosition() {
 
 Coordinates* Level::bossPosition() {
 	int i = 0; int j = 0;
-	while ( l_map[(i*j)+j] != 4 && i < 25 ) {
+	while ( l_map[(i*25)+j] != 4 && i < 25 ) {
 		j++;
 		if ( i < 25 ) {
 			if ( j == 52 ) {
@@ -91,8 +90,7 @@ Coordinates* Level::bossPosition() {
 
 Coordinates* Level::exitPosition() {
 	int i = 0; int j = 0;
-	while ( l_map[(i*j)+j] != 6 && i < 25 ) {
-		cout << l_map[(i*j)+j] << " " << i << " " << j << "\n";
+	while ( l_map[(i*25)+j] != 6 && i < 25 ) {
 		j++;
 		if ( i < 25 ) {
 			if ( j == 52 ) {

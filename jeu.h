@@ -3,6 +3,6 @@
 
 #include <SDL2/SDL.h>
 
-int loadMap(int depth, int* map, char textures[][8], SDL_Renderer* ecran, SDL_Window* fenetre);
+int loadMap(int depth, int* map, int textures[], SDL_Renderer* ecran, SDL_Window* fenetre);
 
 #endif
