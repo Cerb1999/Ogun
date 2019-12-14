@@ -5,6 +5,8 @@ Game::Game(int startLevel):
 	floor(Level(startLevel)), player(Hero(floor.heroPosition()))
 {
 	floor.loadStage();
+	printf("au dd");
+	exit = floor.exitPosition();
 	monsters = floor.getMonsters();
 	monsters.push_back(Boss(startLevel, floor.bossPosition()));
 }
