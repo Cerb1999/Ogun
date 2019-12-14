@@ -16,34 +16,33 @@ Level::Level(int d) {
 }
 
 void Level::loadStage() {
-	stringstream str;
-	ostringstream oss;
-	oss << "maps/stage" << l_depth << ".txt";
+    printf("early load");
+    ostringstream oss;
+    stringstream str;
+    oss << "maps/stage" << l_depth << ".txt";
 
-	int i = 0; int j = - 1;
-	char x;
-	ifstream inFile(oss.str());
-	printf("test");
-	if (!inFile) {
-		cout << "Unable to open file";
-		exit(1);
-	}
-	while (x != '\n') {
-		while (inFile >> x) {
-			if(j == 52){ j = 0; i++; }else{ j++; };
+    string filename = oss.str();
 
-			str << x;
-			int b;
-			str >> b;
-			l_map[(i*j)+j] = b;
+    FILE* pFile;
+    char c;
+    int n = 0, j = 0;
+    pFile = fopen(filename.c_str(),"r");
+    if(pFile != NULL){
+        do{
+            c = fgetc(pFile);
+            str << c;
+            int b;
+            str >> b;
 
-		}
-	}
-	for (int k = 0; k < 25; ++k) {
-		for (int l = 0; l < 52; ++l) {
-		}
-	}
-	inFile.close();
+            if (c != '\n'){
+                l_map[n] = b;
+                cout << c;
+                n++;
+            }
+        } while(c != EOF);
+        fclose(pFile);
+        printf("File contains %d carac\n", n);
+    }
 }
 
 Coordinates* Level::heroPosition() {
