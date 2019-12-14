@@ -1,12 +1,13 @@
 #ifndef Game_H
 #define Game_H
 
-#include <vector>;
+#include <vector>
 #include "Hero.h";
 #include "Monster.h";
 #include "Destructible.h";
-#include "Projectile.h"
+#include "Projectile.h";
 #include "Level.h";
+#include "Coin.h";
 
 class Game{
 private:
@@ -15,7 +16,8 @@ private:
 	Coordinates* exit;
 	std::vector<Monster> monsters;
 	std::vector<Projectile> projectiles;
-	//std::vector<Destructible> destructibles;
+	std::vector<Destructible> destructibles;
+	std::vector<Coin> coins;
 
 public:
 	Game(int startLevel);
@@ -24,6 +26,8 @@ public:
 	Level level() { return floor; };
 	std::vector<Monster> getMonsters() { return monsters; }
 	std::vector<Projectile> getProjectiles() { return projectiles; }
+	std::vector<Destructible> getDestructibles() { return destructibles; }
+	std::vector<Coin> getCoins() { return coins; }
 	Hero* getPlayer() { return player; }
 };
 

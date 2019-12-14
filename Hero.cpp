@@ -23,7 +23,7 @@ bool Hero::hit(Projectile p) {
 
 void Hero::move(int d) {
 	if ( d > 0 && d < 9) {
-		h_position->move(d, 0); //move based on keyboard input
+		h_position->move(d, 1); //move based on keyboard input
 	}
 }
 

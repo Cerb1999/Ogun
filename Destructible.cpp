@@ -9,4 +9,5 @@ bool Destructible::hit(Projectile p) {
 	if ( d_coord->contact(p.getCoordinates(), 1.)) {
 		res = true;
 	}
+	return res;
 }

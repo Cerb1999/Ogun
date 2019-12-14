@@ -20,6 +20,7 @@ public:
     bool playerProjectile() { return p_players; }
     double hitBox() { return p_hitbox; }
     void move();
+    bool murred() { return p_position->murred(p_direction); }
 };
 
 #endif

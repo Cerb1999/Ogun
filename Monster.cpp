@@ -33,7 +33,7 @@ bool Monster::attaquer(Hero* h) {
 		refreshFocus(h);
 		res = true;
 	} else {
-		if (m_position->contact(h->position(), monsterSize())) {
+		if (m_position->contact(h->getCoordinates(), monsterSize())) {
 			h->die(m_damages);
 		} else {
 			refreshFocus(h);
@@ -48,24 +48,24 @@ void Monster::move() {
 }
 
 void Monster::refreshFocus(Hero* h) {
-	if ( m_position->getX() == h->position()->getX() ) {
-			if ( m_position->getY() > h->position()->getY() ) {
+	if ( m_position->getX() == h->getCoordinates()->getX() ) {
+			if ( m_position->getY() > h->getCoordinates()->getY() ) {
 				m_focus = 5;
 			} else {
 				m_focus = 1;
 			}
-		} else if ( m_position->getX() > h->position()->getX() ) {
-			if ( m_position->getY() == h->position()->getY() ) {
+		} else if ( m_position->getX() > h->getCoordinates()->getX() ) {
+			if ( m_position->getY() == h->getCoordinates()->getY() ) {
 				m_focus = 7;
-			} else if ( m_position->getY() > h->position()->getY() ) {
+			} else if ( m_position->getY() > h->getCoordinates()->getY() ) {
 				m_focus = 6;
 			} else {
 				m_focus = 8;
 			}
 		} else {
-			if ( m_position->getY() == h->position()->getY() ) {
+			if ( m_position->getY() == h->getCoordinates()->getY() ) {
 				m_focus = 3;
-			} else if ( m_position->getY() > h->position()->getY() ) {
+			} else if ( m_position->getY() > h->getCoordinates()->getY() ) {
 				m_focus = 4;
 			} else {
 				m_focus = 2;

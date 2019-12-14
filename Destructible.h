@@ -12,7 +12,8 @@ private:
   
 public:
 Destructible(Coordinates c);
-bool hit(Projectile p); 
+bool hit(Projectile p);
+Coordinates* getCoordinates() { return d_coord; } 
 
 };
 

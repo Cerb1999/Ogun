@@ -52,13 +52,53 @@ void Coordinates::move(int direction, int id) {
 			break;
 	}
   double nextX = c_x + x; double nextY = c_y + y;
-  int destTile = g_map[int(nextX)*25+int(nextY)];
-  if ( destTile == 1 || (destTile > 6 && destTile <= 10) ) {
+  int destTile = g_map[int(nextX)*52+int(nextY)];
+  if ( destTile == 1 || (destTile >= 6 && destTile < 10) ) {
 			if (id == 3 || id == 4) {
-				g_map[int(nextX)*25+int(nextY)] = id;      
-				g_map[int(c_x)*25+int(c_y)] = 1;
+				g_map[int(nextX)*52+int(nextY)] = id;      
+				g_map[int(c_x)*52+int(c_y)] = 1;
+			}
+			if (id == 1) {
+				g_map[int(c_x)*52+int(c_y)] = 1;
 			}
       setX(nextX);
       setY(nextY);
   }
+}
+
+bool Coordinates::murred(int d) {
+	double x = 0; double y = 0;
+	switch (d) {
+		case 1:
+			y = 1;
+			break;
+		case 2: 
+			x = 1;
+			y = 1;
+			break;
+		case 3:
+			x = 1;
+			break;
+		case 4:
+			x = 1;
+			y = -1;
+			break;
+		case 5: 
+			y = -1;
+			break;
+		case 6:
+			x = -1;
+			y = -1;
+			break;
+		case 7:
+			x = -1;
+			break;
+		case 8:
+			x = -1;
+			y = 1;
+			break;
+	}
+	double nextX = c_x + x; double nextY = c_y + y;
+	int destTile = g_map[int(nextX)*25+int(nextY)];
+	return (destTile == 1);
 }

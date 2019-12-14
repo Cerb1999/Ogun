@@ -34,9 +34,17 @@ void Level::loadStage() {
 
             if (c != '\n'){
                 l_map[n] = val;
-				if (val == 3) {
-					Coordinates c = Coordinates(n/25,n%25,l_map);
-					l_monsters.push_back(Monster(l_depth, &c));
+				Coordinates c = Coordinates(n/25,n%25,l_map);
+				switch (val) {
+					case 3:
+						l_monsters.push_back(Monster(l_depth, &c));
+						break;
+					case 5:
+						l_crates.push_back(Destructible(c));
+						break;
+					case 8:
+						l_coins.push_back(Coin(c));
+						break;
 				}
                 n++;
             }

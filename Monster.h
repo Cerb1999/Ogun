@@ -34,7 +34,7 @@ public:
     double monsterSize() { return m_size; }
     double projectileSize() { return p_size; }
     void refreshFocus(Hero* h);
-    Coordinates* position() { return m_position; }
+    Coordinates* getCoordinates() { return m_position; }
 };
 
 class Boss: public Monster {

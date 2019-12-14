@@ -4,7 +4,7 @@
 //#include "Coordinates.h";
 #include "Projectile.h";
 
-class Game; class Level; class Boss; class Monster;
+class Game; class Level; class Boss; class Monster; class Coin;
 
 class Hero {
 private:
@@ -23,7 +23,7 @@ public:
     void move(int direction);
     void die(int damages);
     bool alive() { return h_hp > 0; }
-    Coordinates* position() { return h_position; }
+    Coordinates* getCoordinates() { return h_position; }
     char* toString() { return "je suis vivant"; }
 };
 

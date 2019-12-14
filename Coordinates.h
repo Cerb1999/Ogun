@@ -17,6 +17,7 @@ public:
     void setY(double y);
     bool contact(Coordinates* c, double hitBox);
     void move(int direction, int id);
+    bool murred(int d);
 };
 
 #endif
