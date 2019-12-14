@@ -61,7 +61,8 @@ int main(int argc, char *argv[])
 
     ecran = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
 
-    SDL_Texture* fond = charger_image("textures/background/ogun-background-menu.bmp", ecran);
+    SDL_Texture* fondMenu = charger_image("textures/background/ogun-background-menu.bmp", ecran);
+    SDL_Texture* fondJeu = charger_image("textures/background/background-menu.bmp", ecran);
 
     Uint8 r = 255; Uint8 g = 255; Uint8 b = 0;
     SDL_Rect SrcR;
@@ -69,16 +70,20 @@ int main(int argc, char *argv[])
     SDL_Rect DestR;
     DestR.x = 0; DestR.y = 0; DestR.w = 1920/2; DestR.h = 1080/2;
 
+ 
+
     bool menu = true;
+    Game* jeu;
 
     while(!terminer)
     {
         SDL_RenderClear(ecran);
         if (menu) {
-            SDL_RenderCopy(ecran, fond, &SrcR, &DestR);
+            SDL_RenderCopy(ecran, fondMenu, &SrcR, &DestR);
+        } else {
+            SDL_RenderCopy(ecran, fondJeu, &SrcR, &DestR);
+            load(jeu, textures, ecran);
         }
-        Game* jeu;
-
 		bool run = false;
 
 		while( SDL_PollEvent( &evenements ) )
@@ -103,7 +108,7 @@ int main(int argc, char *argv[])
                             jeu = &g;
                             cout << "jeu cree et attribue\n";
                             menu = false;
-                            loadMap(jeu->depth(), jeu->level().getMap(), textures, ecran, fenetre);
+                            //loadMap(jeu->depth(), jeu->level().getMap(), textures, ecran, fenetre);
                             break;
                         }
                         case SDLK_z: {
@@ -157,21 +162,20 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-int loadMap(int depth, int* map, int textures[], SDL_Renderer* ecran, SDL_Window* fenetre){
-    SDL_Texture* fond = charger_image("textures/background/ogun-background.bmp", ecran);
-
+int load(Game* jeu, int textures[], SDL_Renderer* ecran){
     Uint8 r = 255; Uint8 g = 255; Uint8 b = 0;
-
     SDL_Texture* textureTileSetV4 = charger_image_transparente("textures/game/0x72_16x16DungeonTileset.v4.bmp", ecran, r, g, b);
     SDL_Texture* textureTileSetWallsV2 = charger_image_transparente("textures/game/0x72_16x16DungeonTileset_walls.v2.bmp", ecran, r, g, b);
     SDL_Texture* key = charger_image_transparente("textures/2dcoinchests/Key.bmp", ecran, r, g, b);
     SDL_Texture* coin = charger_image_transparente("textures/2dcoinchests/Coin.bmp", ecran, r, g, b);
     SDL_Texture* heart = charger_image_transparente("textures/2dheart/heart.bmp", ecran, r, g, b);
     SDL_Texture* half = charger_image_transparente("textures/game/half.bmp", ecran, r, g, b);
+    
+    int depth = jeu->depth();
 
     for (int i = 0; i < 25; ++i) {
         for (int j = 0; j < 52; ++j) {
-            switch(map[i * 25 + i]){
+            switch(jeu->level().getMap()[i * 25 + i]){
                 case 0:
                     break;
                 case 1:{
