@@ -69,11 +69,14 @@ int main(int argc, char *argv[])
     SDL_Rect DestR;
     DestR.x = 0; DestR.y = 0; DestR.w = 1920/2; DestR.h = 1080/2;
 
+    bool menu = true;
 
     while(!terminer)
     {
         SDL_RenderClear(ecran);
-        SDL_RenderCopy(ecran, fond, &SrcR, &DestR);
+        if (menu) {
+            SDL_RenderCopy(ecran, fond, &SrcR, &DestR);
+        }
         Game* jeu;
 
 		bool run = false;
@@ -99,7 +102,7 @@ int main(int argc, char *argv[])
                             Game g = Game(1);
                             jeu = &g;
                             cout << "jeu cree et attribue\n";
-                            SDL_RenderClear(ecran);
+                            menu = false;
                             loadMap(jeu->depth(), jeu->level().getMap(), textures, ecran, fenetre);
                             break;
                         }
