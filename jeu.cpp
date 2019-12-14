@@ -86,12 +86,8 @@ int main(int argc, char *argv[])
             load(jeu, textures, ecran);
             loadProjectilesMonstersDestrutiblesCoins(jeu, textures, ecran);
         }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 189190f4853734f2019ce6fcecee6aa7584abde2
-		while( SDL_PollEvent( &evenements ) )
+        
+        while( SDL_PollEvent( &evenements ) )
 			switch(evenements.type)
 			{
 				case SDL_QUIT:
