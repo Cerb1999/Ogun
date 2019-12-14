@@ -16,7 +16,7 @@ Level::Level(int d) {
 }
 
 void Level::loadStage() {
-    printf("early load");
+    printf("early load\n");
     ostringstream oss;
     stringstream str;
     oss << "maps/stage" << l_depth << ".txt";
@@ -30,13 +30,10 @@ void Level::loadStage() {
     if(pFile != NULL){
         do{
             c = fgetc(pFile);
-            str << c;
-            int b;
-            str >> b;
 
             if (c != '\n'){
-                l_map[n] = b;
-                cout << c;
+                l_map[n] = (c - '0') ;
+                //cout << c << " " << l_map[n] << "\n";
                 n++;
             }
         } while(c != EOF);
@@ -88,8 +85,10 @@ Coordinates* Level::bossPosition() {
 }
 
 Coordinates* Level::exitPosition() {
+	printf("exit position");
 	int i = 0; int j = 0;
 	while ( l_map[(i*j)+j] != 6 || i < 25 ) {
+		cout << l_map[(i*j)+j] << "\n";
 		j++;
 		if ( i < 25 ) {
 			if ( j == 52 ) {
@@ -98,6 +97,8 @@ Coordinates* Level::exitPosition() {
 			}
 		}
 	}
+	printf("iteration end");
 	Coordinates c = Coordinates(double(i), double(j), l_map);
+	printf("coordinates created ");
 	return &c;
 }
