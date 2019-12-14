@@ -1,12 +1,12 @@
 #include "Game.h";
-
+#include <stdio.h>
 
 Game::Game(int startLevel): 
 	floor(Level(startLevel)), player(Hero(floor.heroPosition()))
 {
-	delete(&exit);
-	exit = floor.exitPosition();
 	floor.loadStage();
+	printf("au dd");
+	exit = floor.exitPosition();
 	monsters = floor.getMonsters();
 	monsters.push_back(Boss(startLevel, floor.bossPosition()));
 }
