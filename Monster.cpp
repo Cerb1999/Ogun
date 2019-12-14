@@ -27,14 +27,14 @@ bool Monster::act() {
 	return res;
 }
 
-bool Monster::attaquer(Hero h) {
+bool Monster::attaquer(Hero* h) {
 	bool res = false;
 	if (m_ranged) {
 		refreshFocus(h);
 		res = true;
 	} else {
-		if (m_position->contact(h.position(), monsterSize())) {
-			h.die(m_damages);
+		if (m_position->contact(h->position(), monsterSize())) {
+			h->die(m_damages);
 		} else {
 			refreshFocus(h);
 			move();
@@ -47,25 +47,25 @@ void Monster::move() {
 	m_position->move(m_focus, m_id);
 }
 
-void Monster::refreshFocus(Hero h) {
-	if ( m_position->getX() == h.position()->getX() ) {
-			if ( m_position->getY() > h.position()->getY() ) {
+void Monster::refreshFocus(Hero* h) {
+	if ( m_position->getX() == h->position()->getX() ) {
+			if ( m_position->getY() > h->position()->getY() ) {
 				m_focus = 5;
 			} else {
 				m_focus = 1;
 			}
-		} else if ( m_position->getX() > h.position()->getX() ) {
-			if ( m_position->getY() == h.position()->getY() ) {
+		} else if ( m_position->getX() > h->position()->getX() ) {
+			if ( m_position->getY() == h->position()->getY() ) {
 				m_focus = 7;
-			} else if ( m_position->getY() > h.position()->getY() ) {
+			} else if ( m_position->getY() > h->position()->getY() ) {
 				m_focus = 6;
 			} else {
 				m_focus = 8;
 			}
 		} else {
-			if ( m_position->getY() == h.position()->getY() ) {
+			if ( m_position->getY() == h->position()->getY() ) {
 				m_focus = 3;
-			} else if ( m_position->getY() > h.position()->getY() ) {
+			} else if ( m_position->getY() > h->position()->getY() ) {
 				m_focus = 4;
 			} else {
 				m_focus = 2;

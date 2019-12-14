@@ -3,18 +3,23 @@
 #include <iostream>
 #include <windows.h>
 
+using namespace std; 
+
 Game::Game(int startLevel): 
-	floor(Level(startLevel)), player(Hero(floor.heroPosition()))
+	floor(Level(startLevel))
 {
 	floor.loadStage();
+	Hero h = Hero(floor.heroPosition());
+	player = &h;
 	exit = floor.exitPosition();
 	monsters = floor.getMonsters();
 	monsters.push_back(Boss(startLevel, floor.bossPosition()));
 }
 
 bool Game::play(int moveDirection, int fireDirection) {
-	std::cout << "play";
-	if (floor.isCleared() && player.position()->contact(exit,0.) ) {
+	cout << "play";
+	if (floor.isCleared() && player->position()->contact(exit,0.) ) {
+		cout << "player at exit";
 		int tmp = floor.getDepth()+1;
 		delete(&floor);
 		floor = Level(tmp);
@@ -27,10 +32,12 @@ bool Game::play(int moveDirection, int fireDirection) {
 		monsters.push_back(Boss(tmp, floor.bossPosition()));
 		projectiles.clear();
 	}
-	if(player.alive()) {
-		player.move(moveDirection);
+	cout << player->position()->getX();
+	if(player->alive()) {
+		cout << "player alive";
+		player->move(moveDirection);
 		if (fireDirection > 0 && fireDirection < 9) {
-			projectiles.push_back(*player.fire(fireDirection));
+			projectiles.push_back(*player->fire(fireDirection));
 		}
 		std::vector<Monster>::iterator ti = monsters.begin();
 		while (ti != monsters.end()) {
@@ -48,7 +55,7 @@ bool Game::play(int moveDirection, int fireDirection) {
 		while (it != projectiles.end()) {
 			it->move();
     		if (!it->playerProjectile()) {
-				if (player.hit(*it)) {
+				if (player->hit(*it)) {
 					it = projectiles.erase(it);
 				} else {
 					it++;

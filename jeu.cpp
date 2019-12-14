@@ -72,22 +72,25 @@ int main(int argc, char *argv[])
 
  
 
-    bool menu = true;
+    bool run = false;
     Game* jeu;
     bool run = false;
 
     while(!terminer)
     {
         SDL_RenderClear(ecran);
-        if (menu) {
+        if (!run) {
             SDL_RenderCopy(ecran, fondMenu, &SrcR, &DestR);
         } else {
             SDL_RenderCopy(ecran, fondJeu, &SrcR, &DestR);
             load(jeu, textures, ecran);
             loadProjectilesMonstersDestrutiblesCoins(jeu, textures, ecran);
         }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 189190f4853734f2019ce6fcecee6aa7584abde2
 		while( SDL_PollEvent( &evenements ) )
 			switch(evenements.type)
 			{
@@ -107,8 +110,6 @@ int main(int argc, char *argv[])
                             if (run == false) run = true;
                             Game g = Game(1);
                             jeu = &g;
-                            cout << "jeu cree et attribue\n";
-                            menu = false;
                             //loadMap(jeu->depth(), jeu->level().getMap(), textures, ecran, fenetre);
                             break;
                         }
