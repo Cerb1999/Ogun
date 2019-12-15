@@ -18,7 +18,6 @@ Level::Level(int d) {
 }
 
 void Level::loadStage() {
-    printf("early load\n");
     ostringstream oss;
     stringstream str;
     oss << "maps/stage" << l_depth << ".txt";
@@ -60,7 +59,6 @@ void Level::loadStage() {
             }
         } while(c != EOF);
         fclose(pFile);
-        printf("File contains %d carac\n", n);
     }
 }
 

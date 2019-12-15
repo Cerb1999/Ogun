@@ -9,3 +9,5 @@ Ogun est un jeu rogue-like (donjons):
 
 Il a été décidé de coder en c++ pour gérer plus facilement les instances de monstre etc.
 Le jeu utilise SDL2 en tant qu'interface graphique.
+
+15/12/2019 : statut : problème de coordonnées (sera corrigé avant 18/12/2019);

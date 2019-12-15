@@ -54,7 +54,6 @@ bool Coordinates::move(int direction, int id) {
 			break;
 	}
   int nextX = c_x + x; int nextY = c_y + y;
-	std::cout << "next X : " << nextX << ", next Y : " << nextY << "\n";
   int destTile = g_map[nextX*52+nextY];
   if ( destTile == 1 || (destTile >= 6 && destTile < 10) ) {
 			if (id == 3 || id == 4) {

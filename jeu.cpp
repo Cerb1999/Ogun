@@ -46,7 +46,6 @@ int main(int argc, char *argv[])
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0)
     {
-        printf("Erreur d’initialisation de la SDL: %s",SDL_GetError());
         SDL_Quit();
         return EXIT_FAILURE;
     }
@@ -65,12 +64,16 @@ int main(int argc, char *argv[])
     SDL_Texture* fondJeu = charger_image("textures/background/background-menu.bmp", ecran);
 
     Uint8 r = 255; Uint8 g = 255; Uint8 b = 0;
-    SDL_Rect SrcR;
-    SrcR.x = 0; SrcR.y = 0; SrcR.w = 1920; SrcR.h = 1080;
-    SDL_Rect DestR;
-    DestR.x = 0; DestR.y = 0; DestR.w = 1920; DestR.h = 1080;
+    SDL_Rect SrcR; SrcR.x = 0; SrcR.y = 0; SrcR.w = 1920; SrcR.h = 1080;
+    SDL_Rect DestR; DestR.x = 0; DestR.y = 0; DestR.w = 1920; DestR.h = 1080;
 
- 
+    SDL_Texture* textureTileSetWallsV2 = charger_image_transparente("textures/game/0x72_16x16DungeonTileset_walls.v2.bmp", ecran, r, g, b);
+    SDL_Texture* key = charger_image_transparente("textures/2dcoinchests/Key.bmp", ecran, r, g, b);
+    SDL_Texture* textureTileSetV4 = charger_image_transparente("textures/game/0x72_16x16DungeonTileset.v4.bmp", ecran, r, g, b);
+    SDL_Texture* coin = charger_image_transparente("textures/2dcoinchests/Coin.bmp", ecran, r, g, b);
+    SDL_Texture* heart = charger_image_transparente("textures/2dheart/heart.bmp", ecran, r, g, b);
+    SDL_Texture* half = charger_image_transparente("textures/2dheart/half.bmp", ecran, r, g, b);
+
 
     bool run = false;
     Game* jeu;
@@ -82,9 +85,8 @@ int main(int argc, char *argv[])
             SDL_RenderCopy(ecran, fondMenu, &SrcR, &DestR);
         } else {
             SDL_RenderCopy(ecran, fondJeu, &SrcR, &DestR);
-            load(jeu, textures, ecran);
-            loadProjectilesMonstersDestrutiblesCoins(jeu, textures, ecran);
-
+            load(jeu, textures, ecran, textureTileSetV4, textureTileSetWallsV2, key);
+            loadProjectilesMonstersDestrutiblesCoins(jeu, textures, ecran, textureTileSetV4, coin, heart, half);
         }
         while( SDL_PollEvent( &evenements ) )
 			switch(evenements.type)
@@ -102,9 +104,10 @@ int main(int argc, char *argv[])
                         }
 				        case SDLK_SPACE: {
                             if(run) break;
-                            if (run == false) run = true;
+                            if (!run) run = true;
                             Game g = Game(1);
                             jeu = &g;
+                            SDL_Delay(500);
                             //loadMap(jeu->depth(), jeu->level().getMap(), textures, ecran, fenetre);
                             break;
                         }
@@ -160,12 +163,7 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-int load(Game* jeu, int textures[], SDL_Renderer* ecran){
-    Uint8 r = 255; Uint8 g = 255; Uint8 b = 0;
-    SDL_Texture* textureTileSetV4 = charger_image_transparente("textures/game/0x72_16x16DungeonTileset.v4.bmp", ecran, r, g, b);
-    SDL_Texture* textureTileSetWallsV2 = charger_image_transparente("textures/game/0x72_16x16DungeonTileset_walls.v2.bmp", ecran, r, g, b);
-    SDL_Texture* key = charger_image_transparente("textures/2dcoinchests/Key.bmp", ecran, r, g, b);
-
+int load(Game* jeu, int textures[], SDL_Renderer* ecran, SDL_Texture* textureTileSetV4, SDL_Texture* textureTileSetWallsV2, SDL_Texture* key){
     int depth = jeu->depth();
 
     int countBoss = 0;
@@ -247,16 +245,8 @@ int load(Game* jeu, int textures[], SDL_Renderer* ecran){
     return 0;
 }
 
-int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Renderer* ecran){
-    Uint8 r = 255; Uint8 g = 255; Uint8 b = 0;
-
-    SDL_Texture* textureTileSetV4 = charger_image_transparente("textures/game/0x72_16x16DungeonTileset.v4.bmp", ecran, r, g, b);
-    SDL_Texture* coin = charger_image_transparente("textures/2dcoinchests/Coin.bmp", ecran, r, g, b);
-    SDL_Texture* heart = charger_image_transparente("textures/2dheart/heart.bmp", ecran, r, g, b);
-    SDL_Texture* half = charger_image_transparente("textures/2dheart/half.bmp", ecran, r, g, b);
-
+int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Renderer* ecran, SDL_Texture* textureTileSetV4, SDL_Texture* coin, SDL_Texture* heart, SDL_Texture* half){
     int depth = jeu->depth();
-
 
     vector<Destructible> destructibles = jeu->getDestructibles();
     vector<Projectile> projectiles = jeu->getProjectiles();
@@ -304,7 +294,7 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
         SDL_Rect sProj; sProj.x = textures[index*8+0]; sProj.y = textures[index*8+1]; sProj.w = textures[index*8+2]; sProj.h = textures[index*8+3];
         SDL_Rect dProj; dProj.x = 400 + it->getCoordinates()->getX() * 30, dProj.y = 200 + it->getCoordinates()->getY() * 30, dProj.w = textures[index*8+6], dProj.h = textures[8*8+6];
         SDL_RenderCopyEx(ecran, textureTileSetV4, &sProj, &dProj, angle, NULL, SDL_FLIP_NONE);
-        it++;
+        it = next(it);
     }
 
     std::vector<Monster>::iterator ti = monsters.begin();
@@ -337,10 +327,8 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
         if(ti->monsterSize() == 2) size = 1.5;
         SDL_Rect sMoBoss; sMoBoss.x = textures[(depth+1)*8+0]; sMoBoss.y = textures[(depth+1)*8+1]; sMoBoss.w = textures[(depth+1)*8+2]; sMoBoss.h = textures[(depth+1)*8+3];
         SDL_Rect dMoBoss; dMoBoss.x = 400 + ti->getCoordinates()->getX() * size * 30, dMoBoss.y = 198 + ti->getCoordinates()->getY() * 30, dMoBoss.w = textures[(depth+1)*8+6] * size, dMoBoss.h = textures[(depth+1)*8+6] * size;
-        cout << "x : " << dMoBoss.x << ", y : " << dMoBoss.y << "\n";
-        cout << "222 x : " <<  << ", y : " << *dMoBoss.y << "\n";
         SDL_RenderCopyEx(ecran, textureTileSetV4, &sMoBoss, &dMoBoss, angle, NULL, SDL_FLIP_NONE);
-        ti++;
+        ti = next(ti);
     }
 
     std::vector<Destructible>::iterator at = destructibles.begin();
@@ -348,7 +336,7 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
         SDL_Rect sDestructible; sDestructible.x = textures[7*8+0]; sDestructible.y = textures[7*8+1]; sDestructible.w = textures[7*8+2]; sDestructible.h = textures[7*8+3];
         SDL_Rect dDestructible; dDestructible.x = 400 + at->getCoordinates()->getX() * 30, dDestructible.y = 200 + at->getCoordinates()->getY() * 30, dDestructible.w = textures[7*8+6], dDestructible.h = textures[7*8+6];
         SDL_RenderCopy(ecran, textureTileSetV4, &sDestructible, &dDestructible);
-        at++;
+        at = next(at);
     }
 
     std::vector<Drop>::iterator ta = drops.begin();
@@ -360,12 +348,10 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
         SDL_Rect dDrop; dDrop.x = 400 + ta->getCoordinates()->getX() * 30, dDrop.y = 200 + ta->getCoordinates()->getY() * 30, dDrop.w = textures[dropIndex*8+6], dDrop.h = textures[dropIndex*8+6];
         if(dropIndex == 11) SDL_RenderCopy(ecran, coin, &sDrop, &dDrop);
         else SDL_RenderCopy(ecran, textureTileSetV4, &sDrop, &dDrop);
-        ta++;
+        ta = next(ta);
     }
-    cout << "une rotation de la fonction \n";
 
     for (int i = 1; i <= jeu->getPlayer()->hpLeft(); ++i) {
-        cout << jeu->getPlayer()->hpLeft() << "hp left \n";
         if (jeu->getPlayer()->hpLeft() != 0) {
             int coeurIndex;
             if (i == jeu->getPlayer()->hpLeft() && i % 2 == 1) {

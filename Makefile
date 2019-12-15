@@ -17,3 +17,7 @@ OBJ_NAME = jeu
 #This is the target that compiles our executable
 all : $(OBJS)
 	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
+
+clean: rm -rf *.o *~
+
+mrproper: clean rm -rf $(EXEC)
