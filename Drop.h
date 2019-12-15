@@ -12,7 +12,7 @@ private:
   bool d_potion;
   
 public:
-Drop(double x, double y, int* map, bool potion);
+Drop(int x, int y, int* map, bool potion);
 bool pickedUp(Hero* h);
 Coordinates* getCoordinates() { return &d_coord; }
 bool isAPotion() { return d_potion; }

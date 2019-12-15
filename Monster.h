@@ -11,17 +11,17 @@ protected:
     int m_hp;
     int m_level;
     int m_damages;
-    double m_speed;
+    int m_speed;
     double m_actions;
-    double m_size;
-    double p_size;
+    int m_size;
+    int p_size;
     bool m_ranged;
     int m_focus;
     int m_id;
     Coordinates m_position;
 
 public:
-    Monster(int l, double x, double y, int* map);
+    Monster(int l, int x, int y, int* map);
     int hpLeft() { return m_hp; }
     bool alive() { return m_hp > 0; }
     bool isRanged() { return m_ranged; }
@@ -31,8 +31,8 @@ public:
     void move();
     int damages() { return m_damages; }
     int focus() { return m_focus; }
-    double monsterSize() { return m_size; }
-    double projectileSize() { return p_size; }
+    int monsterSize() { return m_size; }
+    int projectileSize() { return p_size; }
     void refreshFocus(Hero* h);
     Coordinates* getCoordinates() { return &m_position; }
 };
@@ -41,7 +41,7 @@ class Boss: public Monster {
 private:
 
 public:
-    Boss(int l, double x, double y, int* map);
+    Boss(int l, int x, int y, int* map);
 };
 
 #endif

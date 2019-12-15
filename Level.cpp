@@ -14,6 +14,7 @@ Level::Level(int d) {
     l_depth = d;
     l_map = new int[25*52];
 	loadStage();
+	SetHero();
 }
 
 void Level::loadStage() {
@@ -35,8 +36,8 @@ void Level::loadStage() {
 
             if (c != '\n'){
                 l_map[n] = val;
-				double x = n/25;
-				double y = n%25;
+				int x = n/25;
+				int y = n%25;
 				switch (val) {
 					case 3:
 						l_monsters.push_back(Monster(l_depth, x, y, l_map));
@@ -66,24 +67,24 @@ void Level::loadStage() {
 void Level::SetHero() {
 	switch (l_depth) {
 		case 1:
-		h_x = 7.;
-		h_y = 7.;
+		h_x = 7;
+		h_y = 7;
 		break;
 		case 2:
-		h_x = 5.;
-		h_y = 8.;
+		h_x = 5;
+		h_y = 8;
 		break;
 		case 3:
-		h_x = 21.;
-		h_y = 10.;
+		h_x = 21;
+		h_y = 10;
 		break;
 		case 4:
-		h_x = 20.;
-		h_y = 19.;
+		h_x = 20;
+		h_y = 19;
 		break;
 		case 5:
-		h_x = 20.;
-		h_y = 7.;
+		h_x = 20;
+		h_y = 7;
 		break;
 	}
 }

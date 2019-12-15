@@ -1,6 +1,6 @@
 #include "Coordinates.h"
 
-Coordinates::Coordinates(double x, double y, int* map) {
+Coordinates::Coordinates(int x, int y, int* map) {
     c_x = x;
     c_y = y;
     g_map = map;
@@ -15,13 +15,13 @@ void Coordinates::setY(double y) {
 }
 
 
-bool Coordinates::contact(Coordinates* c, double hitBox) {
+bool Coordinates::contact(Coordinates* c, int hitBox) {
     return (c_x >= c->getX()-hitBox && c_x <= c->getX()+hitBox && c_y >= c->getY()-hitBox && c_y <= c->getY()+hitBox);
 }
 
 bool Coordinates::move(int direction, int id) {
 	bool res = false;
-	double x = 0; double y = 0;
+	int x = 0; int y = 0;
 	switch (direction) {
 		case 1:
 			y = 1;
@@ -52,18 +52,18 @@ bool Coordinates::move(int direction, int id) {
 			y = 1;
 			break;
 	}
-  double nextX = c_x + x; double nextY = c_y + y;
-  int destTile = g_map[int(nextX)*52+int(nextY)];
+  int nextX = c_x + x; int nextY = c_y + y;
+  int destTile = g_map[nextX*52+nextY];
   if ( destTile == 1 || (destTile >= 6 && destTile < 10) ) {
 			if (id == 3 || id == 4) {
-				g_map[int(nextX)*52+int(nextY)] = id;      
-				g_map[int(c_x)*52+int(c_y)] = 1;
+				g_map[nextX*52+nextY] = id;      
+				g_map[c_x*52+c_y] = 1;
 			}
 			if (id == 1) {
 				if (destTile == 7) {
 					res = true;
 				} else {
-					g_map[int(c_x)*52+int(c_y)] = 1;
+					g_map[c_x*52+c_y] = 1;
 				}
 			}
       setX(nextX);
@@ -73,7 +73,7 @@ bool Coordinates::move(int direction, int id) {
 }
 
 bool Coordinates::murred(int d) {
-	double x = 0; double y = 0;
+	int x = 0; int y = 0;
 	switch (d) {
 		case 1:
 			y = 1;
@@ -104,7 +104,7 @@ bool Coordinates::murred(int d) {
 			y = 1;
 			break;
 	}
-	double nextX = c_x + x; double nextY = c_y + y;
-	int destTile = g_map[int(nextX)*52+int(nextY)];
+	int nextX = c_x + x; int nextY = c_y + y;
+	int destTile = g_map[nextX*52+nextY];
 	return (destTile == 1);
 }

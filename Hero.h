@@ -15,7 +15,7 @@ private:
     int h_focus;
 
 public:
-    Hero(double x, double y, int* map);
+    Hero(int x, int y, int* map);
     int hpLeft(){ return h_hp; };
     int damages();
     void fire(int direction);

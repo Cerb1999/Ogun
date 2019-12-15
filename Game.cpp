@@ -16,13 +16,13 @@ Game::Game(int startLevel):
 }
 
 bool Game::play(int moveDirection, int fireDirection) {
-	cout << "play";
+	cout << "play\n";
 	bool res = true;
 	if (floor.isCleared() && player.getCoordinates()->contact(&exit,0.) ) {
 		if ( floor.getDepth() == 5) {
 			res = false;
 		} else {
-			cout << "player at exit";
+			cout << "player at exit\n";
 			int tmp = floor.getDepth()+1;
 			delete(&floor);
 			floor = Level(tmp);
@@ -37,9 +37,8 @@ bool Game::play(int moveDirection, int fireDirection) {
 			projectiles.clear();
 		}
 	}
-	cout << player.getCoordinates()->getX();
 	if(player.alive()) {
-		cout << "player alive";
+		cout << "player alive\n";
 		if (moveDirection > 0 && moveDirection < 9) {
 			player.move(moveDirection);
 		}
@@ -48,6 +47,7 @@ bool Game::play(int moveDirection, int fireDirection) {
 			int x = player.getCoordinates()->getX(); int y = player.getCoordinates()->getY();
 			projectiles.push_back(Projectile(true,player.focus(),1.,player.damages(),x,y, floor.getMap()));
 		}
+		cout << "player moved or fired\n";
 		std::vector<Drop>::iterator fi = drops.begin();
 		while (fi != drops.end() ) {
 			if (fi->pickedUp(&player)) {
@@ -73,6 +73,7 @@ bool Game::play(int moveDirection, int fireDirection) {
 			}
 			ti++;
 		}
+		cout << "after monster\n";
 		std::vector<Projectile>::iterator it = projectiles.begin();
 		while (it != projectiles.end()) {
 			if (it->murred()) {
