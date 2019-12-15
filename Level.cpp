@@ -36,8 +36,8 @@ void Level::loadStage() {
 
             if (c != '\n'){
                 l_map[n] = val;
-				int x = n/25;
-				int y = n%25;
+				int x = n%52;
+				int y = n/52;
 				switch (val) {
 					case 3:
 						l_monsters.push_back(Monster(l_depth, x, y, l_map));
@@ -47,13 +47,13 @@ void Level::loadStage() {
 						b_y = y;
 						break;
 					case 5:
-						l_crates.push_back(Destructible(n/25, n%25, l_map));
+						l_crates.push_back(Destructible(x, y, l_map));
 						break;
 					case 6:
 						e_x = x;
 						e_y = y;
 					case 8:
-						l_drop.push_back(Drop(n/25, n%25, l_map, false));
+						l_drop.push_back(Drop(x, y, l_map, false));
 						break;
 				}
                 n++;

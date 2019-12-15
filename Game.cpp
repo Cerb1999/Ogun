@@ -12,6 +12,7 @@ Game::Game(int startLevel):
 	score = 0;
 	monsters = floor.getMonsters();
 	monsters.push_back(boss);
+	destructibles = floor.getDestructibles();
 	drops = floor.getDrops();
 }
 
