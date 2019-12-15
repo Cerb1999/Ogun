@@ -7,22 +7,18 @@
 using namespace std; 
 
 Game::Game(int startLevel): 
-	floor(Level(startLevel))
+	floor(Level(startLevel)), player(Hero(floor.HeroX(), floor.HeroY(), floor.getMap())), boss(Boss(startLevel, floor.BossX(), floor.BossY(), floor.getMap())), exit(Coordinates(floor.ExitX(), floor.ExitY(), floor.getMap()))
 {
 	score = 0;
-	floor.loadStage();
-	Hero h = Hero(floor.heroPosition());
-	player = &h;
-	exit = floor.exitPosition();
 	monsters = floor.getMonsters();
-	monsters.push_back(Boss(startLevel, floor.bossPosition()));
+	monsters.push_back(boss);
 	drops = floor.getDrops();
 }
 
 bool Game::play(int moveDirection, int fireDirection) {
 	cout << "play";
 	bool res = true;
-	if (floor.isCleared() && player->getCoordinates()->contact(exit,0.) ) {
+	if (floor.isCleared() && player.getCoordinates()->contact(&exit,0.) ) {
 		if ( floor.getDepth() == 5) {
 			res = false;
 		} else {
@@ -32,27 +28,32 @@ bool Game::play(int moveDirection, int fireDirection) {
 			floor = Level(tmp);
 			floor.loadStage();
 			delete(&player);
-			delete(exit);
-			exit = floor.exitPosition();
+			delete(&exit);
+			exit = Coordinates(floor.ExitX(), floor.ExitY(), floor.getMap());
 			monsters.clear();
 			monsters = floor.getMonsters();
-			monsters.push_back(Boss(tmp, floor.bossPosition()));
+			boss = Boss(tmp, floor.BossX(), floor.BossY(), floor.getMap());
+			monsters.push_back(boss);
 			projectiles.clear();
 		}
 	}
-	cout << player->getCoordinates()->getX();
-	if(player->alive()) {
+	cout << player.getCoordinates()->getX();
+	if(player.alive()) {
 		cout << "player alive";
-		player->move(moveDirection);
+		if (moveDirection > 0 && moveDirection < 9) {
+			player.move(moveDirection);
+		}
 		if (fireDirection > 0 && fireDirection < 9) {
-			projectiles.push_back(*player->fire(fireDirection));
+			player.fire(fireDirection);
+			int x = player.getCoordinates()->getX(); int y = player.getCoordinates()->getY();
+			projectiles.push_back(Projectile(true,player.focus(),1.,player.damages(),x,y, floor.getMap()));
 		}
 		std::vector<Drop>::iterator fi = drops.begin();
 		while (fi != drops.end() ) {
-			if (fi->pickedUp(player)) {
+			if (fi->pickedUp(&player)) {
 				fi = drops.erase(fi);
 				if (fi->isAPotion()) {
-					player->heal();
+					player.heal();
 				} else {
 					score++;
 				}
@@ -66,8 +67,8 @@ bool Game::play(int moveDirection, int fireDirection) {
 				ti = monsters.erase(ti);
 			}
 			if (ti->act()) {
-				if (ti->attaquer(player)) {
-					projectiles.push_back(Projectile(false, ti->focus(), ti->projectileSize(), ti->damages(), ti->getCoordinates()));
+				if (ti->attaquer(&player)) {
+					projectiles.push_back(Projectile(false, ti->focus(), ti->projectileSize(), ti->damages(), ti->getCoordinates()->getX(), ti->getCoordinates()->getY(), floor.getMap()));
 				}
 			}
 			ti++;
@@ -79,7 +80,7 @@ bool Game::play(int moveDirection, int fireDirection) {
 			} else {
 				it->move();
 				if (!it->playerProjectile()) {
-					if (player->hit(*it)) {
+					if (player.hit(*it)) {
 						it = projectiles.erase(it);
 					} else {
 						it++;
@@ -98,7 +99,7 @@ bool Game::play(int moveDirection, int fireDirection) {
 							int random = rand()%2;
 							bool res = false;
 							if (random == 1) { res = true; }
-							drops.push_back(Drop(ti->getCoordinates(), res));
+							drops.push_back(Drop(ti->getCoordinates()->getX(), ti->getCoordinates()->getY(), floor.getMap(), res));
 							it = projectiles.erase(it);
 							ti = destructibles.erase(ti);
 						} else {

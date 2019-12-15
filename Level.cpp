@@ -13,6 +13,7 @@ Level::Level(int d) {
     l_cleared = false;
     l_depth = d;
     l_map = new int[25*52];
+	loadStage();
 }
 
 void Level::loadStage() {
@@ -34,16 +35,24 @@ void Level::loadStage() {
 
             if (c != '\n'){
                 l_map[n] = val;
-				Coordinates c = Coordinates(n/25,n%25,l_map);
+				double x = n/25;
+				double y = n%25;
 				switch (val) {
 					case 3:
-						l_monsters.push_back(Monster(l_depth, &c));
+						l_monsters.push_back(Monster(l_depth, x, y, l_map));
+						break;
+					case 4:
+						b_x = x;
+						b_y = y;
 						break;
 					case 5:
-						l_crates.push_back(Destructible(c));
+						l_crates.push_back(Destructible(n/25, n%25, l_map));
 						break;
+					case 6:
+						e_x = x;
+						e_y = y;
 					case 8:
-						l_drop.push_back(Drop(&c, false));
+						l_drop.push_back(Drop(n/25, n%25, l_map, false));
 						break;
 				}
                 n++;
@@ -54,59 +63,27 @@ void Level::loadStage() {
     }
 }
 
-Coordinates* Level::heroPosition() {
-	Coordinates c = Coordinates(0., 0., l_map);
+void Level::SetHero() {
 	switch (l_depth) {
 		case 1:
-		c.setX(7.);
-		c.setY(7.);
+		h_x = 7.;
+		h_y = 7.;
 		break;
 		case 2:
-		c.setX(5.);
-		c.setY(8.);
+		h_x = 5.;
+		h_y = 8.;
 		break;
 		case 3:
-		c.setX(21.);
-		c.setY(10.);
+		h_x = 21.;
+		h_y = 10.;
 		break;
 		case 4:
-		c.setX(20.);
-		c.setY(19.);
+		h_x = 20.;
+		h_y = 19.;
 		break;
 		case 5:
-		c.setX(20.);
-		c.setY(7.);
+		h_x = 20.;
+		h_y = 7.;
 		break;
 	}
-	return &c;
-}
-
-Coordinates* Level::bossPosition() {
-	int i = 0; int j = 0;
-	while ( l_map[(i*25)+j] != 4 && i < 25 ) {
-		j++;
-		if ( i < 25 ) {
-			if ( j == 52 ) {
-				j = 0;
-				i++;
-			}
-		}
-	}
-	Coordinates c = Coordinates(double(i), double(j), l_map);
-	return &c;
-}
-
-Coordinates* Level::exitPosition() {
-	int i = 0; int j = 0;
-	while ( l_map[(i*25)+j] != 6 && i < 25 ) {
-		j++;
-		if ( i < 25 ) {
-			if ( j == 52 ) {
-				j = 0;
-				i++;
-			}
-		}
-	}
-	Coordinates c = Coordinates(double(i), double(j), l_map);
-	return &c;
 }

@@ -18,10 +18,10 @@ protected:
     bool m_ranged;
     int m_focus;
     int m_id;
-    Coordinates* m_position;
+    Coordinates m_position;
 
 public:
-    Monster(int l, Coordinates* c);
+    Monster(int l, double x, double y, int* map);
     int hpLeft() { return m_hp; }
     bool alive() { return m_hp > 0; }
     bool isRanged() { return m_ranged; }
@@ -34,14 +34,14 @@ public:
     double monsterSize() { return m_size; }
     double projectileSize() { return p_size; }
     void refreshFocus(Hero* h);
-    Coordinates* getCoordinates() { return m_position; }
+    Coordinates* getCoordinates() { return &m_position; }
 };
 
 class Boss: public Monster {
 private:
 
 public:
-    Boss(int l, Coordinates* c);
+    Boss(int l, double x, double y, int* map);
 };
 
 #endif

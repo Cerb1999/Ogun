@@ -8,12 +8,12 @@ class Level; class Game;
 
 class Destructible {
 private: 
-  Coordinates* d_coord;
+  Coordinates d_coord;
   
 public:
-Destructible(Coordinates c);
+Destructible(double x, double y, int* map);
 bool hit(Projectile p);
-Coordinates* getCoordinates() { return d_coord; } 
+Coordinates* getCoordinates() { return &d_coord; } 
 
 };
 
