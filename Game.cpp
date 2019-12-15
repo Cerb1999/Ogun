@@ -21,6 +21,7 @@ Game::Game(int startLevel):
 
 bool Game::play(int moveDirection, int fireDirection) {
 	cout << "play";
+	bool res = true;
 	if (floor.isCleared() && player->getCoordinates()->contact(exit,0.) ) {
 		cout << "player at exit";
 		int tmp = floor.getDepth()+1;
@@ -104,5 +105,6 @@ bool Game::play(int moveDirection, int fireDirection) {
 				}
 			}
 		}
-	}
+	} else { res = false;}
+	return res;
 }

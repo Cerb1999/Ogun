@@ -7,6 +7,7 @@ Hero::Hero(Coordinates* c) {
     h_damages = 1;
     h_position = (Coordinates*) malloc (2*sizeof(double)+sizeof(int*));
     h_position = c;
+    h_focus = 3;
 }
 
 int Hero::damages() {
@@ -18,6 +19,7 @@ bool Hero::hit(Projectile p) {
 }
 
 void Hero::move(int d) {
+    h_focus = d;
 	if ( d > 0 && d < 9) {
 		h_position->move(d, 1); //move based on keyboard input
 	}
