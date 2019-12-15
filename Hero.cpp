@@ -1,13 +1,13 @@
 #include "Hero.h"
 #include <stdlib.h>
+#include <iostream>
 
-Hero::Hero(double x, double y, int* map) :
+Hero::Hero(int x, int y, int* map) :
     h_position(Coordinates(x,y,map))
 {
     h_hp = 6;
     h_speed = 1;
     h_damages = 1;
-    
     h_focus = 3;
 }
 

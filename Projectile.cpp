@@ -1,6 +1,6 @@
 #include "Projectile.h";
 
-Projectile::Projectile(bool players, int direction, double size, int damages, double x, double y, int* map) :
+Projectile::Projectile(bool players, int direction, int size, int damages, int x, int y, int* map) :
 	p_position(Coordinates(x,y,map))
 {
 	p_damages = damages;

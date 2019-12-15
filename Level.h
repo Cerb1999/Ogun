@@ -14,12 +14,12 @@ private:
   std::vector<Drop> l_drop;
   bool l_cleared;
   int* l_map;
-  double h_x;
-  double h_y;
-  double b_x;
-  double b_y;
-  double e_x;
-  double e_y;
+  int h_x;
+  int h_y;
+  int b_x;
+  int b_y;
+  int e_x;
+  int e_y;
 
 public:
   Level(int d);
