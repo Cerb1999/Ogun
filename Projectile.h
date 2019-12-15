@@ -18,6 +18,7 @@ public:
     Coordinates* getCoordinates() { return p_position; }
     int damages() { return p_damages; }
     bool playerProjectile() { return p_players; }
+    int getDirection() { return p_direction; }
     double hitBox() { return p_hitbox; }
     void move();
     bool murred() { return p_position->murred(p_direction); }
