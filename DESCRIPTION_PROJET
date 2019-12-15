@@ -1,0 +1,11 @@
+Ogun est un jeu rogue-like (donjons):
+    - Vous incarnez un personnage attaquant avec des projectiles.
+    - Vous devez compléter 5 niveaux en tuant tous les monstres.
+    - Vous disposez de vie, que vous pouvez récupérer via des potions en détruisants des caisses (contenant aussi des pièces)
+    - Chaque niveau contient un boss et des pièges.
+    - Les monstres peuvent attaquer au corps à corps ou lancer des projectiles.
+
+
+
+Il a été décidé de coder en c++ pour gérer plus facilement les instances de monstre etc.
+Le jeu utilise SDL2 en tant qu'interface graphique.

@@ -36,8 +36,8 @@ void Level::loadStage() {
 
             if (c != '\n'){
                 l_map[n] = val;
-				int x = n/52;
-				int y = n%52;
+				int x = n%52;
+				int y = n/52;
 				switch (val) {
 					case 3:
 						l_monsters.push_back(Monster(l_depth, x, y, l_map));
