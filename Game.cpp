@@ -23,18 +23,22 @@ bool Game::play(int moveDirection, int fireDirection) {
 	cout << "play";
 	bool res = true;
 	if (floor.isCleared() && player->getCoordinates()->contact(exit,0.) ) {
-		cout << "player at exit";
-		int tmp = floor.getDepth()+1;
-		delete(&floor);
-		floor = Level(tmp);
-		floor.loadStage();
-		delete(&player);
-		delete(exit);
-		exit = floor.exitPosition();
-		monsters.clear();
-		monsters = floor.getMonsters();
-		monsters.push_back(Boss(tmp, floor.bossPosition()));
-		projectiles.clear();
+		if ( floor.getDepth() == 5) {
+			res = false;
+		} else {
+			cout << "player at exit";
+			int tmp = floor.getDepth()+1;
+			delete(&floor);
+			floor = Level(tmp);
+			floor.loadStage();
+			delete(&player);
+			delete(exit);
+			exit = floor.exitPosition();
+			monsters.clear();
+			monsters = floor.getMonsters();
+			monsters.push_back(Boss(tmp, floor.bossPosition()));
+			projectiles.clear();
+		}
 	}
 	cout << player->getCoordinates()->getX();
 	if(player->alive()) {

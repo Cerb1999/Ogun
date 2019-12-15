@@ -19,7 +19,8 @@ bool Coordinates::contact(Coordinates* c, double hitBox) {
     return (c_x >= c->getX()-hitBox && c_x <= c->getX()+hitBox && c_y >= c->getY()-hitBox && c_y <= c->getY()+hitBox);
 }
 
-void Coordinates::move(int direction, int id) {
+bool Coordinates::move(int direction, int id) {
+	bool res = false;
 	double x = 0; double y = 0;
 	switch (direction) {
 		case 1:
@@ -59,11 +60,16 @@ void Coordinates::move(int direction, int id) {
 				g_map[int(c_x)*52+int(c_y)] = 1;
 			}
 			if (id == 1) {
-				g_map[int(c_x)*52+int(c_y)] = 1;
+				if (destTile == 7) {
+					res = true;
+				} else {
+					g_map[int(c_x)*52+int(c_y)] = 1;
+				}
 			}
       setX(nextX);
       setY(nextY);
   }
+  return res;
 }
 
 bool Coordinates::murred(int d) {
@@ -99,6 +105,6 @@ bool Coordinates::murred(int d) {
 			break;
 	}
 	double nextX = c_x + x; double nextY = c_y + y;
-	int destTile = g_map[int(nextX)*25+int(nextY)];
+	int destTile = g_map[int(nextX)*52+int(nextY)];
 	return (destTile == 1);
 }

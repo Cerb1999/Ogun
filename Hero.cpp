@@ -21,7 +21,9 @@ bool Hero::hit(Projectile p) {
 void Hero::move(int d) {
     h_focus = d;
 	if ( d > 0 && d < 9) {
-		h_position->move(d, 1); //move based on keyboard input
+        if (h_position->move(d, 1)) {
+            h_hp -= 1;
+        } //move based on keyboard input
 	}
 }
 
