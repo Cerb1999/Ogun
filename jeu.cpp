@@ -267,22 +267,69 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
     std::vector<Projectile>::iterator it = projectiles.begin();
     while (it != projectiles.end()) {
         int index;
+        double angle;
         if(it->playerProjectile()) index = 14;
         else index = 13;
+        switch(it->getDirection()){
+            case 1: break;
+            case 2:
+                angle = 45.0;
+                break;
+            case 3: break;
+            case 4:
+                angle = - 45.0;
+                break;
+            case 5:
+                angle = - 90.0;
+                break;
+            case 6:
+                angle = - 135.0;
+                break;
+            case 7:
+                angle = 135.0;
+                break;
+            case 8:
+                angle = 180.0;
+                break;
+        }
 
         SDL_Rect sProj; sProj.x = textures[index*8+0]; sProj.y = textures[index*8+1]; sProj.w = textures[index*8+2]; sProj.h = textures[index*8+3];
         SDL_Rect dProj; dProj.x = 400 + it->getCoordinates()->getX() * 30, dProj.y = 200 + it->getCoordinates()->getY() * 30, dProj.w = textures[index*8+6], dProj.h = textures[14*8+6];
-        SDL_RenderCopy(ecran, textureTileSetV4, &sProj, &dProj);
+        SDL_RenderCopyEx(ecran, textureTileSetV4, &sProj, &dProj, angle, NULL, SDL_FLIP_NONE);
         it++;
     }
 
     std::vector<Monster>::iterator ti = monsters.begin();
     while (ti != monsters.end()) {
+        double angle;
         int size = 1;
+        switch(ti->focus()){
+            case 1: break;
+            case 2:
+                angle = 45.0;
+                break;
+            case 3: break;
+            case 4:
+                angle = - 45.0;
+                break;
+            case 5:
+                angle = - 90.0;
+                break;
+            case 6:
+                angle = - 135.0;
+                break;
+            case 7:
+                angle = 135.0;
+                break;
+            case 8:
+                angle = 180.0;
+                break;
+        }
+
         if(ti->monsterSize() == 2) size = 1.5;
         SDL_Rect sMoBoss; sMoBoss.x = textures[(depth+1)*8+0]; sMoBoss.y = textures[(depth+1)*8+1]; sMoBoss.w = textures[(depth+1)*8+2]; sMoBoss.h = textures[(depth+1)*8+3];
         SDL_Rect dMoBoss; dMoBoss.x = 400 + ti->getCoordinates()->getX() * size * 30, dMoBoss.y = 198 + ti->getCoordinates()->getY() * size * 30, dMoBoss.w = textures[(depth+1)*8+6], dMoBoss.h = textures[(depth+1)*8+6];
-        SDL_RenderCopy(ecran, textureTileSetV4, &sMoBoss, &dMoBoss);
+        SDL_RenderCopyEx(ecran, textureTileSetV4, &sMoBoss, &dMoBoss, angle, NULL, SDL_FLIP_NONE);
         ti++;
     }
 
