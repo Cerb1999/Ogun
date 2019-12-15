@@ -15,7 +15,7 @@ private:
 
 public:
     Hero(Coordinates* c);
-    int hpLeft();
+    int hpLeft(){ return h_hp; };
     int damages();
     Projectile* fire(int direction);
     bool hit(Projectile p); // contact avec p, renvoie le bool correspondant et effectue les actions nescessaires

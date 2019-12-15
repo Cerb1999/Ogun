@@ -9,10 +9,6 @@ Hero::Hero(Coordinates* c) {
     h_position = c;
 }
 
-int Hero::hpLeft() {
-    return h_hp;
-}
-
 int Hero::damages() {
     return h_damages;
 }
