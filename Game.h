@@ -7,7 +7,7 @@
 #include "Destructible.h";
 #include "Projectile.h";
 #include "Level.h";
-#include "Coin.h";
+#include "Drop.h";
 
 class Game{
 private:
@@ -17,7 +17,8 @@ private:
 	std::vector<Monster> monsters;
 	std::vector<Projectile> projectiles;
 	std::vector<Destructible> destructibles;
-	std::vector<Coin> coins;
+	std::vector<Drop> drops;
+	int score;
 
 public:
 	Game(int startLevel);
@@ -27,8 +28,9 @@ public:
 	std::vector<Monster> getMonsters() { return monsters; }
 	std::vector<Projectile> getProjectiles() { return projectiles; }
 	std::vector<Destructible> getDestructibles() { return destructibles; }
-	std::vector<Coin> getCoins() { return coins; }
+	std::vector<Drop> getDrops() { return drops; }
 	Hero* getPlayer() { return player; }
+	int getScore() { return score; }
 };
 
 #endif

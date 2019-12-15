@@ -2,18 +2,21 @@
 #include <stdio.h>
 #include <iostream>
 #include <windows.h>
+#include <stdlib.h>
 
 using namespace std; 
 
 Game::Game(int startLevel): 
 	floor(Level(startLevel))
 {
+	score = 0;
 	floor.loadStage();
 	Hero h = Hero(floor.heroPosition());
 	player = &h;
 	exit = floor.exitPosition();
 	monsters = floor.getMonsters();
 	monsters.push_back(Boss(startLevel, floor.bossPosition()));
+	drops = floor.getDrops();
 }
 
 bool Game::play(int moveDirection, int fireDirection) {
@@ -39,10 +42,15 @@ bool Game::play(int moveDirection, int fireDirection) {
 		if (fireDirection > 0 && fireDirection < 9) {
 			projectiles.push_back(*player->fire(fireDirection));
 		}
-		std::vector<Coin>::iterator fi = coins.begin();
-		while (fi != coins.end() ) {
+		std::vector<Drop>::iterator fi = drops.begin();
+		while (fi != drops.end() ) {
 			if (fi->pickedUp(player)) {
-				fi = coins.erase(fi);
+				fi = drops.erase(fi);
+				if (fi->isAPotion()) {
+					player->heal();
+				} else {
+					score++;
+				}
 			} else {	
 				fi++;
 			}
@@ -82,6 +90,10 @@ bool Game::play(int moveDirection, int fireDirection) {
 					std::vector<Destructible>::iterator ti = destructibles.begin();
 					while (ti != destructibles.end() ) {
 						if (ti->hit(*it)) {
+							int random = rand()%2;
+							bool res = false;
+							if (random == 1) { res = true; }
+							drops.push_back(Drop(ti->getCoordinates(), res));
 							it = projectiles.erase(it);
 							ti = destructibles.erase(ti);
 						} else {

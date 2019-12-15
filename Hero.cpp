@@ -35,3 +35,7 @@ Projectile* Hero::fire(int direction) {
     Projectile p = Projectile(true, direction, 1, h_damages, h_position);
     return &p; 
 }
+
+void Hero::heal() {
+    h_hp++;
+}

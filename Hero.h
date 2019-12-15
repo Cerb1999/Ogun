@@ -25,6 +25,7 @@ public:
     bool alive() { return h_hp > 0; }
     Coordinates* getCoordinates() { return h_position; }
     char* toString() { return "je suis vivant"; }
+    void heal() ;
 };
 
 #endif
