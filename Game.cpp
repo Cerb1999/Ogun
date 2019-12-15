@@ -49,7 +49,7 @@ bool Game::play(int moveDirection, int fireDirection) {
 			projectiles.push_back(Projectile(true,player.focus(),1.,player.damages(),x,y, floor.getMap()));
 		}
 		cout << "player moved or fired\n";
-		std::vector<Drop>::iterator fi = drops.begin();
+		vector<Drop>::iterator fi = drops.begin();
 		while (fi != drops.end() ) {
 			if (fi->pickedUp(&player)) {
 				fi = drops.erase(fi);
@@ -59,10 +59,10 @@ bool Game::play(int moveDirection, int fireDirection) {
 					score++;
 				}
 			} else {	
-				fi++;
+				fi = next(fi);
 			}
 		}
-		std::vector<Monster>::iterator ti = monsters.begin();
+		vector<Monster>::iterator ti = monsters.begin();
 		cout << "x = " << ti->getCoordinates()->getX() << " y = " << ti->getCoordinates()->getY() << "\n";
 		while (ti != monsters.end()) {
 			if (!ti->alive()) {
@@ -73,10 +73,10 @@ bool Game::play(int moveDirection, int fireDirection) {
 					projectiles.push_back(Projectile(false, ti->focus(), ti->projectileSize(), ti->damages(), ti->getCoordinates()->getX(), ti->getCoordinates()->getY(), floor.getMap()));
 				}
 			}
-			ti++;
+			ti = next(ti);
 		}
 		cout << "after monster\n";
-		std::vector<Projectile>::iterator it = projectiles.begin();
+		vector<Projectile>::iterator it = projectiles.begin();
 		while (it != projectiles.end()) {
 			if (it->murred()) {
 				it = projectiles.erase(it);
@@ -86,17 +86,17 @@ bool Game::play(int moveDirection, int fireDirection) {
 					if (player.hit(*it)) {
 						it = projectiles.erase(it);
 					} else {
-						it++;
+						it = next(it);
 					}
 				} else {
 					for (Monster m : monsters) {
 						if (m.hit(*it)) {
 							it = projectiles.erase(it);
 						} else {
-							it++;
+							it = next(it);
 						}
 					}
-					std::vector<Destructible>::iterator ti = destructibles.begin();
+					vector<Destructible>::iterator ti = destructibles.begin();
 					while (ti != destructibles.end() ) {
 						if (ti->hit(*it)) {
 							int random = rand()%2;
@@ -106,9 +106,9 @@ bool Game::play(int moveDirection, int fireDirection) {
 							it = projectiles.erase(it);
 							ti = destructibles.erase(ti);
 						} else {
-							it++;
+							it = next(it);
 						}
-						ti++;
+						ti = next(ti);
 					}
 				}
 			}

@@ -6,11 +6,11 @@ Coordinates::Coordinates(int x, int y, int* map) {
     g_map = map;
 }
 
-void Coordinates::setX(double x) {
+void Coordinates::setX(int x) {
     c_x = x;
 }
 
-void Coordinates::setY(double y) {
+void Coordinates::setY(int y) {
     c_y = y;
 }
 

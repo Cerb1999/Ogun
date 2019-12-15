@@ -14,8 +14,8 @@ public:
     int getX() { return c_x; };
     int getY() { return c_y; };
     int* getMap() { return g_map; };
-    void setX(double x);
-    void setY(double y);
+    void setX(int x);
+    void setY(int y);
     bool contact(Coordinates* c, int hitBox);
     bool move(int direction, int id);
     bool murred(int d);

@@ -12,7 +12,7 @@ protected:
     int m_level;
     int m_damages;
     int m_speed;
-    double m_actions;
+    int m_actions;
     int m_size;
     int p_size;
     bool m_ranged;
