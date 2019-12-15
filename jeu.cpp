@@ -83,7 +83,9 @@ int main(int argc, char *argv[])
         } else {
             SDL_RenderCopy(ecran, fondJeu, &SrcR, &DestR);
             load(jeu, textures, ecran);
+/*
             loadProjectilesMonstersDestrutiblesCoins(jeu, textures, ecran);
+*/
         }
         while( SDL_PollEvent( &evenements ) )
 			switch(evenements.type)
@@ -153,9 +155,9 @@ int main(int argc, char *argv[])
         SDL_Delay(200);
     }
 
-/*    SDL_DestroyRenderer(ecran);
+    SDL_DestroyRenderer(ecran);
     SDL_DestroyWindow(fenetre);
-    SDL_Quit();*/
+    SDL_Quit();
     return 0;
 }
 
@@ -262,14 +264,14 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
     vector<Drop> drops = jeu->getDrops();
     vector<Monster> monsters = jeu->getMonsters();
 
-    Coordinates* hPos = jeu->getPlayer()->getCoordinates();
+/*    Coordinates* hPos = jeu->getPlayer()->getCoordinates();
 
     double heroAngle;
     if(jeu->getPlayer()->focus() == 7) heroAngle = 180;
     else heroAngle = 0;
     SDL_Rect sHero; sHero.x = textures[18*8+0]; sHero.y = textures[18*8+1]; sHero.w = textures[18*8+2]; sHero.h = textures[18*8+3];
     SDL_Rect dHero; dHero.x = 400 + jeu->getPlayer()->getCoordinates()->getX() * 30, dHero.y = 200 + jeu->getPlayer()->getCoordinates()->getY() * 30, dHero.w = textures[18*8+6], dHero.h = textures[18*8+6];
-    SDL_RenderCopyEx(ecran, textureTileSetV4, &sHero, &dHero, heroAngle, NULL, SDL_FLIP_NONE);
+    SDL_RenderCopyEx(ecran, textureTileSetV4, &sHero, &dHero, heroAngle, NULL, SDL_FLIP_NONE);*/
 
     std::vector<Projectile>::iterator it = projectiles.begin();
     while (it != projectiles.end()) {
