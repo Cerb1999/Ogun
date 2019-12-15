@@ -337,6 +337,8 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
         if(ti->monsterSize() == 2) size = 1.5;
         SDL_Rect sMoBoss; sMoBoss.x = textures[(depth+1)*8+0]; sMoBoss.y = textures[(depth+1)*8+1]; sMoBoss.w = textures[(depth+1)*8+2]; sMoBoss.h = textures[(depth+1)*8+3];
         SDL_Rect dMoBoss; dMoBoss.x = 400 + ti->getCoordinates()->getX() * size * 30, dMoBoss.y = 198 + ti->getCoordinates()->getY() * 30, dMoBoss.w = textures[(depth+1)*8+6] * size, dMoBoss.h = textures[(depth+1)*8+6] * size;
+        cout << "x : " << dMoBoss.x << ", y : " << dMoBoss.y << "\n";
+        cout << "222 x : " <<  << ", y : " << *dMoBoss.y << "\n";
         SDL_RenderCopyEx(ecran, textureTileSetV4, &sMoBoss, &dMoBoss, angle, NULL, SDL_FLIP_NONE);
         ti++;
     }
@@ -360,22 +362,19 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
         else SDL_RenderCopy(ecran, textureTileSetV4, &sDrop, &dDrop);
         ta++;
     }
+    cout << "une rotation de la fonction \n";
 
     for (int i = 1; i <= jeu->getPlayer()->hpLeft(); ++i) {
-        if(jeu->getPlayer()->hpLeft() != 0) {
+        cout << jeu->getPlayer()->hpLeft() << "hp left \n";
+        if (jeu->getPlayer()->hpLeft() != 0) {
             int coeurIndex;
             if (i == jeu->getPlayer()->hpLeft() && i % 2 == 1) {
                 coeurIndex = 16;
             } else {
                 coeurIndex = 15;
             }
-            SDL_Rect sCoeur;
-            sCoeur.x = textures[coeurIndex * 8 + 0];
-            sCoeur.y = textures[coeurIndex * 8 + 1];
-            sCoeur.w = textures[coeurIndex * 8 + 2];
-            sCoeur.h = textures[coeurIndex * 8 + 3];
-            SDL_Rect dCoeur;
-            dCoeur.x = 100 * i + ta->getCoordinates()->getX() * 100, dCoeur.y = 75, dCoeur.w = textures[coeurIndex * 8 + 6] / 1.5, dCoeur.h = textures[coeurIndex * 8 + 6] / 1.5;
+            SDL_Rect sCoeur; sCoeur.x = textures[coeurIndex * 8 + 0]; sCoeur.y = textures[coeurIndex * 8 + 1]; sCoeur.w = textures[coeurIndex * 8 + 2]; sCoeur.h = textures[coeurIndex * 8 + 3];
+            SDL_Rect dCoeur; dCoeur.x = 100 * i + ta->getCoordinates()->getX() * 100, dCoeur.y = 75, dCoeur.w = textures[coeurIndex * 8 + 6] / 1.5, dCoeur.h = textures[coeurIndex * 8 + 6] / 1.5;
             if (coeurIndex == 16) SDL_RenderCopy(ecran, half, &sCoeur, &dCoeur);
             else SDL_RenderCopy(ecran, heart, &sCoeur, &dCoeur);
         }

@@ -30,12 +30,12 @@ public:
   std::vector<Destructible> getDestructibles() { return l_crates; };
   std::vector<Drop> getDrops() { return l_drop; };
   void SetHero();
-  double HeroX() { return h_x; }
-  double HeroY() { return h_y; }
-  double BossX() { return b_x; }
-  double BossY() { return b_y; }
-  double ExitX() { return e_x; }
-  double ExitY() { return e_y; }
+  int HeroX() { return h_x; }
+  int HeroY() { return h_y; }
+  int BossX() { return b_x; }
+  int BossY() { return b_y; }
+  int ExitX() { return e_x; }
+  int ExitY() { return e_y; }
   void loadStage();
 };
 

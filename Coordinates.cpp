@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Coordinates.h"
 
 Coordinates::Coordinates(int x, int y, int* map) {
@@ -6,11 +7,11 @@ Coordinates::Coordinates(int x, int y, int* map) {
     g_map = map;
 }
 
-void Coordinates::setX(double x) {
+void Coordinates::setX(int x) {
     c_x = x;
 }
 
-void Coordinates::setY(double y) {
+void Coordinates::setY(int y) {
     c_y = y;
 }
 
@@ -53,10 +54,11 @@ bool Coordinates::move(int direction, int id) {
 			break;
 	}
   int nextX = c_x + x; int nextY = c_y + y;
+	std::cout << "next X : " << nextX << ", next Y : " << nextY << "\n";
   int destTile = g_map[nextX*52+nextY];
   if ( destTile == 1 || (destTile >= 6 && destTile < 10) ) {
 			if (id == 3 || id == 4) {
-				g_map[nextX*52+nextY] = id;      
+				g_map[nextX*52+nextY] = id;
 				g_map[c_x*52+c_y] = 1;
 			}
 			if (id == 1) {
