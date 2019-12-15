@@ -12,6 +12,7 @@ Game::Game(int startLevel):
 	score = 0;
 	monsters = floor.getMonsters();
 	monsters.push_back(boss);
+	destructibles = floor.getDestructibles();
 	drops = floor.getDrops();
 }
 
@@ -62,6 +63,7 @@ bool Game::play(int moveDirection, int fireDirection) {
 			}
 		}
 		std::vector<Monster>::iterator ti = monsters.begin();
+		cout << "x = " << ti->getCoordinates()->getX() << " y = " << ti->getCoordinates()->getY() << "\n";
 		while (ti != monsters.end()) {
 			if (!ti->alive()) {
 				ti = monsters.erase(ti);

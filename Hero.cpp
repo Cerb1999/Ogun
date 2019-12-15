@@ -1,6 +1,5 @@
 #include "Hero.h"
 #include <stdlib.h>
-#include <iostream>
 
 Hero::Hero(int x, int y, int* map) :
     h_position(Coordinates(x,y,map))

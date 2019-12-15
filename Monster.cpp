@@ -1,10 +1,11 @@
 #include "Monster.h";
+#include <iostream>
 
 Monster::Monster(int l, int x, int y, int* map) :
 	m_position(Coordinates(x,y,map))
 {
 	m_level = l;
-	m_level = 2 + l;
+	m_hp = 2 + l;
 	m_damages = 1;
 	m_size = 1;
 	p_size = 1 + l == 5;
