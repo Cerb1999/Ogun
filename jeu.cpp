@@ -83,9 +83,7 @@ int main(int argc, char *argv[])
         } else {
             SDL_RenderCopy(ecran, fondJeu, &SrcR, &DestR);
             load(jeu, textures, ecran);
-/*
             loadProjectilesMonstersDestrutiblesCoins(jeu, textures, ecran);
-*/
         }
         while( SDL_PollEvent( &evenements ) )
 			switch(evenements.type)
@@ -165,8 +163,6 @@ int load(Game* jeu, int textures[], SDL_Renderer* ecran){
     Uint8 r = 255; Uint8 g = 255; Uint8 b = 0;
     SDL_Texture* textureTileSetV4 = charger_image_transparente("textures/game/0x72_16x16DungeonTileset.v4.bmp", ecran, r, g, b);
     SDL_Texture* textureTileSetWallsV2 = charger_image_transparente("textures/game/0x72_16x16DungeonTileset_walls.v2.bmp", ecran, r, g, b);
-    SDL_Texture* heart = charger_image_transparente("textures/2dheart/heart.bmp", ecran, r, g, b);
-    SDL_Texture* half = charger_image_transparente("textures/game/half.bmp", ecran, r, g, b);
     SDL_Texture* key = charger_image_transparente("textures/2dcoinchests/Key.bmp", ecran, r, g, b);
 
     int depth = jeu->depth();
@@ -255,9 +251,13 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
 
     SDL_Texture* textureTileSetV4 = charger_image_transparente("textures/game/0x72_16x16DungeonTileset.v4.bmp", ecran, r, g, b);
     SDL_Texture* coin = charger_image_transparente("textures/2dcoinchests/Coin.bmp", ecran, r, g, b);
+    SDL_Texture* heart = charger_image_transparente("textures/2dheart/heart.bmp", ecran, r, g, b);
+    SDL_Texture* half = charger_image_transparente("textures/2dheart/half.bmp", ecran, r, g, b);
 
     int depth = jeu->depth();
+/*
     Coordinates* hPos = jeu->getPlayer()->getCoordinates();
+*/
     vector<Destructible> destructibles = jeu->getDestructibles();
     vector<Projectile> projectiles = jeu->getProjectiles();
     vector<Coin> coins = jeu->getCoins();
@@ -266,9 +266,13 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
 
     std::vector<Projectile>::iterator it = projectiles.begin();
     while (it != projectiles.end()) {
-        SDL_Rect sProjEnnemi; sProjEnnemi.x = textures[14*8+0]; sProjEnnemi.y = textures[14*8+1]; sProjEnnemi.w = textures[14*8+2]; sProjEnnemi.h = textures[14*8+3];
-        SDL_Rect dProjEnnemi; dProjEnnemi.x = 400 + it->getCoordinates()->getX() * 30, dProjEnnemi.y = 200 + it->getCoordinates()->getY() * 30, dProjEnnemi.w = textures[14*8+6], dProjEnnemi.h = textures[14*8+6];
-        SDL_RenderCopy(ecran, textureTileSetV4, &sProjEnnemi, &dProjEnnemi);
+        int index;
+        if(it->playerProjectile()) index = 14;
+        else index = 13;
+
+        SDL_Rect sProj; sProj.x = textures[index*8+0]; sProj.y = textures[index*8+1]; sProj.w = textures[index*8+2]; sProj.h = textures[index*8+3];
+        SDL_Rect dProj; dProj.x = 400 + it->getCoordinates()->getX() * 30, dProj.y = 200 + it->getCoordinates()->getY() * 30, dProj.w = textures[index*8+6], dProj.h = textures[14*8+6];
+        SDL_RenderCopy(ecran, textureTileSetV4, &sProj, &dProj);
         it++;
     }
 
@@ -296,6 +300,19 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
         SDL_Rect dCoin; dCoin.x = 400 + ta->getCoordinates()->getX() * 30, dCoin.y = 200 + ta->getCoordinates()->getY() * 30, dCoin.w = textures[11*8+6], dCoin.h = textures[11*8+6];
         SDL_RenderCopy(ecran, coin, &sCoin, &dCoin);
         ta++;
+    }
+
+    for (int i = 1; i <= jeu->getPlayer()->hpLeft(); ++i) {
+        int coeurIndex;
+        if(i == jeu->getPlayer()->hpLeft() && i%2 == 1){
+            coeurIndex = 16;
+        }else{
+            coeurIndex = 15;
+        }
+        SDL_Rect sCoeur; sCoeur.x = textures[11*8+0]; sCoeur.y = textures[11*8+1]; sCoeur.w = textures[11*8+2]; sCoeur.h = textures[11*8+3];
+        SDL_Rect dCoeur; dCoeur.x = 400 + ta->getCoordinates()->getX() * 30, dCoeur.y = 200 + ta->getCoordinates()->getY() * 30, dCoeur.w = textures[11*8+6], dCoeur.h = textures[11*8+6];
+        if(coeurIndex == 16) SDL_RenderCopy(ecran, half, &sCoeur, &dCoeur);
+        else SDL_RenderCopy(ecran, heart, &sCoeur, &sCoeur);
     }
     return 0;
 }
