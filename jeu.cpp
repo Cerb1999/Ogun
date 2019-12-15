@@ -260,7 +260,7 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
 */
     vector<Destructible> destructibles = jeu->getDestructibles();
     vector<Projectile> projectiles = jeu->getProjectiles();
-    vector<Coin> coins = jeu->getCoins();
+    vector<Drop> drops = jeu->getDrops();
     vector<Monster> monsters = jeu->getMonsters();
 
 
@@ -294,8 +294,8 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
         at++;
     }
 
-    std::vector<Coin>::iterator ta = coins.begin();
-    while (ta != coins.end()) {
+    std::vector<Drop>::iterator ta = drops.begin();
+    while (ta != drops.end()) {
         SDL_Rect sCoin; sCoin.x = textures[11*8+0]; sCoin.y = textures[11*8+1]; sCoin.w = textures[11*8+2]; sCoin.h = textures[11*8+3];
         SDL_Rect dCoin; dCoin.x = 400 + ta->getCoordinates()->getX() * 30, dCoin.y = 200 + ta->getCoordinates()->getY() * 30, dCoin.w = textures[11*8+6], dCoin.h = textures[11*8+6];
         SDL_RenderCopy(ecran, coin, &sCoin, &dCoin);

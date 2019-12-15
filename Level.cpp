@@ -43,7 +43,7 @@ void Level::loadStage() {
 						l_crates.push_back(Destructible(c));
 						break;
 					case 8:
-						l_drop.push_back(Drop(c, false));
+						l_drop.push_back(Drop(&c, false));
 						break;
 				}
                 n++;

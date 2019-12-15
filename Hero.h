@@ -4,7 +4,7 @@
 //#include "Coordinates.h";
 #include "Projectile.h";
 
-class Game; class Level; class Boss; class Monster; class Coin;
+class Game; class Level; class Boss; class Monster; class Drop;
 
 class Hero {
 private:
