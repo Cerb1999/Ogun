@@ -11,20 +11,20 @@ private:
     int h_hp;
     int h_speed;
     int h_damages;
-    Coordinates* h_position;
+    Coordinates h_position;
     int h_focus;
 
 public:
-    Hero(Coordinates* c);
+    Hero(double x, double y, int* map);
     int hpLeft(){ return h_hp; };
     int damages();
-    Projectile* fire(int direction);
+    void fire(int direction);
     bool hit(Projectile p); // contact avec p, renvoie le bool correspondant et effectue les actions nescessaires
     bool contact(Monster m);
     void move(int direction);
     void die(int damages);
     bool alive() { return h_hp > 0; }
-    Coordinates* getCoordinates() { return h_position; }
+    Coordinates* getCoordinates() { return &h_position; }
     char* toString() { return "je suis vivant"; }
     void heal() ;
     int focus() { return h_focus; }

@@ -13,6 +13,7 @@ public:
     Coordinates(double x, double y, int* map);
     double getX() { return c_x; };
     double getY() { return c_y; };
+    int* getMap() { return g_map; };
     void setX(double x);
     void setY(double y);
     bool contact(Coordinates* c, double hitBox);

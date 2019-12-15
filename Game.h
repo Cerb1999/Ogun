@@ -2,18 +2,19 @@
 #define Game_H
 
 #include <vector>
-#include "Hero.h";
-#include "Monster.h";
-#include "Destructible.h";
-#include "Projectile.h";
-#include "Level.h";
-#include "Drop.h";
+#include "Hero.h"
+#include "Monster.h"
+#include "Destructible.h"
+#include "Projectile.h"
+#include "Level.h"
+#include "Drop.h"
 
 class Game{
 private:
 	Level floor;
-	Hero* player;
-	Coordinates* exit;
+	Hero player;
+	Boss boss;
+	Coordinates exit;
 	std::vector<Monster> monsters;
 	std::vector<Projectile> projectiles;
 	std::vector<Destructible> destructibles;
@@ -29,7 +30,7 @@ public:
 	std::vector<Projectile> getProjectiles() { return projectiles; }
 	std::vector<Destructible> getDestructibles() { return destructibles; }
 	std::vector<Drop> getDrops() { return drops; }
-	Hero* getPlayer() { return player; }
+	Hero* getPlayer() { return &player; }
 	int getScore() { return score; }
 };
 

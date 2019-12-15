@@ -8,13 +8,13 @@ class Level; class Game;
 
 class Drop {
 private: 
-  Coordinates* d_coord;
+  Coordinates d_coord;
   bool d_potion;
   
 public:
-Drop(Coordinates* c, bool potion);
+Drop(double x, double y, int* map, bool potion);
 bool pickedUp(Hero* h);
-Coordinates* getCoordinates() { return d_coord; }
+Coordinates* getCoordinates() { return &d_coord; }
 bool isAPotion() { return d_potion; }
 
 };

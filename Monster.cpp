@@ -1,6 +1,8 @@
 #include "Monster.h";
 
-Monster::Monster(int l, Coordinates* c) {
+Monster::Monster(int l, double x, double y, int* map) :
+	m_position(Coordinates(x,y,map))
+{
 	m_level = l;
 	m_level = 2 + l;
 	m_damages = 1;
@@ -9,12 +11,11 @@ Monster::Monster(int l, Coordinates* c) {
 	m_ranged = l == 3 || l == 5;
 	m_speed = 1 + (l != 1 || l != 4)*0.5;
 	m_actions = m_speed;
-	m_position = c;
 	m_id = 3;
 }
 
 bool Monster::hit(Projectile p) {
-	return m_position->contact(p.getCoordinates(), p.hitBox()+monsterSize());
+	return m_position.contact(p.getCoordinates(), p.hitBox()+monsterSize());
 }
 
 bool Monster::act() {
@@ -33,7 +34,7 @@ bool Monster::attaquer(Hero* h) {
 		refreshFocus(h);
 		res = true;
 	} else {
-		if (m_position->contact(h->getCoordinates(), monsterSize())) {
+		if (m_position.contact(h->getCoordinates(), monsterSize())) {
 			h->die(m_damages);
 		} else {
 			refreshFocus(h);
@@ -44,28 +45,28 @@ bool Monster::attaquer(Hero* h) {
 }
 
 void Monster::move() {
-	m_position->move(m_focus, m_id);
+	m_position.move(m_focus, m_id);
 }
 
 void Monster::refreshFocus(Hero* h) {
-	if ( m_position->getX() == h->getCoordinates()->getX() ) {
-			if ( m_position->getY() > h->getCoordinates()->getY() ) {
+	if ( m_position.getX() == h->getCoordinates()->getX() ) {
+			if ( m_position.getY() > h->getCoordinates()->getY() ) {
 				m_focus = 5;
 			} else {
 				m_focus = 1;
 			}
-		} else if ( m_position->getX() > h->getCoordinates()->getX() ) {
-			if ( m_position->getY() == h->getCoordinates()->getY() ) {
+		} else if ( m_position.getX() > h->getCoordinates()->getX() ) {
+			if ( m_position.getY() == h->getCoordinates()->getY() ) {
 				m_focus = 7;
-			} else if ( m_position->getY() > h->getCoordinates()->getY() ) {
+			} else if ( m_position.getY() > h->getCoordinates()->getY() ) {
 				m_focus = 6;
 			} else {
 				m_focus = 8;
 			}
 		} else {
-			if ( m_position->getY() == h->getCoordinates()->getY() ) {
+			if ( m_position.getY() == h->getCoordinates()->getY() ) {
 				m_focus = 3;
-			} else if ( m_position->getY() > h->getCoordinates()->getY() ) {
+			} else if ( m_position.getY() > h->getCoordinates()->getY() ) {
 				m_focus = 4;
 			} else {
 				m_focus = 2;
@@ -73,7 +74,7 @@ void Monster::refreshFocus(Hero* h) {
 		}
 }
 
-Boss::Boss(int l, Coordinates* c) : Monster(l,c) {
+Boss::Boss(int l, double x, double y, int* map) : Monster(l,x,y,map) {
 	m_level = l;
 	m_hp = 10 + 2*l;
 	m_damages = 2.;
@@ -81,6 +82,6 @@ Boss::Boss(int l, Coordinates* c) : Monster(l,c) {
 	m_size = 2;
 	p_size = 1 + l == 5;
 	m_speed = 1 + (l != 1 || l != 4)*0.5;
-	m_position = c;
+	m_position = Coordinates(x,y,map);
 	m_id = 4;
 }
