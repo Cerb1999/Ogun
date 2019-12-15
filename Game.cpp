@@ -45,7 +45,6 @@ bool Game::play(int moveDirection, int fireDirection) {
 			int x = player.getCoordinates()->getX(); int y = player.getCoordinates()->getY();
 			projectiles.push_back(Projectile(true,player.focus(),1.,player.damages(),x,y, floor.getMap()));
 		}
-
 		vector<Drop>::iterator fi = drops.begin();
 		while (fi != drops.end() ) {
 			if (fi->pickedUp(&player)) {
