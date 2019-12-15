@@ -13,162 +13,150 @@
 
 using namespace std;
 
-int main(int argc, char *argv[]) {
-    int textures[19 * 8];
+int main(int argc, char *argv[])
+{
+	int textures[19*8];
 
-    ifstream infile("textures/texture_coordinates.txt");
-
-    int i = -1;
-    int j = -1;
-    while (infile) {
+	ifstream infile("textures/texture_coordinates.txt");
+	
+	int i = -1; int j = -1;
+	while(infile){
         j = -1;
-        string s;
-        if (!getline(infile, s)) break;
-        i++;
-        istringstream ss(s);
-
-        while (ss) {
-            j++;
-            if (i == 19) i = -1;
-            string s;
-            if (!getline(ss, s, ','))break;
+		string s;
+		if(!getline(infile, s)) break;
+		i++;
+		istringstream ss(s);
+		 	
+		while(ss){
+			j++;
+			if(i == 19) i = -1;
+			string s;
+			if(!getline(ss,s,','))break;
             long val;
             istringstream(s) >> val;
-            textures[i * 8 + j] = val;
-        }
-    }
+			textures[i*8+j] = val;
+		}
+	}
+	 
 
-
-    SDL_Window *fenetre;
+    SDL_Window* fenetre;
     SDL_Event evenements;
-    SDL_Renderer *ecran;
+    SDL_Renderer* ecran;
     bool terminer = false;
 
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        printf("Erreur d’initialisation de la SDL: %s", SDL_GetError());
+    if(SDL_Init(SDL_INIT_VIDEO) < 0)
+    {
+        printf("Erreur d’initialisation de la SDL: %s",SDL_GetError());
         SDL_Quit();
         return EXIT_FAILURE;
     }
 
-    fenetre = SDL_CreateWindow("Ogun", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080,
-                               SDL_WINDOW_RESIZABLE);
-    if (fenetre == NULL) {
-        printf("Erreur de la creation d’une fenetre: %s", SDL_GetError());
+    fenetre = SDL_CreateWindow("Ogun", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080, SDL_WINDOW_RESIZABLE);
+    if(fenetre == NULL)
+    {
+        printf("Erreur de la creation d’une fenetre: %s",SDL_GetError());
         SDL_Quit();
         return EXIT_FAILURE;
     }
 
     ecran = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
 
-    SDL_Texture *fondMenu = charger_image("textures/background/ogun-background-menu.bmp", ecran);
-    SDL_Texture *fondJeu = charger_image("textures/background/background-menu.bmp", ecran);
+    SDL_Texture* fondMenu = charger_image("textures/background/ogun-background-menu.bmp", ecran);
+    SDL_Texture* fondJeu = charger_image("textures/background/background-menu.bmp", ecran);
 
     Uint8 r = 255; Uint8 g = 255; Uint8 b = 0;
     SDL_Rect SrcR;
     SrcR.x = 0; SrcR.y = 0; SrcR.w = 1920; SrcR.h = 1080;
-    SDL_Rect DestR; DestR.x = 0;DestR.y = 0;DestR.w = 1920; DestR.h = 1080;
+    SDL_Rect DestR;
+    DestR.x = 0; DestR.y = 0; DestR.w = 1920; DestR.h = 1080;
 
+ 
 
     bool run = false;
-    Game *jeu;
+    Game* jeu;
 
-    int data = 101;
-    SDL_Thread *threadID = SDL_CreateThread(threadFunction, "LazyThread", (void *) data);
-
-    while (!terminer) {
-        SDL_RenderClear(ecran);
-
-        SDL_PollEvent(&evenements);
-            switch (evenements.type) {
-                case SDL_QUIT:
-                    terminer = true;
-                    break;
-                case SDL_KEYDOWN:
-                    switch (evenements.key.keysym.sym) {
-                        case SDLK_ESCAPE: {
-                            SDL_DestroyRenderer(ecran);
-                            SDL_DestroyWindow(fenetre);
-                            SDL_Quit();
-                            terminer = true;
-                            break;
-                        }
-                        case SDLK_SPACE: {
-                            printf("ca fait ca x fois");
-                            if (run == false) { run = true; }
-/*                        Game g = Game(1);
-                        jeu = &g;*/
-                            //loadMap(jeu->depth(), jeu->level().getMap(), textures, ecran, fenetre);
-
-                            break;
-                        }
-                        case SDLK_z: {
-                            printf("heyy");
-                            if (run) {
-                                terminer = !jeu->play(1, 0);
-                            }
-                            break;
-                        }
-                        case SDLK_s: {
-                            if (run) {
-                                terminer = !jeu->play(5, 0);
-                            }
-                            break;
-                        }
-                        case SDLK_q: {
-                            if (run) {
-                                terminer = !jeu->play(7, 0);
-                            }
-                            break;
-                        }
-                        case SDLK_d: {
-                            if (run) {
-                                terminer = !jeu->play(3, 0);
-                            }
-                            break;
-                        }
-                        case SDLK_UP: {
-                            if (run) {
-                                terminer = !jeu->play(0, 1);
-                            }
-                            break;
-                        }
-                        case SDLK_DOWN: {
-                            if (run) {
-                                terminer = !jeu->play(0, 5);
-                            }
-                            break;
-                        }
-                        case SDLK_LEFT: {
-                            if (run) {
-                                terminer = !jeu->play(0, 7);
-                            }
-                            break;
-                        }
-                        case SDLK_RIGHT: {
-                            if (run) {
-                                terminer = !jeu->play(0, 3);
-                            }
-                            break;
-                        }
-                        default:
-                            break;
-                    }
-            }
+    while(!terminer)
+    {
         SDL_RenderClear(ecran);
         if (!run) {
             SDL_RenderCopy(ecran, fondMenu, &SrcR, &DestR);
         } else {
             SDL_RenderCopy(ecran, fondJeu, &SrcR, &DestR);
             load(jeu, textures, ecran);
+            loadProjectilesMonstersDestrutiblesCoins(jeu, textures, ecran);
 
-            //loadProjectilesMonstersDestrutiblesCoins(jeu, textures, ecran);
         }
+        while( SDL_PollEvent( &evenements ) )
+			switch(evenements.type)
+			{
+				case SDL_QUIT:
+					terminer = true; break;
+				case SDL_KEYDOWN:
+					switch(evenements.key.keysym.sym){
+				        case SDLK_ESCAPE: {
+                            SDL_DestroyRenderer(ecran);
+                            SDL_DestroyWindow(fenetre);
+                            SDL_Quit();
+                            terminer = true;
+                            break;
+                        }
+				        case SDLK_SPACE: {
+                            if(run) break;
+                            if (run == false) run = true;
+                            Game g = Game(1);
+                            jeu = &g;
+                            //loadMap(jeu->depth(), jeu->level().getMap(), textures, ecran, fenetre);
+                            break;
+                        }
+                        case SDLK_z: {
+                            if (!run) break;
+                            terminer = !jeu->play(1, 0);
+                            break;
+                        }
+                        case SDLK_s: {
+                            if (!run) break;
+                            terminer = !jeu->play(5, 0);
+                            break;
+                        }
+                        case SDLK_q: {
+                            if (!run) break;
+                            terminer = !jeu->play(7, 0);
+                            break;
+                        }
+                        case SDLK_d: {
+                            if (!run) break;
+                            terminer = !jeu->play(3, 0);
+                            break;
+                        }
+                        case SDLK_UP: {
+                            if (!run) break;
+                            terminer = !jeu->play(0, 1);
+                            break;
+                        }
+                        case SDLK_DOWN: {
+                            if (!run) break;
+                            terminer = !jeu->play(0, 5);
+                            break;
+                        }
+                        case SDLK_LEFT: {
+                            if (!run) break;
+                            terminer = !jeu->play(0, 7);
+                            break;
+                        }
+                        case SDLK_RIGHT: {
+                            if (!run) break;
+                            terminer = !jeu->play(0, 3);
+                            break;
+                        }
+					}
+            }
         SDL_RenderPresent(ecran);
+        SDL_Delay(200);
     }
-    SDL_WaitThread( threadID, NULL );
-/*    SDL_DestroyRenderer(ecran);
+
+    SDL_DestroyRenderer(ecran);
     SDL_DestroyWindow(fenetre);
-    SDL_Quit();*/
+    SDL_Quit();
     return 0;
 }
 
@@ -275,14 +263,14 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
     vector<Drop> drops = jeu->getDrops();
     vector<Monster> monsters = jeu->getMonsters();
 
-/*    Coordinates* hPos = jeu->getPlayer()->getCoordinates();
+    Coordinates* hPos = jeu->getPlayer()->getCoordinates();
 
     double heroAngle;
     if(jeu->getPlayer()->focus() == 7) heroAngle = 180;
     else heroAngle = 0;
     SDL_Rect sHero; sHero.x = textures[18*8+0]; sHero.y = textures[18*8+1]; sHero.w = textures[18*8+2]; sHero.h = textures[18*8+3];
     SDL_Rect dHero; dHero.x = 400 + jeu->getPlayer()->getCoordinates()->getX() * 30, dHero.y = 200 + jeu->getPlayer()->getCoordinates()->getY() * 30, dHero.w = textures[18*8+6], dHero.h = textures[18*8+6];
-    SDL_RenderCopyEx(ecran, textureTileSetV4, &sHero, &dHero, heroAngle, NULL, SDL_FLIP_NONE);*/
+    SDL_RenderCopyEx(ecran, textureTileSetV4, &sHero, &dHero, heroAngle, NULL, SDL_FLIP_NONE);
 
     std::vector<Projectile>::iterator it = projectiles.begin();
     while (it != projectiles.end()) {
@@ -366,9 +354,11 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
         int dropIndex;
         if(ta->isAPotion()) dropIndex = 17;
         else dropIndex = 11;
+        cout << ta->getCoordinates()->getX() << ",    ";
         SDL_Rect sDrop; sDrop.x = textures[dropIndex*8+0]; sDrop.y = textures[dropIndex*8+1]; sDrop.w = textures[dropIndex*8+2]; sDrop.h = textures[dropIndex*8+3];
         SDL_Rect dDrop; dDrop.x = 400 + ta->getCoordinates()->getX() * 30, dDrop.y = 200 + ta->getCoordinates()->getY() * 30, dDrop.w = textures[dropIndex*8+6], dDrop.h = textures[dropIndex*8+6];
-        SDL_RenderCopy(ecran, coin, &sDrop, &dDrop);
+        if(dropIndex == 11) SDL_RenderCopy(ecran, coin, &sDrop, &dDrop);
+        else SDL_RenderCopy(ecran, textureTileSetV4, &sDrop, &dDrop);
         ta++;
     }
 
@@ -380,17 +370,9 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
             coeurIndex = 15;
         }
         SDL_Rect sCoeur; sCoeur.x = textures[coeurIndex*8+0]; sCoeur.y = textures[coeurIndex*8+1]; sCoeur.w = textures[coeurIndex*8+2]; sCoeur.h = textures[coeurIndex*8+3];
-        SDL_Rect dCoeur; dCoeur.x = 400 + ta->getCoordinates()->getX() * 30, dCoeur.y = 200 + ta->getCoordinates()->getY() * 30, dCoeur.w = textures[coeurIndex*8+6], dCoeur.h = textures[coeurIndex*8+6];
+        SDL_Rect dCoeur; dCoeur.x = 100 * i + ta->getCoordinates()->getX() * 100, dCoeur.y = 75, dCoeur.w = textures[coeurIndex*8+6] / 1.5, dCoeur.h = textures[coeurIndex*8+6] / 1.5;
         if(coeurIndex == 16) SDL_RenderCopy(ecran, half, &sCoeur, &dCoeur);
-        else SDL_RenderCopy(ecran, heart, &sCoeur, &sCoeur);
+        else SDL_RenderCopy(ecran, heart, &sCoeur, &dCoeur);
     }
-    return 0;
-}
-
-int threadFunction( void* data )
-{
-    //Print incoming data
-    printf( "Running thread with value = %d\n", (int)data );
-
     return 0;
 }
