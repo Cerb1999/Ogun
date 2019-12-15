@@ -109,42 +109,42 @@ int main(int argc, char *argv[])
                         }
                         case SDLK_z: {
                             if (!run) break;
-                            jeu->play(1, 0);
+                            terminer = !jeu->play(1, 0);
                             break;
                         }
                         case SDLK_s: {
                             if (!run) break;
-                            jeu->play(5, 0);
+                            terminer = !jeu->play(5, 0);
                             break;
                         }
                         case SDLK_q: {
                             if (!run) break;
-                            jeu->play(7, 0);
+                            terminer = !jeu->play(7, 0);
                             break;
                         }
                         case SDLK_d: {
                             if (!run) break;
-                            jeu->play(3, 0);
+                            terminer = !jeu->play(3, 0);
                             break;
                         }
                         case SDLK_UP: {
                             if (!run) break;
-                            jeu->play(0, 1);
+                            terminer = !jeu->play(0, 1);
                             break;
                         }
                         case SDLK_DOWN: {
                             if (!run) break;
-                            jeu->play(0, 5);
+                            terminer = !jeu->play(0, 5);
                             break;
                         }
                         case SDLK_LEFT: {
                             if (!run) break;
-                            jeu->play(0, 7);
+                            terminer = !jeu->play(0, 7);
                             break;
                         }
                         case SDLK_RIGHT: {
                             if (!run) break;
-                            jeu->play(0, 3);
+                            terminer = !jeu->play(0, 3);
                             break;
                         }
 					}

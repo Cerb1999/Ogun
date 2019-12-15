@@ -12,6 +12,7 @@ private:
     int h_speed;
     int h_damages;
     Coordinates* h_position;
+    int h_focus;
 
 public:
     Hero(Coordinates* c);
@@ -26,6 +27,7 @@ public:
     Coordinates* getCoordinates() { return h_position; }
     char* toString() { return "je suis vivant"; }
     void heal() ;
+    int focus() { return h_focus; }
 };
 
 #endif
