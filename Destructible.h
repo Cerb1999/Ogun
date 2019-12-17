@@ -11,7 +11,7 @@ private:
   Coordinates d_coord;
   
 public:
-Destructible(int x, int y, int* map);
+Destructible(short x, short y, short* map);
 bool hit(Projectile p);
 Coordinates* getCoordinates() { return &d_coord; } 
 

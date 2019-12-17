@@ -1,28 +1,28 @@
 #include <iostream>
 #include "Coordinates.h"
 
-Coordinates::Coordinates(int x, int y, int* map) {
+Coordinates::Coordinates(short x, short y, short* map) {
     c_x = x;
     c_y = y;
     g_map = map;
 }
 
-void Coordinates::setX(int x) {
+void Coordinates::setX(short x) {
     c_x = x;
 }
 
-void Coordinates::setY(int y) {
+void Coordinates::setY(short y) {
     c_y = y;
 }
 
 
-bool Coordinates::contact(Coordinates* c, int hitBox) {
+bool Coordinates::contact(Coordinates* c, short hitBox) {
     return (c_x >= c->getX()-hitBox && c_x <= c->getX()+hitBox && c_y >= c->getY()-hitBox && c_y <= c->getY()+hitBox);
 }
 
-bool Coordinates::move(int direction, int id) {
+bool Coordinates::move(short direction, short id) {
 	bool res = false;
-	int x = 0; int y = 0;
+	short x = 0; short y = 0;
 	switch (direction) {
 		case 1:
 			y = 1;
@@ -53,8 +53,8 @@ bool Coordinates::move(int direction, int id) {
 			y = 1;
 			break;
 	}
-  int nextX = c_x + x; int nextY = c_y + y;
-  int destTile = g_map[nextX*52+nextY];
+  short nextX = c_x + x; short nextY = c_y + y;
+  short destTile = g_map[nextX*52+nextY];
   if ( destTile == 1 || (destTile >= 6 && destTile < 10) ) {
 			if (id == 3 || id == 4) {
 				g_map[nextX*52+nextY] = id;
@@ -73,8 +73,8 @@ bool Coordinates::move(int direction, int id) {
   return res;
 }
 
-bool Coordinates::murred(int d) {
-	int x = 0; int y = 0;
+bool Coordinates::murred(short d) {
+	short x = 0; short y = 0;
 	switch (d) {
 		case 1:
 			y = 1;
@@ -105,7 +105,7 @@ bool Coordinates::murred(int d) {
 			y = 1;
 			break;
 	}
-	int nextX = c_x + x; int nextY = c_y + y;
-	int destTile = g_map[nextX*52+nextY];
+	short nextX = c_x + x; short nextY = c_y + y;
+	short destTile = g_map[nextX*52+nextY];
 	return (destTile == 1);
 }

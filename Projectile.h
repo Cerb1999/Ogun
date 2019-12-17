@@ -8,18 +8,18 @@
 class Projectile {
 private:
     Coordinates p_position;
-    int p_damages;
+    short p_damages;
     bool p_players; //evitons le suicide et de pouvoir nous faire mal avec nos propres projectiles
-    int p_direction; //le tir se déplace vers un point cardinal {N, NE, E, SE, S, SW, W, NW}
-    int p_hitbox;
+    short p_direction; //le tir se déplace vers un poshort cardinal {N, NE, E, SE, S, SW, W, NW}
+    short p_hitbox;
 
 public:
-    Projectile(bool players, int direction, int size, int damages, int x, int y, int* map);
+    Projectile(bool players, short direction, short size, short damages, short x, short y, short* map);
     Coordinates* getCoordinates() { return &p_position; }
-    int damages() { return p_damages; }
+    short damages() { return p_damages; }
     bool playerProjectile() { return p_players; }
-    int getDirection() { return p_direction; }
-    int hitBox() { return p_hitbox; }
+    short getDirection() { return p_direction; }
+    short hitBox() { return p_hitbox; }
     void move();
     bool murred() { return p_position.murred(p_direction); }
 };

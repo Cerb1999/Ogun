@@ -1,6 +1,6 @@
 #include "Monster.h";
 
-Monster::Monster(int l, int x, int y, int* map) :
+Monster::Monster(short l, short x, short y, short* map) :
 	m_position(Coordinates(x,y,map))
 {
 	m_level = l;
@@ -74,14 +74,12 @@ void Monster::refreshFocus(Hero* h) {
 		}
 }
 
-Boss::Boss(int l, int x, int y, int* map) : Monster(l,x,y,map) {
-	m_level = l;
+Boss::Boss(short l, short x, short y, short* map) : Monster(l,x,y,map) {
 	m_hp = 10 + 2*l;
 	m_damages = 2;
 	m_ranged = l == 3 || l == 4;
 	m_size = 2;
 	p_size = 1 + l == 5;
 	m_speed = 1 + (l != 1 || l != 4) + 1;
-	m_position = Coordinates(x,y,map);
 	m_id = 4;
 }

@@ -9,10 +9,10 @@
 
 using namespace std;
 
-Level::Level(int d) {
+Level::Level(short d) {
     l_cleared = false;
     l_depth = d;
-    l_map = new int[25*52];
+    l_map = new short[25*52];
 	loadStage();
 	SetHero();
 }
@@ -26,17 +26,17 @@ void Level::loadStage() {
 
     FILE* pFile;
     char c;
-    int n = 0, j = 0;
+    short n = 0, j = 0;
     pFile = fopen(filename.c_str(),"r");
     if(pFile != NULL){
         do{
             c = fgetc(pFile);
-			int val = (c- '0');
+			short val = (c - '0');
 
-            if (c != '\n'){
+            if (c != '\n' && c != EOF){
                 l_map[n] = val;
-				int x = n%52;
-				int y = n/52;
+				short x = n%52;
+				short y = n/52;
 				switch (val) {
 					case 3:
 						l_monsters.push_back(Monster(l_depth, x, y, l_map));

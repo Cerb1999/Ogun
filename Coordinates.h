@@ -5,20 +5,20 @@ class Boss; class Hero; class Destructible; class Projectile; class Game;
 
 class Coordinates {
 private:
-    int c_x;
-    int c_y;
-    int* g_map;
+    short c_x;
+    short c_y;
+    short* g_map;
 
 public:
-    Coordinates(int x, int y, int* map);
-    int getX() { return c_x; };
-    int getY() { return c_y; };
-    int* getMap() { return g_map; };
-    void setX(int x);
-    void setY(int y);
-    bool contact(Coordinates* c, int hitBox);
-    bool move(int direction, int id);
-    bool murred(int d);
+    Coordinates(short x, short y, short* map);
+    short getX() { return c_x; };
+    short getY() { return c_y; };
+    short* getMap() { return g_map; };
+    void setX(short x);
+    void setY(short y);
+    bool contact(Coordinates* c, short hitBox);
+    bool move(short direction, short id);
+    bool murred(short d);
 };
 
 #endif

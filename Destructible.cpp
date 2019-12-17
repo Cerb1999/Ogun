@@ -1,6 +1,6 @@
 #include "Destructible.h";
 
-Destructible::Destructible(int x, int y, int* map) : d_coord(Coordinates(x,y,map)) {}
+Destructible::Destructible(short x, short y, short* map) : d_coord(Coordinates(x,y,map)) {}
 
 bool Destructible::hit(Projectile p) {
 	bool res = false;

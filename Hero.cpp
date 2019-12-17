@@ -1,7 +1,7 @@
 #include "Hero.h"
 #include <stdlib.h>
 
-Hero::Hero(int x, int y, int* map) :
+Hero::Hero(short x, short y, short* map) :
     h_position(Coordinates(x,y,map))
 {
     h_hp = 6;
@@ -10,7 +10,7 @@ Hero::Hero(int x, int y, int* map) :
     h_focus = 3;
 }
 
-int Hero::damages() {
+short Hero::damages() {
     return h_damages;
 }
 
@@ -18,7 +18,7 @@ bool Hero::hit(Projectile p) {
     return h_position.contact(p.getCoordinates(), p.hitBox());
 }
 
-void Hero::move(int d) {
+void Hero::move(short d) {
 	if ( d > 0 && d < 9) {
         h_focus = d;
         if (h_position.move(d, 1)) {
@@ -27,11 +27,11 @@ void Hero::move(int d) {
 	}
 }
 
-void Hero::die(int damages) {
+void Hero::die(short damages) {
     h_hp -= damages;
 }
 
-void Hero::fire(int direction) {
+void Hero::fire(short direction) {
     h_focus = direction;
 }
 

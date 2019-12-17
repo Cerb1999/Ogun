@@ -8,26 +8,26 @@ class Game; class Level; class Boss; class Monster; class Drop;
 
 class Hero {
 private:
-    int h_hp;
-    int h_speed;
-    int h_damages;
+    short h_hp;
+    short h_speed;
+    short h_damages;
     Coordinates h_position;
-    int h_focus;
+    short h_focus;
 
 public:
-    Hero(int x, int y, int* map);
-    int hpLeft(){ return h_hp; };
-    int damages();
-    void fire(int direction);
+    Hero(short x, short y, short* map);
+    short hpLeft(){ return h_hp; };
+    short damages();
+    void fire(short direction);
     bool hit(Projectile p); // contact avec p, renvoie le bool correspondant et effectue les actions nescessaires
     bool contact(Monster m);
-    void move(int direction);
-    void die(int damages);
+    void move(short direction);
+    void die(short damages);
     bool alive() { return h_hp > 0; }
     Coordinates* getCoordinates() { return &h_position; }
     char* toString() { return "je suis vivant"; }
     void heal() ;
-    int focus() { return h_focus; }
+    short focus() { return h_focus; }
 };
 
 #endif

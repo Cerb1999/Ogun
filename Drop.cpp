@@ -1,6 +1,6 @@
 #include "Drop.h";
 
-Drop::Drop(int x, int y, int* map, bool potion):
+Drop::Drop(short x, short y, short* map, bool potion):
 	d_coord(Coordinates(x,y,map))
 {
 	d_potion = potion;
