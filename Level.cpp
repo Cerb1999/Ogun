@@ -6,11 +6,12 @@
 #include <sstream>
 #include <string>
 #include "Level.h"
+#include <windows.h>
 
 using namespace std;
 
 Level::Level(int d) {
-    l_cleared = false;
+	l_cleared = false;
     l_depth = d;
     l_map = new int[25*52];
 	loadStage();
@@ -18,7 +19,7 @@ Level::Level(int d) {
 }
 
 void Level::loadStage() {
-    ostringstream oss;
+	ostringstream oss;
     stringstream str;
     oss << "maps/stage" << l_depth << ".txt";
 
@@ -33,8 +34,8 @@ void Level::loadStage() {
             c = fgetc(pFile);
 			int val = (c- '0');
 
-            if (c != '\n'){
-                l_map[n] = val;
+            if (c != '\n' && c != EOF){
+				l_map[n] = val;
 				int x = n%52;
 				int y = n/52;
 				switch (val) {

@@ -11,9 +11,9 @@ private:
 
 public:
     Coordinates(int x, int y, int* map);
-    int getX() { return c_x; };
-    int getY() { return c_y; };
     int* getMap() { return g_map; };
+    int getX() { return c_x; };
+    int getY() { ;return c_y; };
     void setX(int x);
     void setY(int y);
     bool contact(Coordinates* c, int hitBox);

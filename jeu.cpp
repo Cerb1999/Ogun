@@ -85,6 +85,7 @@ int main(int argc, char *argv[])
             SDL_RenderCopy(ecran, fondMenu, &SrcR, &DestR);
         } else {
             SDL_RenderCopy(ecran, fondJeu, &SrcR, &DestR);
+
             load(jeu, textures, ecran, textureTileSetV4, textureTileSetWallsV2, key);
             loadProjectilesMonstersDestrutiblesCoins(jeu, textures, ecran, textureTileSetV4, coin, heart, half);
         }
@@ -297,40 +298,6 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
         it = next(it);
     }
 
-    std::vector<Monster>::iterator ti = monsters.begin();
-    while (ti != monsters.end()) {
-        double angle;
-        int size = 1;
-        switch(ti->focus()){
-            case 1: break;
-            case 2:
-                angle = 45.0;
-                break;
-            case 3: break;
-            case 4:
-                angle = - 45.0;
-                break;
-            case 5:
-                angle = - 90.0;
-                break;
-            case 6:
-                angle = - 135.0;
-                break;
-            case 7:
-                angle = - 180.0;
-                break;
-            case 8:
-                angle = - 225.0;
-                break;
-        }
-
-        if(ti->monsterSize() == 2) size = 1.5;
-        SDL_Rect sMoBoss; sMoBoss.x = textures[(depth+1)*8+0]; sMoBoss.y = textures[(depth+1)*8+1]; sMoBoss.w = textures[(depth+1)*8+2]; sMoBoss.h = textures[(depth+1)*8+3];
-        SDL_Rect dMoBoss; dMoBoss.x = 400 + ti->getCoordinates()->getX() * size * 30, dMoBoss.y = 198 + ti->getCoordinates()->getY() * 30, dMoBoss.w = textures[(depth+1)*8+6] * size, dMoBoss.h = textures[(depth+1)*8+6] * size;
-        SDL_RenderCopyEx(ecran, textureTileSetV4, &sMoBoss, &dMoBoss, angle, NULL, SDL_FLIP_NONE);
-        ti = next(ti);
-    }
-
     std::vector<Destructible>::iterator at = destructibles.begin();
     while (at != destructibles.end()) {
         SDL_Rect sDestructible; sDestructible.x = textures[7*8+0]; sDestructible.y = textures[7*8+1]; sDestructible.w = textures[7*8+2]; sDestructible.h = textures[7*8+3];
@@ -365,5 +332,41 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
             else SDL_RenderCopy(ecran, heart, &sCoeur, &dCoeur);
         }
     }
+
+    std::vector<Monster>::iterator ti = monsters.begin();
+    while (ti != monsters.end()) {
+        double angle;
+        int size = 1;
+        switch(ti->focus()){
+            case 1: break;
+            case 2:
+                angle = 45.0;
+                break;
+            case 3: break;
+            case 4:
+                angle = - 45.0;
+                break;
+            case 5:
+                angle = - 90.0;
+                break;
+            case 6:
+                angle = - 135.0;
+                break;
+            case 7:
+                angle = - 180.0;
+                break;
+            case 8:
+                angle = - 225.0;
+                break;
+        }
+
+
+        if(ti->monsterSize() == 2) size = 1.5;
+        SDL_Rect sMoBoss; sMoBoss.x = textures[(depth+1)*8+0]; sMoBoss.y = textures[(depth+1)*8+1]; sMoBoss.w = textures[(depth+1)*8+2]; sMoBoss.h = textures[(depth+1)*8+3];
+        SDL_Rect dMoBoss; dMoBoss.x = 400 + ti->getCoordinates()->getX() * size * 30, dMoBoss.y = 198 + ti->getCoordinates()->getY() * 30, dMoBoss.w = textures[(depth+1)*8+6] * size, dMoBoss.h = textures[(depth+1)*8+6] * size;
+        SDL_RenderCopyEx(ecran, textureTileSetV4, &sMoBoss, &dMoBoss, angle, NULL, SDL_FLIP_NONE);
+        ti = next(ti);
+    }
+
     return 0;
 }

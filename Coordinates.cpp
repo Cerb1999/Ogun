@@ -12,9 +12,8 @@ void Coordinates::setX(int x) {
 }
 
 void Coordinates::setY(int y) {
-    c_y = y;
+	c_y = y;
 }
-
 
 bool Coordinates::contact(Coordinates* c, int hitBox) {
     return (c_x >= c->getX()-hitBox && c_x <= c->getX()+hitBox && c_y >= c->getY()-hitBox && c_y <= c->getY()+hitBox);
