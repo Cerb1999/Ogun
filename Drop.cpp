@@ -1,10 +1,8 @@
 #include "Drop.h";
 
 Drop::Drop(short x, short y, short* map, bool potion):
-	d_coord(Coordinates(x,y,map))
-{
-	d_potion = potion;
-}
+	d_coord(Coordinates(x,y,map)), d_potion(potion)
+{}
 
 bool Drop::pickedUp(Hero* h) {
 	bool res = false;

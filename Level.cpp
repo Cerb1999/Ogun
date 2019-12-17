@@ -9,12 +9,10 @@
 
 using namespace std;
 
-Level::Level(short d) {
-    l_cleared = false;
-    l_depth = d;
-    l_map = new short[25*52];
-	loadStage();
-	SetHero();
+Level::Level(short d) : l_cleared(false), l_depth(d), l_map(new short[25*52])
+{
+	this->loadStage();
+	this->SetHero();
 }
 
 void Level::loadStage() {

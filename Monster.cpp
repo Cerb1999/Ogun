@@ -1,18 +1,8 @@
 #include "Monster.h";
 
 Monster::Monster(short l, short x, short y, short* map) :
-	m_position(Coordinates(x,y,map))
-{
-	m_level = l;
-	m_hp = 2 + l;
-	m_damages = 1;
-	m_size = 1;
-	p_size = 1 + l == 5;
-	m_ranged = l == 3 || l == 5;
-	m_speed = 1 + (l != 1 || l != 4);
-	m_actions = m_speed;
-	m_id = 3;
-}
+	m_position(Coordinates(x,y,map)), m_level(l), m_hp(2+l), m_damages(1), m_size(1), p_size(1 + l == 5), m_ranged(l == 3 || l == 5), m_speed(1 + (l != 1 || l != 4)), m_actions(0), m_id(3)
+{}
 
 bool Monster::hit(Projectile p) {
 	return m_position.contact(p.getCoordinates(), p.hitBox()+monsterSize());
@@ -75,11 +65,10 @@ void Monster::refreshFocus(Hero* h) {
 }
 
 Boss::Boss(short l, short x, short y, short* map) : Monster(l,x,y,map) {
-	m_hp = 10 + 2*l;
-	m_damages = 2;
-	m_ranged = l == 3 || l == 4;
-	m_size = 2;
-	p_size = 1 + l == 5;
-	m_speed = 1 + (l != 1 || l != 4) + 1;
-	m_id = 4;
+	this->m_hp = 10 + 2*l;
+	this->m_damages = 2;
+	this->m_size = 2;
+	this->p_size = 1 + l == 5;
+	this->m_speed = 2 + (l != 1 || l != 4);
+	this->m_id = 4;
 }

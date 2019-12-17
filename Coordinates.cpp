@@ -1,18 +1,15 @@
 #include <iostream>
 #include "Coordinates.h"
 
-Coordinates::Coordinates(short x, short y, short* map) {
-    c_x = x;
-    c_y = y;
-    g_map = map;
-}
+Coordinates::Coordinates(short x, short y, short* map) : c_x(x), c_y(y), g_map(map)
+{}
 
 void Coordinates::setX(short x) {
-    c_x = x;
+    this->c_x = x;
 }
 
 void Coordinates::setY(short y) {
-    c_y = y;
+    this->c_y = y;
 }
 
 

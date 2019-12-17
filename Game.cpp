@@ -7,13 +7,12 @@
 using namespace std; 
 
 Game::Game(short startLevel): 
-	floor(Level(startLevel)), player(Hero(floor.HeroX(), floor.HeroY(), floor.getMap())), boss(Boss(startLevel, floor.BossX(), floor.BossY(), floor.getMap())), exit(Coordinates(floor.ExitX(), floor.ExitY(), floor.getMap()))
+	floor(Level(startLevel)), player(Hero(floor.HeroX(), floor.HeroY(), floor.getMap())), boss(Boss(startLevel, floor.BossX(), floor.BossY(), floor.getMap())), exit(Coordinates(floor.ExitX(), floor.ExitY(), floor.getMap())), score(0)
 {
-	score = 0;
-	monsters = floor.getMonsters();
-	monsters.push_back(boss);
-	destructibles = floor.getDestructibles();
-	drops = floor.getDrops();
+	this->monsters = floor.getMonsters();
+	this->monsters.push_back(boss);
+	this->destructibles = floor.getDestructibles();
+	this->drops = floor.getDrops();
 }
 
 bool Game::play(short moveDirection, short fireDirection) {
