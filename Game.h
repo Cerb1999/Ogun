@@ -19,19 +19,19 @@ private:
 	std::vector<Projectile> projectiles;
 	std::vector<Destructible> destructibles;
 	std::vector<Drop> drops;
-	int score;
+	short score;
 
 public:
-	Game(int startLevel);
-	bool play(int movementDirection, int fireDirection);
-	int depth() { return floor.getDepth(); }
+	Game(short startLevel);
+	bool play(short movementDirection, short fireDirection);
+	short depth() { return floor.getDepth(); }
 	Level level() { return floor; };
 	std::vector<Monster> getMonsters() { return monsters; }
 	std::vector<Projectile> getProjectiles() { return projectiles; }
 	std::vector<Destructible> getDestructibles() { return destructibles; }
 	std::vector<Drop> getDrops() { return drops; }
 	Hero* getPlayer() { return &player; }
-	int getScore() { return score; }
+	short getScore() { return score; }
 };
 
 #endif

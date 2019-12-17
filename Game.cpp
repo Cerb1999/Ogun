@@ -6,23 +6,25 @@
 
 using namespace std; 
 
-Game::Game(int startLevel): 
-	floor(Level(startLevel)), player(Hero(floor.HeroX(), floor.HeroY(), floor.getMap())), boss(Boss(startLevel, floor.BossX(), floor.BossY(), floor.getMap())), exit(Coordinates(floor.ExitX(), floor.ExitY(), floor.getMap()))
+Game::Game(short startLevel): 
+	floor(Level(startLevel)), player(Hero(floor.HeroX(), floor.HeroY(), floor.getMap())), boss(Boss(startLevel, floor.BossX(), floor.BossY(), floor.getMap())), exit(Coordinates(floor.ExitX(), floor.ExitY(), floor.getMap())), score(0)
 {
-	score = 0;
-	monsters = floor.getMonsters();
-	monsters.push_back(boss);
-	destructibles = floor.getDestructibles();
-	drops = floor.getDrops();
+	this->monsters = floor.getMonsters();
+	this->monsters.push_back(boss);
+	this->destructibles = floor.getDestructibles();
+	this->drops = floor.getDrops();
 }
 
-bool Game::play(int moveDirection, int fireDirection) {
+bool Game::play(short moveDirection, short fireDirection) {
+	cout << "play start\n"; 
 	bool res = true;
 	if (floor.isCleared() && player.getCoordinates()->contact(&exit,0.) ) {
+		cout << "level cleared level " << floor.getDepth() << "and hero at doors\n"; 
 		if ( floor.getDepth() == 5) {
+			cout << "game finished\n"; 
 			res = false;
 		} else {
-			int tmp = floor.getDepth()+1;
+			short tmp = floor.getDepth()+1;
 			delete(&floor);
 			floor = Level(tmp);
 			floor.loadStage();
@@ -37,15 +39,17 @@ bool Game::play(int moveDirection, int fireDirection) {
 		}
 	}
 	if(player.alive()) {
+		cout << "player alive\n"; 
 		if (moveDirection > 0 && moveDirection < 9) {
 			player.move(moveDirection);
 		}
 		if (fireDirection > 0 && fireDirection < 9) {
 			player.fire(fireDirection);
-			int x = player.getCoordinates()->getX(); int y = player.getCoordinates()->getY();
+			short x = player.getCoordinates()->getX(); short y = player.getCoordinates()->getY();
 			projectiles.push_back(Projectile(true,player.focus(),1.,player.damages(),x,y, floor.getMap()));
 		}
 		vector<Drop>::iterator fi = drops.begin();
+		cout << "first drop coordinates : " << fi->getCoordinates()->getX() << " " << fi->getCoordinates()->getY() << "\n"; 
 		while (fi != drops.end() ) {
 			if (fi->pickedUp(&player)) {
 				fi = drops.erase(fi);
@@ -59,6 +63,7 @@ bool Game::play(int moveDirection, int fireDirection) {
 			}
 		}
 		vector<Monster>::iterator ti = monsters.begin();
+		cout << "first monster cordinates : " << ti->getCoordinates()->getX() << " " << ti->getCoordinates()->getY() << "\n"; 
 		while (ti != monsters.end()) {
 			if (!ti->alive()) {
 				ti = monsters.erase(ti);
@@ -93,7 +98,7 @@ bool Game::play(int moveDirection, int fireDirection) {
 					vector<Destructible>::iterator ti = destructibles.begin();
 					while (ti != destructibles.end() ) {
 						if (ti->hit(*it)) {
-							int random = rand()%2;
+							short random = rand()%2;
 							bool res = false;
 							if (random == 1) { res = true; }
 							drops.push_back(Drop(ti->getCoordinates()->getX(), ti->getCoordinates()->getY(), floor.getMap(), res));

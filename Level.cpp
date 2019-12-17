@@ -10,12 +10,10 @@
 
 using namespace std;
 
-Level::Level(int d) {
-	l_cleared = false;
-    l_depth = d;
-    l_map = new int[25*52];
-	loadStage();
-	SetHero();
+Level::Level(short d) : l_cleared(false), l_depth(d), l_map(new short[25*52])
+{
+	this->loadStage();
+	this->SetHero();
 }
 
 void Level::loadStage() {
@@ -27,12 +25,12 @@ void Level::loadStage() {
 
     FILE* pFile;
     char c;
-    int n = 0, j = 0;
+    short n = 0, j = 0;
     pFile = fopen(filename.c_str(),"r");
     if(pFile != NULL){
         do{
             c = fgetc(pFile);
-			int val = (c- '0');
+			short val = (c - '0');
 
             if (c != '\n' && c != EOF){
 				l_map[n] = val;

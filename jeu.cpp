@@ -15,11 +15,11 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-	int textures[19*8];
+	short textures[19*8];
 
 	ifstream infile("textures/texture_coordinates.txt");
 	
-	int i = -1; int j = -1;
+	short i = -1; short j = -1;
 	while(infile){
         j = -1;
 		string s;
@@ -109,7 +109,6 @@ int main(int argc, char *argv[])
                             Game g = Game(1);
                             jeu = &g;
                             SDL_Delay(500);
-                            //loadMap(jeu->depth(), jeu->level().getMap(), textures, ecran, fenetre);
                             break;
                         }
                         case SDLK_z: {
@@ -164,12 +163,12 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-int load(Game* jeu, int textures[], SDL_Renderer* ecran, SDL_Texture* textureTileSetV4, SDL_Texture* textureTileSetWallsV2, SDL_Texture* key){
-    int depth = jeu->depth();
+short load(Game* jeu, short textures[], SDL_Renderer* ecran, SDL_Texture* textureTileSetV4, SDL_Texture* textureTileSetWallsV2, SDL_Texture* key){
+    short depth = jeu->depth();
 
-    int countBoss = 0;
-    for (int i = 0; i < 25; ++i) {
-        for (int j = 0; j < 52; ++j) {
+    short countBoss = 0;
+    for (short i = 0; i < 25; ++i) {
+        for (short j = 0; j < 52; ++j) {
             switch(jeu->level().getMap()[i * 52 + j]){
                 case 0:
                     break;
@@ -246,8 +245,8 @@ int load(Game* jeu, int textures[], SDL_Renderer* ecran, SDL_Texture* textureTil
     return 0;
 }
 
-int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Renderer* ecran, SDL_Texture* textureTileSetV4, SDL_Texture* coin, SDL_Texture* heart, SDL_Texture* half){
-    int depth = jeu->depth();
+short loadProjectilesMonstersDestrutiblesCoins(Game* jeu, short textures[], SDL_Renderer* ecran, SDL_Texture* textureTileSetV4, SDL_Texture* coin, SDL_Texture* heart, SDL_Texture* half){
+    short depth = jeu->depth();
 
     vector<Destructible> destructibles = jeu->getDestructibles();
     vector<Projectile> projectiles = jeu->getProjectiles();
@@ -265,7 +264,7 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
 
     std::vector<Projectile>::iterator it = projectiles.begin();
     while (it != projectiles.end()) {
-        int index;
+        short index;
         double angle;
         if(it->playerProjectile()) index = 14;
         else index = 13;
@@ -308,7 +307,7 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
 
     std::vector<Drop>::iterator ta = drops.begin();
     while (ta != drops.end()) {
-        int dropIndex;
+        short dropIndex;
         if(ta->isAPotion()) dropIndex = 17;
         else dropIndex = 11;
         SDL_Rect sDrop; sDrop.x = textures[dropIndex*8+0]; sDrop.y = textures[dropIndex*8+1]; sDrop.w = textures[dropIndex*8+2]; sDrop.h = textures[dropIndex*8+3];
@@ -318,9 +317,9 @@ int loadProjectilesMonstersDestrutiblesCoins(Game* jeu, int textures[], SDL_Rend
         ta = next(ta);
     }
 
-    for (int i = 1; i <= jeu->getPlayer()->hpLeft(); ++i) {
+    for (short i = 1; i <= jeu->getPlayer()->hpLeft(); ++i) {
         if (jeu->getPlayer()->hpLeft() != 0) {
-            int coeurIndex;
+            short coeurIndex;
             if (i == jeu->getPlayer()->hpLeft() && i % 2 == 1) {
                 coeurIndex = 16;
             } else {
